@@ -1,7 +1,6 @@
 package com.duang.fuli.service.impl;
 
 import java.util.Collection;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;

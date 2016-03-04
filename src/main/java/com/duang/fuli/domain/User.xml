@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duang.fuli.domain.User">
+
+	<resultMap type="User" id="selectMap">
+	    <id column="uid" property="uid" />
+	    <result column="username" property="username" />
+		<result column="password" property="password" />
+		<result column="nickname" property="nickname" />
+		<result column="registerTime" property="registerTime" />
+	</resultMap>
+
+	<select id="selectByUsername" parameterType="String" resultMap="selectMap">
+		select * from user where username=#{username}
+	</select>
+	
+		<!-- INSERT INTO 表名称 VALUES (值1, 值2,....) -->
+	<!-- useGeneratedKeys="true" 设置是否使用jdbc对应的返回主键的功能 keyProperty="aid" 设置返回的主键是要存放在对应实体类中的那个属性当中，一般都是放在主键 -->
+	<insert id="insertUser" parameterType="InactiveAccount">
+		insert into
+		user(username,password,nickname,registerTime) values
+		(#{username},#{password},#{nickname},#{registerTime})
+	</insert>
+	
+    <delete id="deleteByUsername" parameterType="String">
+		delete from user where username=#{username}
+	</delete>
+
+</mapper>

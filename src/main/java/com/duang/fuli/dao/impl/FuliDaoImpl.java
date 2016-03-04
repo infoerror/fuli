@@ -14,6 +14,7 @@ public class FuliDaoImpl extends SqlSessionDaoSupport implements FuliDao {
 
 
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public Collection getFulisOfPage(int pageIndex) {
 		Page page = new Page();

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duang.fuli.domain.InactiveAccount">
+
+	<resultMap type="InactiveAccount" id="selectMap">
+	    <result column="token" property="token" />
+	    <result column="username" property="username" />
+		<result column="password" property="password" />
+		<result column="registerTime" property="registerTime" />
+	</resultMap>
+
+	<select id="selectByToken" parameterType="String" resultMap="selectMap">
+		select * from inactiveAccount where token=#{token}
+	</select>
+	
+		<!-- INSERT INTO 表名称 VALUES (值1, 值2,....) -->
+	<!-- useGeneratedKeys="true" 设置是否使用jdbc对应的返回主键的功能 keyProperty="aid" 设置返回的主键是要存放在对应实体类中的那个属性当中，一般都是放在主键 -->
+	<insert id="insertInactiveAccount" parameterType="InactiveAccount">
+		insert into
+		inactiveAccount(token,username,password,registerTime) values
+		(#{token},#{username},#{password},#{registerTime})
+	</insert>
+	
+    <delete id="deleteByUsername" parameterType="String">
+		delete from inactiveAccount where username=#{username}
+	</delete>
+
+</mapper>

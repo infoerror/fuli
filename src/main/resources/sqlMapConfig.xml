@@ -4,11 +4,16 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-	    <typeAlias type="com.duang.fuli.domain.Page" alias="Page"/>	
-		<typeAlias type="com.duang.fuli.domain.Fuli" alias="Fuli"/>
+		<typeAlias type="com.duang.fuli.domain.Page" alias="Page" />
+		<typeAlias type="com.duang.fuli.domain.Fuli" alias="Fuli" />
+		<typeAlias type="com.duang.fuli.domain.InactiveAccount"
+			alias="InactiveAccount" />
+		<typeAlias type="com.duang.fuli.domain.User" alias="User" />
 	</typeAliases>
 	<mappers>
 		<!-- 映射文件的位置 -->
 		<mapper resource="com/duang/fuli/domain/Fuli.xml" />
+		<mapper resource="com/duang/fuli/domain/User.xml" />
+		<mapper resource="com/duang/fuli/domain/InactiveAccount.xml" />
 	</mappers>
 </configuration>

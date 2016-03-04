@@ -27,26 +27,9 @@
 </head>
 <body>
 	<div class="container">
-	<jsp:include page="/WEB-INF/web/common/newnav.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/web/common/newnav.jsp"></jsp:include>
 
-		<div class="bc-social">
-			<div class="container">
-				<ul class="bc-social-buttons">
-					<li class="social-qq"><i class="fa fa-qq"></i> <span
-						id="qqgroup">QQ1320020962&</span></li>
 
-					<li class="social-weibo"><a href="http://115.28.1.19"
-						title="IT詹士锋微博" target="_blank"
-						onclick="_hmt.push(['_trackEvent', 'masthead', 'click', 'masthead-新浪微博'])"><i
-							class="fa fa-weibo"></i> 新浪微博：@IT詹士锋</a></li>
-
-					<li class="social-weibo"><a href="http://115.28.1.19"
-						title="IT詹士锋微博" target="_blank"
-						onclick="_hmt.push(['_trackEvent', 'masthead', 'click', 'masthead-新浪微博'])"><i
-							class="fa fa-weibo"></i> 新浪微博：@张广通_通广张</a></li>
-				</ul>
-			</div>
-		</div>
 
 		<div class="row container-fluid projects">
 
@@ -58,47 +41,73 @@
 
 			<div class="col-md-8">
 
-				<c:forEach items="${fulis }" var="fuli">
 
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h2>
-								<a href="/article/${fuli.id }" target="new"
-									style="text-decoration:none; color:#373434">${fuli.title }</a>
-							</h2>
+				<form class="form-horizontal" role="form">
+					<div class="form-group">
+						<label for="username" class="col-sm-2 control-label">用户名</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" name="username"
+								placeholder="请输入用户名">
 						</div>
-						<div class="panel-body">${fuli.content }
-							<span class="label label-default">浏览:${fuli.viewCount}</span>
-                                  <span
-								class="label label-default">${article.publishTime }</span> <span
-								class="pull-right"><a class="btn btn-default"
-								href="/article/${fuli.id}" target="new">View
-									details &raquo;</a></span>
+						<div class="col-sm-4" style="color:red" id="u_tip">
+							
 						</div>
 					</div>
+					<div class="form-group">
+						<label for="password" class="col-sm-2 control-label">密码</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" name="password"
+								placeholder="请输入密码">
+								
+						</div>
+						<div class="col-sm-4" style="color:red" id="p_tip">
+							
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="confirmPassword" class="col-sm-2 control-label">确认密码</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" name="confirmPassword"
+								placeholder="请输入密码">
+						</div>
+						<div class="col-sm-4" style="color:red" id="cp_tip">
+							
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="confirmPassword" class="col-sm-2 control-label">验证码</label>
+						<div class="col-sm-3">
+							<input type="text" class="form-control" name="confirmPassword"
+								placeholder="请输入验证码">
+						</div>
+							<div class="col-sm-3">
+							<img alt="captcha" src="<%=basePath%>/register/showCaptcha">
+						</div>
+						<div class="col-sm-4" style="color:red" id="cp_tip">
+							
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn btn-default">确认注册</button>
+						</div>
+					</div>
+				</form>
 
-				</c:forEach>
-
-				<div class="pull-right">
-					<nav>
-						<ul class="pagination">
-						</ul>
-					</nav>
-				</div>
 
 
 
 			</div>
 			<div class="col-md-4">
 
-		
+
 
 				<div class="panel panel-default">
 					<!-- Default panel contents -->
 					<div class="panel-heading">标签云</div>
-					<div class="panel-body">
-	
-					</div>
+					<div class="panel-body"></div>
 				</div>
 
 				<div class="panel panel-default">
