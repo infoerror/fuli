@@ -14,8 +14,10 @@ import com.duang.fuli.domain.InactiveAccount;
 import com.duang.fuli.domain.RegisterForm;
 import com.duang.fuli.domain.User;
 import com.duang.fuli.domain.json.RegisterJson;
+import com.duang.fuli.domain.json.Result;
 import com.duang.fuli.service.RegisterService;
 import com.duang.fuli.service.result.RegisterResult;
+import com.duang.fuli.service.result.SendRegisterEmailResult;
 import com.duang.fuli.service.result.RegisterResult.REGISTER_RESULT;
 import com.duang.fuli.utils.EmailUtil;
 import com.duang.fuli.utils.MD5Utils;
@@ -129,13 +131,39 @@ public class RegisterServiceImpl implements RegisterService {
 	}
 
 	@Override
-	public boolean sendRegisterMail(String actionUrl, InactiveAccount inactiveAccount)
+	public SendRegisterEmailResult sendRegisterMail(String actionUrl, InactiveAccount inactiveAccount)
 			throws Exception {
+		
 		return sendMessageToClient(actionUrl, inactiveAccount);
 	}
+	
+	private static String EXPIRED_MAIL_JSON;
+	private static String SUCC_MAIL_JSON;
+	private static String FAIL_MAIL_JSON;
+	static {
+		Result result = new Result();
+		result.setError_no(10001);
+		result.setError("激活时间已经过期，请重新注册");
+		EXPIRED_MAIL_JSON = JSON.toJSONString(result);
 
-	private boolean sendMessageToClient(String actionUrl,
+		result.setError_no(0);
+		result.setMsg("成功发送激活邮件");
+		SUCC_MAIL_JSON = JSON.toJSONString(result);
+
+		result.setError_no(10002);
+		result.setError("发送激活邮件失败，请检查您的邮箱是否正确，或者联系管理员");
+		FAIL_MAIL_JSON = JSON.toJSONString(result);
+
+	}
+
+	private SendRegisterEmailResult sendMessageToClient(String actionUrl,
 			InactiveAccount inactiveAccount) throws Exception {
+		SendRegisterEmailResult result = new SendRegisterEmailResult();
+		if(inactiveAccount==null){
+			result.setJson(EXPIRED_MAIL_JSON);
+			return result;
+		}
+		
 		StringBuilder content = new StringBuilder();
 		StringBuilder tempContextUrl = new StringBuilder(actionUrl);
 		tempContextUrl.append("?token=");
@@ -149,13 +177,18 @@ public class RegisterServiceImpl implements RegisterService {
 		try {
 			EmailUtil.sendEmail(inactiveAccount.getUsername(), "点击链接验证您的账号",
 					content.toString());
+			result.setJson(SUCC_MAIL_JSON);
+			return result;
 		} catch (Exception e) {
 			LOG.warn("can't send register mail!", e);
-			return false;
+		    result.setJson(FAIL_MAIL_JSON);
+		    return result;
 		}
 
-		return true;
 	}
+
+	
+	
 
 	@Override
 	public boolean authenticateEmail(String token) {
