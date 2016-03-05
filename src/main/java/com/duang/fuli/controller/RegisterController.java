@@ -11,9 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.duang.fuli.controller.base.BaseController;
 import com.duang.fuli.domain.InactiveAccount;
 import com.duang.fuli.domain.User;
 import com.duang.fuli.domain.json.RegisterJson;
@@ -26,7 +26,7 @@ import com.duang.fuli.utils.ValidatorUtils;
 @Controller
 @Scope("prototype")
 @RequestMapping(value = "/register")
-public class RegisterController {
+public class RegisterController extends BaseController {
 	private static final Logger LOG = Logger
 			.getLogger(RegisterController.class);
 	@Resource(name="registerService")
@@ -38,7 +38,7 @@ public class RegisterController {
 	}
 
 	@RequestMapping("authenticateEmail")
-	public String authenticate(Model model, @RequestParam String token)
+	public String authenticateEmail(Model model, @RequestParam String token)
 			throws Exception {
 		if (LOG.isDebugEnabled())
 			LOG.debug("receive token:" + token);
@@ -71,12 +71,12 @@ public class RegisterController {
 
 	}
 
-	@RequestMapping("sendRegisterMail")
-	public String sendRegisterMail(HttpSession session,
+	@RequestMapping("sendEmailForRegister")
+	public void sendRegisterMail(HttpServletResponse response,HttpSession session,
 			HttpServletRequest request) throws Exception {
 		Object tmpUser;
 		if ((tmpUser = session.getAttribute("inactiveAccount")) == null) {
-			return (EXPIRED_MAIL_JSON);
+			writeJson(EXPIRED_MAIL_JSON,response);
 		} else {
 			String targetUrl = request.getRequestURL().toString();
 			String targetUri = request.getRequestURI().toString();
@@ -86,14 +86,16 @@ public class RegisterController {
 			StringBuilder tempContextUrl = url
 					.delete(url.length() - targetUri.length(), url.length())
 					.append(contextPath).append("");
-			tempContextUrl.append("/register/authenticate");
+			tempContextUrl.append("/register/authenticateEmail");
 
 			boolean succ = registerService.sendRegisterMail(
 					tempContextUrl.toString(), (InactiveAccount) tmpUser);
 			if (succ) {
-				return SUCC_MAIL_JSON;
+			   writeJson(SUCC_MAIL_JSON, response);
+				return;
 			} else {
-				return FAIL_MAIL_JSON;
+				writeJson(FAIL_MAIL_JSON, response);
+				return;
 			}
 		}
 	}
@@ -129,43 +131,47 @@ public class RegisterController {
 		registerMessage.setError("用户名只能是邮箱");
 		USERNAME_ERROR_JSON = JSON.toJSONString(registerMessage);
 		
-		registerMessage.setError_no(10003);
+		registerMessage.setError_no(20001);
 		registerMessage.setError("密码只能是6到16位之间");
 		PASSWORD_FORMAT_ERROR_JSON = JSON.toJSONString(registerMessage);
 		
-		registerMessage.setError_no(10004);
+		registerMessage.setError_no(20002);
 		registerMessage.setError("两次密码不一致!");
 		TWO_PASSWORD_INEQUAL_ERROR_JSON= JSON.toJSONString(registerMessage);
 		
-		registerMessage.setError_no(10005);
+		registerMessage.setError_no(30001);
 		registerMessage.setError("验证码错误!");
 	    CAPTCHA_ERROR_JSON= JSON.toJSONString(registerMessage);
 			
-		registerMessage.setError_no(9999);
+		registerMessage.setError_no(-1);
 		registerMessage.setError("暂时无法注册，请稍后重试！");
 		OTHER_ERROR_JSON = JSON.toJSONString(registerMessage);
 
 	}
 
-	@RequestMapping("/register")
-	@ResponseBody
-	public String register(HttpSession session, @RequestParam String username,@RequestParam String password,
+	
+	@RequestMapping("/confirm")
+	public void register(HttpServletResponse response,HttpSession session, @RequestParam String username,@RequestParam String password,
 			@RequestParam String confirmPassword	,@RequestParam String captcha	
 			)
 			throws Exception {
 
 		if(!ValidatorUtils.isEmail(username)){
-			return USERNAME_ERROR_JSON;
+			writeJson(USERNAME_ERROR_JSON, response);
+			return;
 		}
 		if(password==null || password.length()<6 && password.length()>16){
-			return PASSWORD_FORMAT_ERROR_JSON;
+			writeJson(PASSWORD_FORMAT_ERROR_JSON,response);
+			return;
 		}
 		if(confirmPassword==null || !password.equals(confirmPassword)){
-			return TWO_PASSWORD_INEQUAL_ERROR_JSON;
+			writeJson(TWO_PASSWORD_INEQUAL_ERROR_JSON,response);
+			return;
 		}
 		String rightCaptcha=(String) session.getAttribute(CaptchaUtils.REGISTER_SESSION_FLAG);
-		if(!rightCaptcha.equals(captcha)){
-			return  CAPTCHA_ERROR_JSON;
+		if(rightCaptcha ==null || !rightCaptcha.equals(captcha)){
+			writeJson(CAPTCHA_ERROR_JSON, response);
+			return;
 		}
 		
 		User user = new User();
@@ -175,13 +181,15 @@ public class RegisterController {
 		switch (registerResult.getResult()) {
 		case SUCCESS:
 			session.setAttribute("inactiveAccount", registerResult.getInactiveAccount());
-			return SUCC_REG_JSON;
+			writeJson(SUCC_REG_JSON,response);
+			return;
 		case EXIST_USER:
-			return EXIST_USER_ERROR_JSON;
+			writeJson(EXIST_USER_ERROR_JSON,response);
+			return;
 		default:
 			break;
 		}
-		return OTHER_ERROR_JSON;
+	    writeJson(OTHER_ERROR_JSON,  response);
 	}
 
 	@RequestMapping("/showCaptcha")

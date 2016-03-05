@@ -11,11 +11,11 @@ function checkUsername() {
 
 function showUsernameError(message) {
 	$("#e_username").text(message);
-	$("#le_username").show();
+	$("#e_username").show();
 }
 
 function hideUsernameError() {
-	$("#le_username").hide();
+	$("#e_username").hide();
 }
 
 function checkSubmit() {
@@ -25,8 +25,8 @@ function checkSubmit() {
 
 function checkPassword() {
 	var len = $.trim($("#password").val()).length;
-	if (len < 6 || len > 15) {
-		showPasswordError("密码不能少于6位或大于15位")
+	if (len < 6 || len > 16) {
+		showPasswordError("密码不能少于6位或大于16位")
 		return false;
 	} else {
 		// $("#t").text("");
@@ -36,12 +36,12 @@ function checkPassword() {
 }
 
 function hidePasswordError() {
-	$("#le_password").hide();
+	$("#e_password").hide();
 }
 
 function showPasswordError(message) {
 	$("#e_password").text(message);
-	$("#le_password").show();
+	$("#e_password").show();
 }
 
 function checkConfirmPassword() {
@@ -58,11 +58,11 @@ function checkConfirmPassword() {
 
 function showConfirmPasswordError(message) {
 	$("#e_confirm_password").text(message);
-	$("#le_confirm_password").show();
+	$("#e_confirm_password").show();
 }
 
 function hideConfirmPasswordError() {
-	$("#le_confirm_password").hide();
+	$("#e_confirm_password").hide();
 
 }
 
@@ -77,22 +77,21 @@ function checkPasswordEqual() {
 }
 
 function hidePasswordEqualError() {
-
-	$("#le_confirm_password").hide();
-	$("#le_password").hide();
+	$("#e_confirm_password").hide();
+	$("#e_password").hide();
 }
 
 function showPasswordEqualError(message) {
 	$("#e_password").text(message);
 	$("#e_password").show();
 	$("#e_confirm_password").text(message);
-	$("#le_confirm_password").show();
+	$("#e_confirm_password").show();
 }
 
 function checkCaptcha() {
 	var len = $.trim($("#captcha").val()).length;
-	if (len != 4) {
-		showCaptchaError("验证码只能是4位数");
+	if (len != 6) {
+		showCaptchaError("验证码只能是6位数");
 		return false;
 	} else {
 		// $("#t").text("");
@@ -103,12 +102,12 @@ function checkCaptcha() {
 
 function showCaptchaError(message) {
 	$("#e_captcha").text(message);
-	$("#le_captcha").show();
+	$("#e_captcha").show();
 
 }
 
 function hideCaptchaError() {
-	$("#le_captcha").hide();
+	$("#e_captcha").hide();
 
 }
 
@@ -121,18 +120,21 @@ function changeImg() {
 function active() {
 	$.ajax({
 		type : "POST",
-		url : registerAddress + "sendRegisterMail",
+		url : registerAddress + "sendEmailForRegister",
 		dataType : "json",
 		complete : function(data) {
-			$("#li_active").hide();
 			// 在这里做些事情，假设返回的json数据里有name这个属性
 			// 有时候可以直接data.name或者data['name']去访问
 			// 但有时候，却要通过var jsonData =
 			// eval("("+data.responseText+")");才可以通过jsonData.name访问，而且这种情况下，需要是complete而不是success
 			var jsonData = eval("(" + data.responseText + ")");
-			$("#t_message").text(jsonData.tips);
-			if (jsonData.code > 0) {
+			
+			if (jsonData.error_no== 0) {
 				$('#a_login').show();
+				$("#sendEmailForRegister").hide();
+				$("#message").text(jsonData.msg);
+			}else{
+				$("#message").text(jsonData.error);	
 			}
 		}
 	});
@@ -146,7 +148,7 @@ var registerAddress = "";
 function register() {
 
 	$.ajax({
-		url : registerAddress + "register", // 跳转到 action
+		url : registerAddress + "confirm", // 跳转到 action
 		data : {
 			username : $("#username").val(),
 			password : $("#password").val(),
@@ -157,29 +159,25 @@ function register() {
 		cache : false,
 		dataType : 'json',
 		success : function(result) {
-			if (result.code == '0') {
-				// http://localhost:8080/Jzdy1.0/style/image/error.png
-				window.location.href = registerAddress + "activeAccountUI";
+			var no =result.error_no; 
+			if (no== 0) {
+				window.location.href = registerAddress + "activeAccount";
 			} else {
 				currentState = -1;
-				if (result.username) {
-					showUsernameError(result.username);
+				if (no==10001 || no==10002) {
+					showUsernameError(result.error);
 				}
-				if (result.password) {
-					showPasswordError(result.password);
-				}
-				if (result.confirmPassword) {
-					showPasswordError(result.confirmPassword);
+				if (no==20001) {
+					showPasswordError(result.error);
 				}
 
-				if (result.inequal) {
-					showPasswordEqualError(result.inequal);
+				if (no==20002) {
+					showPasswordEqualError(result.error);
 				}
 
-				if (result.captcha) {
-					showCaptchaError(result.captcha);
+				if (no==30001) {
+					showCaptchaError(result.error);
 				}
-
 				// $("#tips_content").text(result.tips);
 				changeImg();
 

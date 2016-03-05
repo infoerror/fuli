@@ -1,12 +1,16 @@
 package com.duang.fuli.controller.base;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import com.duang.fuli.utils.RenderUtils;
 
 
 /**
@@ -36,6 +40,11 @@ public class BaseController {
 		e.printStackTrace();
 		
         return "error/error";
+	}
+	
+	
+	public void writeJson(String json,HttpServletResponse response) throws IOException{
+		RenderUtils.renderJson(json, response);
 	}
 	
 }

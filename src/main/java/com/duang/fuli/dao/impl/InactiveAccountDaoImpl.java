@@ -11,7 +11,7 @@ public class InactiveAccountDaoImpl extends SqlSessionDaoSupport implements Inac
 
 	@Override
 	public void saveInactiveAccount(InactiveAccount inactiveAccount) {
-		  this.getSqlSession().insert("com.duang.fuli.domain.InactiveAccount.deleteByToken", inactiveAccount);
+		  this.getSqlSession().insert("com.duang.fuli.domain.InactiveAccount.insertInactiveAccount", inactiveAccount);
 	}
 
 	@Override

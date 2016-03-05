@@ -43,10 +43,13 @@ public class RegisterServiceImpl implements RegisterService {
 		inactiveAccountDao.deleteByUsername(user.getUsername());
 		long registerTime =System.currentTimeMillis(); 
 		InactiveAccount inactiveAccount = new InactiveAccount();
+		inactiveAccount.setUsername(user.getUsername());
 		inactiveAccount.setPassword(user.getPassword());
 		inactiveAccount.setRegisterTime(System.currentTimeMillis());
 		inactiveAccount.setToken(MD5Utils.md5(user.getUsername()
 				+registerTime));
+		inactiveAccountDao.saveInactiveAccount(inactiveAccount);
+		
 		result.setResult(REGISTER_RESULT.SUCCESS);
 		result.setInactiveAccount(inactiveAccount);
  
