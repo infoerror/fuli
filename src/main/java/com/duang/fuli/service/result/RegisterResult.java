@@ -11,6 +11,8 @@ public class RegisterResult {
 	private  REGISTER_RESULT result;
 	
 	private InactiveAccount inactiveAccount;
+	
+	private String json;
 
 	public REGISTER_RESULT getResult() {
 		return result;
@@ -26,6 +28,14 @@ public class RegisterResult {
 
 	public void setInactiveAccount(InactiveAccount inactiveAccount) {
 		this.inactiveAccount = inactiveAccount;
+	}
+
+	public String getJson() {
+		return json;
+	}
+
+	public void setJson(String json) {
+		this.json = json;
 	}
 
 

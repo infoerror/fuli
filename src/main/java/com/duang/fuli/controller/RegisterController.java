@@ -7,21 +7,23 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.alibaba.fastjson.JSON;
 import com.duang.fuli.controller.base.BaseController;
 import com.duang.fuli.domain.InactiveAccount;
-import com.duang.fuli.domain.User;
-import com.duang.fuli.domain.json.RegisterJson;
+import com.duang.fuli.domain.RegisterForm;
 import com.duang.fuli.domain.json.Result;
 import com.duang.fuli.service.RegisterService;
 import com.duang.fuli.service.result.RegisterResult;
+import com.duang.fuli.service.result.RegisterResult.REGISTER_RESULT;
 import com.duang.fuli.utils.CaptchaUtils;
-import com.duang.fuli.utils.ValidatorUtils;
 
 @Controller
 @Scope("prototype")
@@ -109,87 +111,17 @@ public class RegisterController extends BaseController {
 		return "register/activeAccountUI";
 	}
 
-	private final static String SUCC_REG_JSON;
-	private final static String EXIST_USER_ERROR_JSON;
-	private final static String USERNAME_ERROR_JSON;
-	private final static String PASSWORD_FORMAT_ERROR_JSON;
-	private final static String TWO_PASSWORD_INEQUAL_ERROR_JSON;	
-	private final static String CAPTCHA_ERROR_JSON;
-	private final static String OTHER_ERROR_JSON;
-
-	static {
-		RegisterJson registerMessage = new RegisterJson();
-		registerMessage.setError_no(0);
-		registerMessage.setMsg("注册成功!");
-		SUCC_REG_JSON = JSON.toJSONString(registerMessage);
-
-		registerMessage.setError_no(10001);
-		registerMessage.setError("用户已经存在");
-		EXIST_USER_ERROR_JSON = JSON.toJSONString(registerMessage);
-		
-		registerMessage.setError_no(10002);
-		registerMessage.setError("用户名只能是邮箱");
-		USERNAME_ERROR_JSON = JSON.toJSONString(registerMessage);
-		
-		registerMessage.setError_no(20001);
-		registerMessage.setError("密码只能是6到16位之间");
-		PASSWORD_FORMAT_ERROR_JSON = JSON.toJSONString(registerMessage);
-		
-		registerMessage.setError_no(20002);
-		registerMessage.setError("两次密码不一致!");
-		TWO_PASSWORD_INEQUAL_ERROR_JSON= JSON.toJSONString(registerMessage);
-		
-		registerMessage.setError_no(30001);
-		registerMessage.setError("验证码错误!");
-	    CAPTCHA_ERROR_JSON= JSON.toJSONString(registerMessage);
-			
-		registerMessage.setError_no(-1);
-		registerMessage.setError("暂时无法注册，请稍后重试！");
-		OTHER_ERROR_JSON = JSON.toJSONString(registerMessage);
-
-	}
-
 	
-	@RequestMapping("/confirm")
-	public void register(HttpServletResponse response,HttpSession session, @RequestParam String username,@RequestParam String password,
-			@RequestParam String confirmPassword	,@RequestParam String captcha	
-			)
+	@RequestMapping(value="/confirm",method=RequestMethod.POST)
+	public void register(HttpServletResponse response,HttpSession session,@RequestBody RegisterForm registerForm)
 			throws Exception {
-
-		if(!ValidatorUtils.isEmail(username)){
-			writeJson(USERNAME_ERROR_JSON, response);
-			return;
-		}
-		if(password==null || password.length()<6 && password.length()>16){
-			writeJson(PASSWORD_FORMAT_ERROR_JSON,response);
-			return;
-		}
-		if(confirmPassword==null || !password.equals(confirmPassword)){
-			writeJson(TWO_PASSWORD_INEQUAL_ERROR_JSON,response);
-			return;
-		}
-		String rightCaptcha=(String) session.getAttribute(CaptchaUtils.REGISTER_SESSION_FLAG);
-		if(rightCaptcha ==null || !rightCaptcha.equals(captcha)){
-			writeJson(CAPTCHA_ERROR_JSON, response);
-			return;
-		}
-		
-		User user = new User();
-		user.setUsername(username);
-		user.setPassword(password);
-		RegisterResult registerResult = registerService.register(user);
-		switch (registerResult.getResult()) {
-		case SUCCESS:
+		String rightCaptcha = (String) session.getAttribute(CaptchaUtils.REGISTER_SESSION_FLAG);
+		registerForm.setRightCaptcha(rightCaptcha);
+		RegisterResult registerResult = registerService.register(registerForm);
+		if(registerResult.getResult()==REGISTER_RESULT.SUCCESS){
 			session.setAttribute("inactiveAccount", registerResult.getInactiveAccount());
-			writeJson(SUCC_REG_JSON,response);
-			return;
-		case EXIST_USER:
-			writeJson(EXIST_USER_ERROR_JSON,response);
-			return;
-		default:
-			break;
 		}
-	    writeJson(OTHER_ERROR_JSON,  response);
+		writeJson(registerResult.getJson(), response);
 	}
 
 	@RequestMapping("/showCaptcha")

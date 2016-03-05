@@ -17,7 +17,9 @@
 	<!-- 会自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 
 		两个bean,是spring MVC为@Controllers分发请求所必须的。 并提供了：数据绑定支持， @NumberFormatannotation支持，@DateTimeFormat支持， 
 		@Valid支持，读写XML的支持（JAXB），读写JSON的支持（Jackson）。 -->
-	<mvc:annotation-driven />
+	<mvc:annotation-driven/>
+	
+
 	<context:component-scan base-package="com.duang" />
 
 	<!-- <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" 
@@ -38,7 +40,29 @@
 
 	<!-- 处理器 -->
 	<!-- <bean name="/hello" class="com.mvc.jn.controller.HelloWorldController"/> -->
-
+<!-- 输出对象转JSON支持   -->
+ 	<bean id="stringConverter" class="org.springframework.http.converter.StringHttpMessageConverter">  
+    <property name="supportedMediaTypes">  
+      <list>  
+        <value>text/plain;charset=UTF-8</value>  
+      </list>  
+    </property>  
+  </bean>  
+ 
+  <bean id="jsonConverter"  
+    class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"></bean>  
+    
+  <bean  
+    class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
+    <property name="messageConverters">  
+      <list>  
+        <ref bean="stringConverter"/>  
+        <ref bean="jsonConverter" />  
+      </list>  
+    </property>  
+  </bean>
+  
+  
 	<!-- 打开aop的自动代理功 -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 

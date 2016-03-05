@@ -19,6 +19,7 @@ public class User implements Serializable{
 	private Date registerTime;
 
 	private String nickname;
+	
 
 
 	public int getUid() {

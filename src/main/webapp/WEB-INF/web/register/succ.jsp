@@ -46,7 +46,7 @@
 					<!-- Default panel contents -->
 					<div class="panel-heading">注册成功!</div>
 					<div class="panel-body">
-					 <a href="<%=basePath %>/login/" style="display:none" id="a_login">立刻登录网站!</a>
+					 <a href="<%=basePath %>/login/" id="a_login">立刻登录网站!</a>
 					</div>
 				</div>
 

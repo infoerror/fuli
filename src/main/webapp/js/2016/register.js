@@ -146,18 +146,20 @@ var registerAddress = "";
 // }
 
 function register() {
+	var user = {};  
+
+	user.username=$("#username").val();
+	user.password=$("#password").val();
+	user.confirmPassword =$("#confirmPassword").val();
+	user.captcha=$("#captcha").val();
 
 	$.ajax({
 		url : registerAddress + "confirm", // 跳转到 action
-		data : {
-			username : $("#username").val(),
-			password : $("#password").val(),
-			confirmPassword : $("#confirmPassword").val(),
-			captcha : $("#captcha").val()
-		},
+		data : JSON.stringify(user) ,
 		type : 'post',
 		cache : false,
 		dataType : 'json',
+		contentType : 'application/json',
 		success : function(result) {
 			var no =result.error_no; 
 			if (no== 0) {
