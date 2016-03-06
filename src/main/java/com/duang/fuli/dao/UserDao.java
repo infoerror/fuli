@@ -9,4 +9,6 @@ public interface UserDao{
 
 	void saveUser(User user);
 
+	User login(User user);
+
 }

@@ -189,5 +189,53 @@ function register() {
 			alert("暂时无法链接服务器，请联系管理员")
 		}
 	});
+}
 
+
+function checkLoginSubmit() {
+	return checkUsername() && checkPassword() && checkCaptcha();
+}
+	
+	function login() {
+		var user = {};  
+
+		user.username=$("#username").val();
+		user.password=$("#password").val();
+		user.captcha=$("#captcha").val();
+
+		$.ajax({
+			url : registerAddress + "confirm", // 跳转到 action
+			data : JSON.stringify(user) ,
+			type : 'post',
+			cache : false,
+			dataType : 'json',
+			contentType : 'application/json',
+			success : function(result) {
+				var no =result.error_no; 
+				if (no== 0) {
+					window.location.href = registerAddress + "loginSuccess";
+				} else {
+					currentState = -1;
+					if (no==10001 || no==10002) {
+						showUsernameError(result.error);
+					}
+					if (no==20001 || no==100001) {
+						showPasswordError(result.error);
+					}
+				
+					if (no==30001) {
+						showCaptchaError(result.error);
+					}
+					// $("#tips_content").text(result.tips);
+					changeImg();
+
+				}
+			},
+			error : function() {
+				alert("暂时无法链接服务器，请联系管理员")
+			}
+		});
+
+	
+	
 }

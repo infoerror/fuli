@@ -11,132 +11,75 @@ import com.alibaba.fastjson.JSON;
 import com.duang.fuli.dao.InactiveAccountDao;
 import com.duang.fuli.dao.UserDao;
 import com.duang.fuli.domain.InactiveAccount;
-import com.duang.fuli.domain.RegisterForm;
 import com.duang.fuli.domain.User;
-import com.duang.fuli.domain.json.RegisterJson;
+import com.duang.fuli.domain.form.RegisterForm;
 import com.duang.fuli.domain.json.Result;
 import com.duang.fuli.service.RegisterService;
+import com.duang.fuli.service.VerifyAccountService;
 import com.duang.fuli.service.result.RegisterResult;
-import com.duang.fuli.service.result.SendRegisterEmailResult;
 import com.duang.fuli.service.result.RegisterResult.REGISTER_RESULT;
+import com.duang.fuli.service.result.SendRegisterEmailResult;
+import com.duang.fuli.service.result.VerifyAccountResult;
 import com.duang.fuli.utils.EmailUtil;
 import com.duang.fuli.utils.MD5Utils;
-import com.duang.fuli.utils.ValidatorUtils;
 
 @Service("registerService")
 public class RegisterServiceImpl implements RegisterService {
 
-	private static final Logger LOG = Logger.getLogger(RegisterServiceImpl.class);
+	private static final Logger LOG = Logger
+			.getLogger(RegisterServiceImpl.class);
 
-	@Resource(name="userDao")
+	@Resource(name = "userDao")
 	private UserDao userDao;
-	@Resource(name="inactiveAccountDao")
+	@Resource(name = "inactiveAccountDao")
 	private InactiveAccountDao inactiveAccountDao;
+	@Resource(name = "verifyAccountService")
+	private VerifyAccountService verifyAccountService;
 
 	private final static String SUCC_REG_JSON;
-	private final static String EXIST_USER_ERROR_JSON;
-	private final static String USERNAME_ERROR_JSON;
-	private final static String PASSWORD_FORMAT_ERROR_JSON;
-	private final static String TWO_PASSWORD_INEQUAL_ERROR_JSON;	
-	private final static String CAPTCHA_ERROR_JSON;
-	private final static String OTHER_ERROR_JSON;
 
 	static {
-		RegisterJson registerMessage = new RegisterJson();
-		registerMessage.setError_no(0);
-		registerMessage.setMsg("注册成功!");
-		SUCC_REG_JSON = JSON.toJSONString(registerMessage);
-
-		registerMessage.setError_no(10001);
-		registerMessage.setError("用户已经存在");
-		EXIST_USER_ERROR_JSON = JSON.toJSONString(registerMessage);
-		
-		registerMessage.setError_no(10002);
-		registerMessage.setError("用户名只能是邮箱");
-		USERNAME_ERROR_JSON = JSON.toJSONString(registerMessage);
-		
-		registerMessage.setError_no(20001);
-		registerMessage.setError("密码只能是6到16位之间");
-		PASSWORD_FORMAT_ERROR_JSON = JSON.toJSONString(registerMessage);
-		
-		registerMessage.setError_no(20002);
-		registerMessage.setError("两次密码不一致!");
-		TWO_PASSWORD_INEQUAL_ERROR_JSON= JSON.toJSONString(registerMessage);
-		
-		registerMessage.setError_no(30001);
-		registerMessage.setError("验证码错误!");
-	    CAPTCHA_ERROR_JSON= JSON.toJSONString(registerMessage);
-			
-		registerMessage.setError_no(-1);
-		registerMessage.setError("暂时无法注册，请稍后重试！");
-		OTHER_ERROR_JSON = JSON.toJSONString(registerMessage);
-
+		Result result = new Result();
+		result.setError_no(0);
+		result.setMsg("注册成功!");
+		SUCC_REG_JSON = JSON.toJSONString(result);
 	}
 
-	
 	@Override
-	public RegisterResult register(RegisterForm user) {
+	public RegisterResult register(RegisterForm registerForm) {
 		if (LOG.isDebugEnabled())
-			LOG.debug("register user-->" + user);
+			LOG.debug("register user-->" + registerForm);
+		RegisterResult registerResult = new RegisterResult();
 		
-		String username = user.getUsername();
-		String password = user.getPassword();
-		String confirmPassword = user.getConfirmPassword();
-		String captcha =  user.getCaptcha();
-		String rightCaptcha = user.getRightCaptcha();
-		
-		RegisterResult result = new RegisterResult();
-
-		if(!ValidatorUtils.isEmail(username)){
-			result.setJson(USERNAME_ERROR_JSON);
-			return result;
-		}
-		
-		if(password==null || password.length()<6 && password.length()>16){
-			result.setJson(PASSWORD_FORMAT_ERROR_JSON);
-			return result;
-		}
-		if(confirmPassword==null || !password.equals(confirmPassword)){
-			result.setJson(TWO_PASSWORD_INEQUAL_ERROR_JSON);
-			return result;
-		}
-		
-		if(rightCaptcha ==null || !rightCaptcha.equals(captcha)){
-		    result.setJson(CAPTCHA_ERROR_JSON);
-		    return result;
-		}
-	
-		User u = userDao.getUserByUsername(user.getUsername());
-		if (u != null) {
-			result.setJson(EXIST_USER_ERROR_JSON);
-			result.setResult(REGISTER_RESULT.EXIST_USER);
-			return result;
+		VerifyAccountResult verifyAccountResult=verifyAccountService.verifyRegister(registerForm);
+		if(!verifyAccountResult.isPassVerification()){
+                registerResult.setJson(verifyAccountResult.getJson());
+                return registerResult;
 		}
 
-		inactiveAccountDao.deleteByUsername(user.getUsername());
-		long registerTime =System.currentTimeMillis(); 
+		inactiveAccountDao.deleteByUsername(registerForm.getUsername());
+		long registerTime = System.currentTimeMillis();
 		InactiveAccount inactiveAccount = new InactiveAccount();
-		inactiveAccount.setUsername(user.getUsername());
-		inactiveAccount.setPassword(user.getPassword());
+		inactiveAccount.setUsername(registerForm.getUsername());
+		inactiveAccount.setPassword(registerForm.getPassword());
 		inactiveAccount.setRegisterTime(System.currentTimeMillis());
-		inactiveAccount.setToken(MD5Utils.md5(user.getUsername()
-				+registerTime));
+		inactiveAccount
+				.setToken(MD5Utils.md5(registerForm.getUsername() + registerTime));
 		inactiveAccountDao.saveInactiveAccount(inactiveAccount);
-		
-		result.setResult(REGISTER_RESULT.SUCCESS);
-		result.setInactiveAccount(inactiveAccount);
-        result.setJson(SUCC_REG_JSON);
-		
-		return result;
+		registerResult.setResult(REGISTER_RESULT.SUCCESS);
+		registerResult.setInactiveAccount(inactiveAccount);
+		registerResult.setJson(SUCC_REG_JSON);
+
+		return registerResult;
 	}
 
 	@Override
-	public SendRegisterEmailResult sendRegisterMail(String actionUrl, InactiveAccount inactiveAccount)
-			throws Exception {
-		
+	public SendRegisterEmailResult sendRegisterMail(String actionUrl,
+			InactiveAccount inactiveAccount) throws Exception {
+
 		return sendMessageToClient(actionUrl, inactiveAccount);
 	}
-	
+
 	private static String EXPIRED_MAIL_JSON;
 	private static String SUCC_MAIL_JSON;
 	private static String FAIL_MAIL_JSON;
@@ -159,11 +102,11 @@ public class RegisterServiceImpl implements RegisterService {
 	private SendRegisterEmailResult sendMessageToClient(String actionUrl,
 			InactiveAccount inactiveAccount) throws Exception {
 		SendRegisterEmailResult result = new SendRegisterEmailResult();
-		if(inactiveAccount==null){
+		if (inactiveAccount == null) {
 			result.setJson(EXPIRED_MAIL_JSON);
 			return result;
 		}
-		
+
 		StringBuilder content = new StringBuilder();
 		StringBuilder tempContextUrl = new StringBuilder(actionUrl);
 		tempContextUrl.append("?token=");
@@ -181,14 +124,11 @@ public class RegisterServiceImpl implements RegisterService {
 			return result;
 		} catch (Exception e) {
 			LOG.warn("can't send register mail!", e);
-		    result.setJson(FAIL_MAIL_JSON);
-		    return result;
+			result.setJson(FAIL_MAIL_JSON);
+			return result;
 		}
 
 	}
-
-	
-	
 
 	@Override
 	public boolean authenticateEmail(String token) {
@@ -199,7 +139,7 @@ public class RegisterServiceImpl implements RegisterService {
 
 		User user = new User();
 		user.setUsername(account.getUsername());
-		Timestamp registerTime=new Timestamp(account.getRegisterTime());
+		Timestamp registerTime = new Timestamp(account.getRegisterTime());
 		user.setRegisterTime(registerTime);
 		user.setNickname("新用户" + token.substring(0, 5));
 		user.setPassword(MD5Utils.md5(account.getPassword()));

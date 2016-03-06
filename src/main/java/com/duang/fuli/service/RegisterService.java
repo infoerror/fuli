@@ -1,7 +1,7 @@
 package com.duang.fuli.service;
 
 import com.duang.fuli.domain.InactiveAccount;
-import com.duang.fuli.domain.RegisterForm;
+import com.duang.fuli.domain.form.RegisterForm;
 import com.duang.fuli.service.result.RegisterResult;
 import com.duang.fuli.service.result.SendRegisterEmailResult;
 

@@ -5,7 +5,7 @@ import com.duang.fuli.domain.InactiveAccount;
 public class RegisterResult {
 	
 	public static enum REGISTER_RESULT{
-		SUCCESS,EXIST_USER
+		SUCCESS
 	}
 	
 	private  REGISTER_RESULT result;

@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,16 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.alibaba.fastjson.JSON;
 import com.duang.fuli.controller.base.BaseController;
 import com.duang.fuli.domain.InactiveAccount;
-import com.duang.fuli.domain.RegisterForm;
-import com.duang.fuli.domain.json.Result;
+import com.duang.fuli.domain.form.RegisterForm;
 import com.duang.fuli.service.RegisterService;
 import com.duang.fuli.service.result.RegisterResult;
-import com.duang.fuli.service.result.SendRegisterEmailResult;
 import com.duang.fuli.service.result.RegisterResult.REGISTER_RESULT;
+import com.duang.fuli.service.result.SendRegisterEmailResult;
 import com.duang.fuli.utils.CaptchaUtils;
+import com.duang.fuli.utils.SessionFlagUtils;
 
 @Controller
 @Scope("prototype")
@@ -89,7 +87,7 @@ public class RegisterController extends BaseController {
 	@RequestMapping(value="/confirm",method=RequestMethod.POST)
 	public void register(HttpServletResponse response,HttpSession session,@RequestBody RegisterForm registerForm)
 			throws Exception {
-		String rightCaptcha = (String) session.getAttribute(CaptchaUtils.REGISTER_SESSION_FLAG);
+		String rightCaptcha = (String) session.getAttribute(SessionFlagUtils.REGISTER_SESSION_FLAG);
 		registerForm.setRightCaptcha(rightCaptcha);
 		RegisterResult registerResult = registerService.register(registerForm);
 		if(registerResult.getResult()==REGISTER_RESULT.SUCCESS){
@@ -100,7 +98,7 @@ public class RegisterController extends BaseController {
 
 	@RequestMapping("/showCaptcha")
 	public void showCaptcha(HttpServletResponse response,HttpSession session) throws Exception {
-		CaptchaUtils.writeImg2Resp(response,session,CaptchaUtils.REGISTER_SESSION_FLAG);
+		CaptchaUtils.writeImg2Resp(response,session,SessionFlagUtils.REGISTER_SESSION_FLAG);
 	}
 
 }

@@ -8,15 +8,12 @@ import java.io.IOException;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class CaptchaUtils {
 	private static final int WIDTH = 100, HEIGHT = 18;
 
-	public static final String REGISTER_SESSION_FLAG = "register_captcha";
-	
 
 	private static Font mFont = new Font("Times New Roman", Font.PLAIN, 17);
 

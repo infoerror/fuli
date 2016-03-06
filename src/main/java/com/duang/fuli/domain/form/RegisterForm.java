@@ -1,4 +1,4 @@
-package com.duang.fuli.domain;
+package com.duang.fuli.domain.form;
 
 import java.io.Serializable;
 
