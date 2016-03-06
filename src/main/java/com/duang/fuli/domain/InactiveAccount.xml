@@ -12,19 +12,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 	<select id="selectByToken" parameterType="String" resultMap="selectMap">
-		select * from inactiveAccount where token=#{token}
+		select * from inactive_account where token=#{token}
 	</select>
 	
 		<!-- INSERT INTO 表名称 VALUES (值1, 值2,....) -->
 	<!-- useGeneratedKeys="true" 设置是否使用jdbc对应的返回主键的功能 keyProperty="aid" 设置返回的主键是要存放在对应实体类中的那个属性当中，一般都是放在主键 -->
 	<insert id="insertInactiveAccount" parameterType="InactiveAccount">
 		insert into
-		inactiveAccount(token,username,password,registerTime) values
+		inactive_account(token,username,password,registerTime) values
 		(#{token},#{username},#{password},#{registerTime})
 	</insert>
 	
     <delete id="deleteByUsername" parameterType="String">
-		delete from inactiveAccount where username=#{username}
+		delete from inactive_account where username=#{username}
 	</delete>
 
 </mapper>

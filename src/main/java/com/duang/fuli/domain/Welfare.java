@@ -3,7 +3,7 @@ package com.duang.fuli.domain;
 import java.io.Serializable;
 import java.sql.Date;
 
-public class Fuli implements Serializable{
+public class Welfare implements Serializable{
 	
 	/**
 	 * 

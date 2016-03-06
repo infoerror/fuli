@@ -27,7 +27,7 @@
 </head>
 <body>
 	<div class="container">
-	<jsp:include page="/WEB-INF/web/common/newnav.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/web/common/newnav.jsp"></jsp:include>
 
 		<div class="bc-social">
 			<div class="container">
@@ -52,38 +52,39 @@
 
 			<div class="projects-header page-header">
 
-				<h3>起风了，唯有努力生存。。</h3>
-				<p>本xx后台采用的框架有Bootstrap3.0+jsp+springmvc+spring3+mybaits+lucene，运行环境是ubuntu+tomcat7.0</p>
+				<h3>禁止黄赌毒，从我做起！</h3>
 			</div>
 
-			<div class="col-md-8">
-                 你好！个人中心！
+			<div class="col-md-12">
+				<div class="row container-fluid">
+				   <div class="row">
+				   <div class="col-md-3">
 
-
-
-			</div>
-			<div class="col-md-4">
-
-		
-
-				<div class="panel panel-default">
-					<!-- Default panel contents -->
-					<div class="panel-heading">标签云</div>
-					<div class="panel-body">
-	
-					</div>
-				</div>
-
-				<div class="panel panel-default">
-					<!-- Default panel contents -->
-					<div class="panel-heading">热门文章</div>
-					<div class="panel-body">
-						<ul class="list-group">
+						<ul class="nav nav-list">
+							<li class="nav-header">操作列表</li>
+							<li><a href="#">我的福利</a></li>
+							<li><a href="#">我的余额</a></li>
+							<li><a href="#">审核列表</a></li>
+							<li><a href="#">发福利</a></li>
 						</ul>
 					</div>
-
+					<div class="col-md-9">
+					功能区！
+					</div>
+				    </div>
+					
 				</div>
+
+
+
+				<div class="clearfix"></div>
+				<blockquote class="pull-right">
+					<p>多发福利，造福人类！</p>
+					<small>本站宗旨</small>
+				</blockquote>
+
 			</div>
+		
 		</div>
 
 		<div class="panel panel-default">

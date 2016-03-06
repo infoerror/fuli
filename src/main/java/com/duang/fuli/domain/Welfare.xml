@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.duang.fuli.domain.Fuli">
-	<resultMap type="Fuli" id="fuliMap">
-		<id column="id" property="id" />
+<mapper namespace="com.duang.fuli.domain.Welfare">
+	<resultMap type="Welfare" id="welfareMap">
+		<id column="wid" property="id" />
 		<result column="title" property="title" />
 		<result column="content" property="content" />
 		<result column="publishTime" property="publishTime" />
@@ -13,8 +13,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 	<select id="selectFulisOfPage" parameterType="Page"
-		resultMap="fuliMap">
-		select * from fuli order by id limit #{pageIndex},#{pageCount}
+		resultMap="welfareMap">
+		select * from welfare order by wid limit #{pageIndex},#{pageCount}
 	</select>
 
 </mapper>
