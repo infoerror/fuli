@@ -1,7 +1,8 @@
 package com.duang.fuli.domain;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
+import java.util.Set;
 
 public class Welfare implements Serializable{
 	
@@ -13,6 +14,8 @@ public class Welfare implements Serializable{
 	private int viewCount;
 	private String title;
 	private String content;
+	private User author;
+	private Set<WelfareTag> welfareTags;
 	private Date publishTime;
 	public int getId() {
 		return id;
@@ -43,6 +46,18 @@ public class Welfare implements Serializable{
 	}
 	public void setViewCount(int viewCount) {
 		this.viewCount = viewCount;
+	}
+	public Set<WelfareTag> getWelfareTags() {
+		return welfareTags;
+	}
+	public void setWelfareTags(Set<WelfareTag> welfareTags) {
+		this.welfareTags = welfareTags;
+	}
+	public User getAuthor() {
+		return author;
+	}
+	public void setAuthor(User author) {
+		this.author = author;
 	}
 
 }

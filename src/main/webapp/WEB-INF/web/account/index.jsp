@@ -9,6 +9,7 @@
 <link href="<%=basePath%>/css/site.min.css" rel="stylesheet">
 <script src="<%=basePath%>/js/jquery-1.11.2.min.js"></script>
 <script src="<%=basePath%>/js/bootstrap.js"></script>
+
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -65,7 +66,7 @@
 							<li><a href="#">我的福利</a></li>
 							<li><a href="#">我的余额</a></li>
 							<li><a href="#">审核列表</a></li>
-							<li><a href="#">发福利</a></li>
+							<li><a href="<%=basePath%>/account/publishWelfare">发福利</a></li>
 						</ul>
 					</div>
 					<div class="col-md-9">

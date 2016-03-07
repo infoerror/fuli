@@ -10,7 +10,7 @@ public class User implements Serializable{
 	 */
 	private static final long serialVersionUID = 5039935226716207273L;
 	
-	private int uid;
+	private int id;
 
 	private String username;
 
@@ -22,12 +22,14 @@ public class User implements Serializable{
 	
 
 
-	public int getUid() {
-		return uid;
+
+
+	public int getId() {
+		return id;
 	}
 
-	public void setUid(int uid) {
-		this.uid = uid;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getUsername() {

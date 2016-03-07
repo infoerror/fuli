@@ -9,12 +9,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="content" property="content" />
 		<result column="publishTime" property="publishTime" />
 		<result column="visitCount" property="visitCount" />
-	
+		<collection property="welfareTags" select="selectAllATByWid"
+			column="wid" ofType="WelfareTag" />
 	</resultMap>
 
-	<select id="selectFulisOfPage" parameterType="Page"
-		resultMap="welfareMap">
+	<select id="selectFulisOfPage" parameterType="Page" resultMap="welfareMap">
 		select * from welfare order by wid limit #{pageIndex},#{pageCount}
 	</select>
-
+	
+	<select id="selectAllATByWid" parameterType="long" resultType="WelfareTag">
+		select * from welfare_own_tag w_o_t join welfare_tag w_t on
+		w_o_t.tagId=w_t.wtid where w_o_t.welfareId=#{wid}
+	</select>
+	
+	<!-- INSERT INTO 表名称 VALUES (值1, 值2,....) -->
+	<insert id="insertWelfare" parameterType="Welfare"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into
+		unaudited_welfare(title,content,publishTime,userId) values
+		(#{title},#{content},#{publishTime},#{author.id})
+	</insert>
+	
+	<insert id="buildWelfareAndTagRelation" parameterType="Welfare_Tag">
+		insert into welfare_own_tag
+		(welfareId,TagId) values (#{welfareId},#{welfareTagId})
+	</insert>
+	
 </mapper>
