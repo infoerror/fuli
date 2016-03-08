@@ -106,12 +106,11 @@
 						</div>
 					</div>
 
-				</div>
 
 
 
 				<div class="clearfix"></div>
-				<blockquote class="pull-right">
+				<blockquote class="pull-right row">
 					<p>多发福利，造福人类！</p>
 					<small>本站宗旨</small>
 				</blockquote>
@@ -159,7 +158,7 @@
 				<p class="text-center">Copyright © fengblog.cn All Rights
 					Reserved. xxx 内容版权所有，同时保留所有权利。个人博客免责声明</p>
 			</div>
-
+</div>
 		<script>
 			$(document)
 					.ready(

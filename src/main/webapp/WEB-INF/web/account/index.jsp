@@ -30,30 +30,12 @@
 	<div class="container">
 		<jsp:include page="/WEB-INF/web/common/newnav.jsp"></jsp:include>
 
-		<div class="bc-social">
-			<div class="container">
-				<ul class="bc-social-buttons">
-					<li class="social-qq"><i class="fa fa-qq"></i> <span
-						id="qqgroup">QQ1320020962&</span></li>
-
-					<li class="social-weibo"><a href="http://115.28.1.19"
-						title="IT詹士锋微博" target="_blank"
-						onclick="_hmt.push(['_trackEvent', 'masthead', 'click', 'masthead-新浪微博'])"><i
-							class="fa fa-weibo"></i> 新浪微博：@IT詹士锋</a></li>
-
-					<li class="social-weibo"><a href="http://115.28.1.19"
-						title="IT詹士锋微博" target="_blank"
-						onclick="_hmt.push(['_trackEvent', 'masthead', 'click', 'masthead-新浪微博'])"><i
-							class="fa fa-weibo"></i> 新浪微博：@张广通_通广张</a></li>
-				</ul>
-			</div>
-		</div>
-
+	
 		<div class="row container-fluid projects">
 
 			<div class="projects-header page-header">
 
-				<h3>禁止黄赌毒，从我做起！</h3>
+				<h3>远离黄赌毒，从我做起！</h3>
 			</div>
 
 			<div class="col-md-12">

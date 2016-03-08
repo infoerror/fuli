@@ -18,8 +18,6 @@ public interface WelfareService {
 
 	public Collection<Welfare> getFulisOfPage(int pageIndex);
 
-	public AddWelfareResult addWelfare(WelfareForm welfare);
 
-	public Collection<WelfareTag> getAllWelfareTags();
 	
 }

@@ -7,7 +7,7 @@ package com.duang.fuli.utils;
  */
 public class PageUtils {
 	
-	public static int showCount = 4;
+	public static int showCount = 5;
 	public static int showImgCount = 4;
 	
 }

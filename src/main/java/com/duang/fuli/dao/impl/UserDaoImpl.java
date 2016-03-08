@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import com.duang.fuli.dao.UserDao;
 import com.duang.fuli.domain.User;
-import com.duang.fuli.domain.form.LoginForm;
 @Repository("userDao")
 public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao{
 

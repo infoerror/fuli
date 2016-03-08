@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.duang.fuli.domain.UnauditedWelfare">
+
+
+
+
+	<resultMap type="UnauditedWelfare" id="welfareMap">
+		<id column="wid" property="id" />
+		<result column="title" property="title" />
+		<result column="content" property="content" />
+		<result column="publishTime" property="publishTime" />
+		<collection property="welfareTags" select="selectAllTagByWid"
+			column="wid" ofType="WelfareTag" />
+	</resultMap>
+	
+	
+	<resultMap type="UnauditedWelfare" id="selectUserUnauditedWelfare">
+		<id column="wid" property="id" />
+		<result column="title" property="title" />
+		<result column="publishTime" property="publishTime" />
+		<collection property="welfareTags" select="selectAllTagByWid"
+			column="wid" ofType="WelfareTag" />
+	</resultMap>
+	
+	
+	<select id="selectAllTagByWid" parameterType="long" resultType="WelfareTag">
+		select * from welfare_own_tag w_o_t join welfare_tag w_t on
+		w_o_t.tagId=w_t.wtid where w_o_t.welfareId=#{wid}
+	</select>
+	
+	<select id="selectUserUnauditedWelfareCount" parameterType="User" resultType="Integer">
+		select count(*) from unaudited_welfare where userId=#{id}
+	</select>
+	
+	<select id="selectUserUnauditedWelfares" parameterType="User" resultMap="selectUserUnauditedWelfare">
+	    select wid,title,publishTime from unaudited_welfare where userId=#{id} order by wid limit #{pageIndex},#{pageCount}
+	</select>
+	
+	<!-- INSERT INTO 表名称 VALUES (值1, 值2,....) -->
+	<insert id="insertUnauditedWelfare" parameterType="UnauditedWelfare"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into
+		unaudited_welfare(title,content,publishTime,userId) values
+		(#{title},#{content},#{publishTime},#{author.id})
+	</insert>
+	
+		<insert id="buildUnauditedWelfareAndTagRelation" parameterType="Welfare_Tag">
+		insert into unaudited_welfare_own_tag
+		(welfareId,TagId) values (#{welfareId},#{welfareTagId})
+	</insert>
+</mapper>
