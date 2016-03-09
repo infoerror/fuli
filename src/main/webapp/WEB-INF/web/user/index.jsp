@@ -30,7 +30,7 @@
 	<div class="container">
 		<jsp:include page="/WEB-INF/web/common/newnav.jsp"></jsp:include>
 
-	
+
 		<div class="row container-fluid projects">
 
 			<div class="projects-header page-header">
@@ -40,22 +40,74 @@
 
 			<div class="col-md-12">
 				<div class="row container-fluid">
-				   <div class="row">
-				   <div class="col-md-3">
+					<div class="row">
+						<div class="col-md-2">
 
-						<ul class="nav nav-list">
-							<li class="nav-header">操作列表</li>
-							<li><a href="#">我的福利</a></li>
-							<li><a href="#">我的余额</a></li>
-							<li><a href="#">审核列表</a></li>
-							<li><a href="<%=basePath%>/account/publishWelfare">发福利</a></li>
-						</ul>
+							<ul class="nav nav-list">
+								<li class="nav-header">操作列表</li>
+								<li><a href="#">我的福利</a></li>
+								<li><a href="#">我的余额</a></li>
+								<li><a href="<%=basePath%>/user/unauditedWelfares">审核列表</a></li>
+								<li><a href="<%=basePath%>/user/publishWelfare">发福利</a></li>
+							</ul>
+						</div>
+						<div class="col-md-10">
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col-md-3" style="text-align:left">
+										<img src="<%=basePath%>${userInfo.imageUri}">
+									</div>
+									<div class="col-md-9">
+										<div class="container-fluid">
+											<div class="col-md-12">
+												<h4>基本信息</h4>
+												<table class="table">
+													<tr style="">
+														<td>用户名:</td>
+														<td>${user.username}</td>
+													</tr>
+													<tr>
+														<td>昵称:</td>
+														<td>${user.nickname }</td>
+													</tr>
+													<tr>
+														<td>注册时间:</td>
+														<td>${user.registerTime }</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<h2>个人详细信息</h2>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<table class="table">
+											<tr style="">
+												<td>手机号:</td>
+												<td>${userInfo.phone }</td>
+											</tr>
+											<tr>
+												<td>邮箱:</td>
+												<td>${userInfo.email }</td>
+											</tr>
+											<tr>
+												<td>个人说明:</td>
+												<td>${userInfo.description}</td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</div>
+
+						</div>
 					</div>
-					<div class="col-md-9">
-					功能区！
-					</div>
-				    </div>
-					
+
 				</div>
 
 
@@ -67,7 +119,7 @@
 				</blockquote>
 
 			</div>
-		
+
 		</div>
 
 		<div class="panel panel-default">

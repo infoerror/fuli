@@ -13,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.duang.fuli.domain.InactiveAccount"
 			alias="InactiveAccount" />
 		<typeAlias type="com.duang.fuli.domain.User" alias="User" />
+		<typeAlias type="com.duang.fuli.domain.UserInfo" alias="UserInfo" />
 	</typeAliases>
 	<mappers>
 		<!-- 映射文件的位置 -->
@@ -20,6 +21,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="com/duang/fuli/domain/WelfareTag.xml" />
 		<mapper resource="com/duang/fuli/domain/UnauditedWelfare.xml" />
 		<mapper resource="com/duang/fuli/domain/User.xml" />
+	    <mapper resource="com/duang/fuli/domain/UserInfo.xml" />
 		<mapper resource="com/duang/fuli/domain/InactiveAccount.xml" />
 	</mappers>
 </configuration>

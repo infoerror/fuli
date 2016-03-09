@@ -45,7 +45,7 @@ public class LoginController extends BaseController{
 	
 	@RequestMapping("/loginSuccess")
 	public String loginSuccess() throws Exception {
-		return "redirect:/account/center";
+		return "redirect:/user/center";
 	}
 	
 	@RequestMapping("/showCaptcha")

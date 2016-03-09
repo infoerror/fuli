@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.hibernate.annotations.ResultCheckStyle;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
@@ -43,6 +44,13 @@ public class RegisterServiceImpl implements RegisterService {
 		result.setError_no(0);
 		result.setMsg("注册成功!");
 		SUCC_REG_JSON = JSON.toJSONString(result);
+		RegisterResult registerResult = new RegisterResult();
+		registerResult.setResult(REGISTER_RESULT.SUCCESS);
+		registerResult.setJson(SUCC_REG_JSON);;
+		
+		RegisterResult error= new RegisterResult();
+		error.setResult(REGISTER_RESULT.SUCCESS);
+		error.setJson(SUCC_REG_JSON);;	
 	}
 
 	@Override

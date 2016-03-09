@@ -105,7 +105,7 @@ public class UnauditedWelfareServiceImpl implements UnauditedWelfareService {
 		int currentPage=unauditedPage.getCurrentPage();
 	    currentPage =  currentPage==0?1:currentPage;
 	    
-		if(totalPages == 0){
+		if(unauditedPage.isNeedLoadCount()){
 			//第一次加载
 			int count=unauditedWelfareDao.getUnauditedWelfareCount(currentUser);
 			totalPages = count/PageUtils.showCount+1;

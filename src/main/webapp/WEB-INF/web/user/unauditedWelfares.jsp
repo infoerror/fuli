@@ -58,8 +58,8 @@
 								<li class="nav-header">操作列表</li>
 								<li><a href="#">我的福利</a></li>
 								<li><a href="#">我的余额</a></li>
-								<li><a href="#">审核列表</a></li>
-								<li><a href="#">发福利</a></li>
+								<li class="active"><a href="#">审核列表</a></li>
+								<li class="info"><a href="#">发福利</a></li>
 							</ul>
 						</div>
 						<div class="col-md-10">
@@ -77,10 +77,18 @@
 									</tr>
 								</thead>
 								<tbody id="welfare_data">
+									<c:forEach items="${welfares}" var="welfare">
+									  <tr>
+									  <td><a href="/">${welfare.title }</a></td>
+									  <td>${welfare.publishTime }</td>
+									  <td><a href="">更新</a> <a href="">删除</a></td></tr>
+									</c:forEach>
 								</tbody>
 							</table>
 							<ul class="pagination" id="data_page">
-
+             	                <c:forEach begin="${startPage}" end="${endPage }" var="page">
+             	                   <li><a data-key="${page}">${page}</a></li>
+             	                </c:forEach>
 							</ul>
 						</div>
 					</div>
@@ -139,102 +147,121 @@
 	</div>
 </div>
 	<script>
+	
+	var pageCount=${totalPages};
+	function getDate(tm){
+		var tt=new Date(parseInt(tm)).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ")
+		return tt;
+		} 
+	function getData(currentPage,totalPages){
+		
+		var welfareData={};
+		welfareData.currentPage=currentPage;
+		$
+		.ajax({
+			url : "<%=basePath%>/unauditedWelfare/myList",
+			data : JSON.stringify(welfareData),
+			type : 'post',
+			cache : false,
+			dataType : 'json',
+			contentType : 'application/json',
+			success : function(result) {
+				var no = result.error_no;
+				if (no == 0) {
+					createPagination(currentPage,pageCount);
+
+					$('#welfare_data tr').remove();
+					$(result.data)
+							.each(
+									function() {
+										$dataEle='<tr><td><a href="/">'
+										+ this.title
+										+ '</a></td>';
+										$dataEle+='<td>'+getDate(this.publishTime)+'</td>';
+										$dataEle+='<td><a href="">更新</a> <a href="">删除</a></td></tr>';
+										
+										$($dataEle)
+												.appendTo(
+														"#welfare_data");
+
+									})
+
+					//
+					//if(result.totalPages)
+
+				} else {
+					$('#tips').text(
+							result.error);
+					$('#myModal').modal('show')
+				}
+			},
+			error : function() {
+				alert("暂时无法链接服务器，请联系管理员")
+			}
+		});
+		
+		
+}
+	function createPagination(currentPage,totalPages){
+		
+		$('#data_page li').remove();
+		
+		var startPage=0;
+		var endPage = 0;
+		
+		if(currentPage<=3){
+			startPage = 1;
+			if(totalPages<5){
+				endPage = totalPages;
+			}else{
+				endPage =5;
+			}
+		}else{
+			if(totalPages<5){
+				endPage = totalPages;
+			}else{
+				startPage = currentPage-2;
+				endPage = currentPage+2;	
+			}
+		}
+		for(var i =startPage;i<=endPage;i++){
+			var temp= '<li';
+			if(i==currentPage){
+				temp+=' class="active"';
+			}
+		    temp+='><a data-key="'+i+'"';
+			temp+='>'+i+'</a></li>';
+			$(temp).appendTo("#data_page");	
+		}
+		
+		setPageListener();
+	}
+	
+	function setPageListener(){
+		
+		$('#data_page li').click(function(e){
+		
+			var page=$(this).find("a").attr("data-key");
+			$(this).addClass("active");
+			getData(page,pageCount);
+		})
+		
+	}
+	
 			$(document)
 					.ready(
 					
 							
 							function() {
 
-								getData(1,0);
-								window.pages=0;
 							
+								$('#data_page li:first').addClass("active");
+								
+							
+								setPageListener();
 								
 								
-								function createPagination(currentPage,totalPages){
-									
-									$('#data_page li').remove();
-									
-									var startPage=0;
-									var endPage = 0;
-									
-									if(currentPage<=3){
-										startPage = 1;
-										if(totalPages<5){
-											endPage = totalPages;
-										}else{
-											endPage =5;
-										}
-									}else{
-										if(totalPages<5){
-											endPage = totalPages;
-										}else{
-											startPage = currentPage-2;
-											endPage = currentPage+2;	
-										}
-									}
-									for(var i =startPage;i<=endPage;i++){
-										$('<li><a class="pageLink">'+i+'</a></li>').appendTo("#data_page");	
-									}
-									
-									
-								}
-								
-								function getDate(tm){
-									var tt=new Date(parseInt(tm)).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ")
-									return tt;
-									} 
-						
-								
-								
-									function getData(currentPage,totalPages){
-										
-										var welfareData={};
-										welfareData.currentPage=currentPage;
-										welfareData.totalPages=totalPages;
-										$
-										.ajax({
-											url : "<%=basePath%>/unauditedWelfare/myList",
-											data : JSON.stringify(welfareData),
-											type : 'post',
-											cache : false,
-											dataType : 'json',
-											contentType : 'application/json',
-											success : function(result) {
-												var no = result.error_no;
-												if (no == 0) {
-                                                    window.pages= result.totalPages;
-													createPagination(currentPage,result.totalPages);
-
-													$('#welfare_data tr').remove();
-													$(result.data)
-															.each(
-																	function() {
-																		$dataEle='<tr><td><a href="/">'
-																		+ this.title
-																		+ '</a></td>';
-																		$dataEle+='<td>'+getDate(this.publishTime)+'</td>';
-																		$dataEle+='<td><a href="">更新</a> <a href="">删除</a></td></tr>';
-																		
-																		$($dataEle)
-																				.appendTo(
-																						"#welfare_data");
-
-																	})
-
-													//
-													//if(result.totalPages)
-
-												} else {
-													$('#tips').text(
-															result.error);
-													$('#myModal').modal('show')
-												}
-											},
-											error : function() {
-												alert("暂时无法链接服务器，请联系管理员")
-											}
-										});
-							}
+							
 
 						});
 	</script>

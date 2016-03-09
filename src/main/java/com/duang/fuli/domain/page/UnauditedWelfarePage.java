@@ -10,6 +10,7 @@ public class UnauditedWelfarePage implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private boolean needLoadCount;
 	private int currentPage;
 	private int totalPages;
 	private User user;
@@ -28,6 +29,14 @@ public class UnauditedWelfarePage implements Serializable{
 
 	public void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;
+	}
+
+	public boolean isNeedLoadCount() {
+		return needLoadCount;
+	}
+
+	public void setNeedLoadCount(boolean needLoadCount) {
+		this.needLoadCount = needLoadCount;
 	}
 
 	public User getUser() {
