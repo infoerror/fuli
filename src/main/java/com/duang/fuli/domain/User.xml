@@ -5,8 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.duang.fuli.domain.User">
 
 	<resultMap type="User" id="selectMap">
-	    <id column="uid" property="id" />
-	    <result column="username" property="username" />
+		<id column="uid" property="id" />
+		<result column="username" property="username" />
 		<result column="password" property="password" />
 		<result column="nickname" property="nickname" />
 		<result column="registerTime" property="registerTime" />
@@ -15,21 +15,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectByUsername" parameterType="String" resultMap="selectMap">
 		select * from user where username=#{username}
 	</select>
-	
-	<select id="selectByUsernameAndPassword" parameterType="User" resultMap="selectMap">
-		select * from user where username=#{username} and password=#{password} 
+
+	<select id="selectByUsernameAndPassword" parameterType="User"
+		resultMap="selectMap">
+		select * from user where username=#{username} and
+		password=#{password}
 	</select>
-	
-		<!-- INSERT INTO 表名称 VALUES (值1, 值2,....) -->
+
+	<!-- INSERT INTO 表名称 VALUES (值1, 值2,....) -->
 	<!-- useGeneratedKeys="true" 设置是否使用jdbc对应的返回主键的功能 keyProperty="aid" 设置返回的主键是要存放在对应实体类中的那个属性当中，一般都是放在主键 -->
-	<insert id="insertUser" parameterType="InactiveAccount">
+	<insert id="insertUser" parameterType="User" useGeneratedKeys="true"
+		keyProperty="id">
 		insert into
-		user(username,password,nickname,registerTime) values
-		(#{username},#{password},#{nickname},#{registerTime})
+		user(username,password) values
+		(#{username},#{password})
 	</insert>
-	
-    <delete id="deleteByUsername" parameterType="String">
-		delete from user where username=#{username}
+
+	<delete id="deleteByUsername" parameterType="String">
+		delete from user
+		where username=#{username}
 	</delete>
 
 </mapper>

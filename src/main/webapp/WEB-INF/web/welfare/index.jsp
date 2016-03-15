@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="/WEB-INF/web/common/common.jsp"%>
 <!doctype html>
 <html>
@@ -6,7 +7,8 @@
 <meta charset="utf-8">
 <title>福利</title>
 <link href="<%=basePath%>/css/bootstrap.min.css" rel="stylesheet">
-<link href="<%=basePath%>/css/site.min.css" rel="stylesheet">
+<link href="<%=basePath%>/css/layout.css" rel="stylesheet">
+<link href="<%=basePath%>/css/style.css" rel="stylesheet">
 <script src="<%=basePath%>/js/jquery-1.11.2.min.js"></script>
 <script src="<%=basePath%>/js/bootstrap.js"></script>
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -26,112 +28,76 @@
 
 </head>
 <body>
-	<div class="container">
 	<jsp:include page="/WEB-INF/web/common/newnav.jsp"></jsp:include>
+	<div class="wrap">
+		<div class="container">
 
-		<div class="bc-social">
-			<div class="container">
-				<ul class="bc-social-buttons">
-					<li class="social-qq"><i class="fa fa-qq"></i> <span
-						id="qqgroup">QQ1320020962&</span></li>
 
-					<li class="social-weibo"><a href="http://115.28.1.19"
-						title="IT詹士锋微博" target="_blank"
-						onclick="_hmt.push(['_trackEvent', 'masthead', 'click', 'masthead-新浪微博'])"><i
-							class="fa fa-weibo"></i> 新浪微博：@IT詹士锋</a></li>
+			<div class="row container-fluid projects">
 
-					<li class="social-weibo"><a href="http://115.28.1.19"
-						title="IT詹士锋微博" target="_blank"
-						onclick="_hmt.push(['_trackEvent', 'masthead', 'click', 'masthead-新浪微博'])"><i
-							class="fa fa-weibo"></i> 新浪微博：@张广通_通广张</a></li>
-				</ul>
-			</div>
-		</div>
+				<div class="col-md-8">
 
-		<div class="row container-fluid projects">
+					<div class="content">
+						<c:forEach var="welfare" items="${results}">
+							<article class="excerpt  cate1 auth1">
+								<h2>
+									<a href="welfare/${welfare.id}" title="${welfare.title}">${welfare.title}</a>
+								</h2>
+								<div class="info">
+									<span class="spndate"><fmt:formatDate
+											value="${welfare.publishTime }" type="both" /></span><span
+										class="spnname"><a href="u/${welfare.author.id}">${welfare.author.nickname }</a></span><span
+										class="spncomm"><a
+										href="welfare/${welfare.id}#comments" title="查看10的评论">10条评论</a></span><span
+										class="spnview">${welfare.viewCount}次浏览</span>
+								</div>
 
-			<div class="projects-header page-header">
+								<div class="note">
+									<p>${welfare.content}</p>
+									<p class="readmore">
+										<a href="welfare/${welfare.id}" title="${welfare.title}">阅读全文</a>
+									</p>
+								</div>
+							</article>
+						</c:forEach>
 
-				<h3>起风了，唯有努力生存。。</h3>
-				<p>本xx后台采用的框架有Bootstrap3.0+jsp+springmvc+spring3+mybaits+lucene，运行环境是ubuntu+tomcat7.0</p>
-			</div>
+						<div class="pull-right">
+							<nav>
+								<ul class="pagination">
+								</ul>
+							</nav>
+						</div>
 
-			<div class="col-md-8">
 
-				<c:forEach items="${fulis }" var="fuli">
+
+					</div>
+				</div>
+				<div class="col-md-4">
+
+
 
 					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h2>
-								<a href="/article/${fuli.id }" target="new"
-									style="text-decoration:none; color:#373434">${fuli.title }</a>
-							</h2>
+						<!-- Default panel contents -->
+						<div class="panel-heading">标签云</div>
+						<div class="panel-body"></div>
+					</div>
+
+					<div class="panel panel-default">
+						<!-- Default panel contents -->
+						<div class="panel-heading">热门文章</div>
+						<div class="panel-body">
+							<ul class="list-group">
+							</ul>
 						</div>
-						<div class="panel-body">${fuli.content }
-							<span class="label label-default">浏览:${fuli.viewCount}</span>
-                                  <span
-								class="label label-default">${article.publishTime }</span> <span
-								class="pull-right"><a class="btn btn-default"
-								href="/article/${fuli.id}" target="new">View
-									details &raquo;</a></span>
-						</div>
-					</div>
 
-				</c:forEach>
-
-				<div class="pull-right">
-					<nav>
-						<ul class="pagination">
-						</ul>
-					</nav>
-				</div>
-
-
-
-			</div>
-			<div class="col-md-4">
-
-		
-
-				<div class="panel panel-default">
-					<!-- Default panel contents -->
-					<div class="panel-heading">标签云</div>
-					<div class="panel-body">
-	
 					</div>
 				</div>
-
-				<div class="panel panel-default">
-					<!-- Default panel contents -->
-					<div class="panel-heading">热门文章</div>
-					<div class="panel-body">
-						<ul class="list-group">
-						</ul>
-					</div>
-
-				</div>
 			</div>
-		</div>
 
-		<div class="panel panel-default">
-			<!-- Default panel contents -->
-			<div class="panel-heading">
-				友情链接 <a class="pull-right" href="">申请入口</a>
-			</div>
-			<div class="panel-body">
-				<a href="">马云个人博客</a> <a href="">马化腾个人博客</a> <a href="">王欣个人博客</a> <a
-					href="">雷军个人博客</a> <a href="">李彦宏个人博客</a> <a href="">周鸿祎个人博客</a> <a
-					href="">丁磊个人博客</a> <a href="">曹国伟个人博客</a> <a href="">张朝阳个人博客</a> <a
-					href="">陈天桥个人博客</a> <a href="">更多</a>
-			</div>
-		</div>
+			
 
-		<div class="well">
-			<p class="text-center">Copyright © fengblog.cn All Rights
-				Reserved. xxx 内容版权所有，同时保留所有权利。个人博客免责声明</p>
 		</div>
-
 	</div>
-
+<%@ include file="../common/footer.jspf"%>
 </body>
 </html>

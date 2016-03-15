@@ -15,7 +15,6 @@ import com.duang.fuli.domain.Welfare;
 import com.duang.fuli.service.WelfareService;
 import com.duang.fuli.utils.PageUtils;
 
-
 @Controller
 @Scope("prototype")
 @RequestMapping(value = "/welfare")
@@ -26,10 +25,18 @@ public class WelfareController extends BaseController {
 	@RequestMapping(value = "/uptodate/{pageindex}")
 	public String uptodateList(Model model,
 			@PathVariable(value = "pageindex") int pageIndex) {
-		Collection<Welfare> fulis= this.welfareService.getFulisOfPage(pageIndex);
-		model.addAttribute("fulis",fulis);
+		Collection<Welfare> fulis = this.welfareService
+				.getFulisOfPage(pageIndex);
+		model.addAttribute("results", fulis);
 		model.addAttribute("showCount", PageUtils.showCount);
 		return "welfare/index";
 	}
-	
+
+	@RequestMapping(value="/{id}")
+	public String detail(Model model,@PathVariable("id") int id) {
+		Welfare welfare=welfareService.getWelfare(id);
+		model.addAttribute("welfare", welfare);
+		return "welfare/detail";
+	}
+
 }

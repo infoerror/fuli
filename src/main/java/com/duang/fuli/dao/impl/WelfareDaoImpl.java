@@ -36,5 +36,10 @@ public class WelfareDaoImpl extends SqlSessionDaoSupport implements WelfareDao {
 		 this.getSqlSession().insert("com.duang.fuli.domain.Welfare.buildWelfareAndTagRelation",welfare_Tag);
 	}
 
+	@Override
+	public Welfare getWelfare(int id) {
+		return this.getSqlSession().selectOne("com.duang.fuli.domain.Welfare.selectWelfareById",id);
+	}
+
 
 }

@@ -1,12 +1,17 @@
 package com.duang.fuli.domain;
 
+import java.util.Date;
+
 public class UserInfo {
 	
 	private User user;
+	private String nickname;
 	private String email;
 	private String imageUri;
 	private String phone;
+	private int userId;
 	private String description;
+	private Date registerTime;
 	
 	public User getUser() {
 		return user;
@@ -37,6 +42,24 @@ public class UserInfo {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public Date getRegisterTime() {
+		return registerTime;
+	}
+	public void setRegisterTime(Date registerTime) {
+		this.registerTime = registerTime;
+	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 }

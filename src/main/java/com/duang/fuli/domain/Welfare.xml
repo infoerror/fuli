@@ -13,15 +13,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			column="wid" ofType="WelfareTag" />
 	</resultMap>
 
+	<!-- welfare detail start -->
+	<resultMap type="Welfare" id="welfareDetail">
+		<id column="w.wid" property="id" />
+		<result column="w_title" property="title" />
+		<result column="w_content" property="content" />
+		<result column="w_publishTime" property="publishTime" />
+		<result column="w_visitCount" property="visitCount" />
+		<association property="author" javaType="UserInfo"
+			resultMap="userInfoDetail" />
+		<collection property="welfareTags" select="selectAllATByWid"
+			column="wid" ofType="WelfareTag" />
+	</resultMap>
+
+	<resultMap type="UserInfo" id="userInfoDetail">
+		<id column="u_i_userId" property="userId" />
+		<result column="u_i_nickname" property="nickname" />
+		<result column="u_i_imageUri" property="imageUri" />
+	</resultMap>
+
+	<select id="selectWelfareById" parameterType="Integer"
+		resultMap="welfareDetail">
+		select w.content w_content,w.title w_title,w.publishTime w_publishTime,w.viewCount w_viewCount,u_i.userId u_i_userId,u_i.nickname u_i_nickname,u_i.imageUri u_i_imageUri from welfare
+		w,user_info u_i where w.wid=#{id} and w.userId=u_i.userId
+	</select>
+	<!-- welfare detail end -->
+
+
 	<select id="selectFulisOfPage" parameterType="Page" resultMap="welfareMap">
 		select * from welfare order by wid limit #{pageIndex},#{pageCount}
 	</select>
-	
+
+
 	<select id="selectAllATByWid" parameterType="long" resultType="WelfareTag">
 		select * from welfare_own_tag w_o_t join welfare_tag w_t on
 		w_o_t.tagId=w_t.wtid where w_o_t.welfareId=#{wid}
 	</select>
-	
+
 	<!-- INSERT INTO 表名称 VALUES (值1, 值2,....) -->
 	<insert id="insertWelfare" parameterType="Welfare"
 		useGeneratedKeys="true" keyProperty="id">
@@ -29,10 +57,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		unaudited_welfare(title,content,publishTime,userId) values
 		(#{title},#{content},#{publishTime},#{author.id})
 	</insert>
-	
+
 	<insert id="buildWelfareAndTagRelation" parameterType="Welfare_Tag">
-		insert into welfare_own_tag
-		(welfareId,TagId) values (#{welfareId},#{welfareTagId})
+		insert
+		into welfare_own_tag
+		(welfareId,TagId) values
+		(#{welfareId},#{welfareTagId})
 	</insert>
-	
+
 </mapper>

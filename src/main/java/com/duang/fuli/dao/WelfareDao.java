@@ -12,5 +12,7 @@ public interface WelfareDao {
 	public void addWelfare(Welfare welfare);
 
 	public void addTagsToWelfare(Welfare_Tag welfare_Tag);
+
+	public Welfare getWelfare(int id);
 	
 }

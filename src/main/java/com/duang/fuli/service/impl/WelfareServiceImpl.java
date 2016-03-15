@@ -32,6 +32,11 @@ public class WelfareServiceImpl implements WelfareService {
 		return welfareDao.getFulisOfPage(pageIndex);
 	}
 
+	@Override
+	public Welfare getWelfare(int id) {
+		return welfareDao.getWelfare(id);
+	}
+
 	
 
 

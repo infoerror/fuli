@@ -13,6 +13,7 @@ import com.duang.fuli.dao.InactiveAccountDao;
 import com.duang.fuli.dao.UserDao;
 import com.duang.fuli.domain.InactiveAccount;
 import com.duang.fuli.domain.User;
+import com.duang.fuli.domain.UserInfo;
 import com.duang.fuli.domain.form.RegisterForm;
 import com.duang.fuli.domain.json.Result;
 import com.duang.fuli.service.RegisterService;
@@ -148,11 +149,17 @@ public class RegisterServiceImpl implements RegisterService {
 		User user = new User();
 		user.setUsername(account.getUsername());
 		Timestamp registerTime = new Timestamp(account.getRegisterTime());
-		user.setRegisterTime(registerTime);
-		user.setNickname("新用户" + token.substring(0, 5));
+		
 		user.setPassword(MD5Utils.md5(account.getPassword()));
 		inactiveAccountDao.deleteByUsername(account.getUsername());
 		userDao.saveUser(user);
+		
+		UserInfo userInfo  =new UserInfo();
+		userInfo.setRegisterTime(registerTime);
+		userInfo.setNickname("新用户" + token.substring(0, 5));
+		userInfo.setUser(user);
+		userDao.saveUserInfo(userInfo);
+		
 		return true;
 	}
 

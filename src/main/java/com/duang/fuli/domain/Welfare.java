@@ -14,7 +14,7 @@ public class Welfare implements Serializable{
 	private int viewCount;
 	private String title;
 	private String content;
-	private User author;
+	private UserInfo author;
 	private Set<WelfareTag> welfareTags;
 	private Date publishTime;
 	public int getId() {
@@ -53,11 +53,12 @@ public class Welfare implements Serializable{
 	public void setWelfareTags(Set<WelfareTag> welfareTags) {
 		this.welfareTags = welfareTags;
 	}
-	public User getAuthor() {
+	public UserInfo getAuthor() {
 		return author;
 	}
-	public void setAuthor(User author) {
+	public void setAuthor(UserInfo author) {
 		this.author = author;
 	}
+	
 
 }

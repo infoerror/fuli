@@ -18,6 +18,8 @@ public interface WelfareService {
 
 	public Collection<Welfare> getFulisOfPage(int pageIndex);
 
+	public Welfare getWelfare(int id);
+
 
 	
 }

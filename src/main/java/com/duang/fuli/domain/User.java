@@ -16,7 +16,6 @@ public class User extends Page implements Serializable{
 
 	private String password;
 
-	private Date registerTime;
 
 	private String nickname;
 	
@@ -46,14 +45,6 @@ public class User extends Page implements Serializable{
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public Date getRegisterTime() {
-		return registerTime;
-	}
-
-	public void setRegisterTime(Date registerTime) {
-		this.registerTime = registerTime;
 	}
 
 
