@@ -15,10 +15,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from user_info where userId=#{id}
 	</select>
 
+	<!-- select basic info start -->
+	<resultMap type="BasicInfo" id="selectBasicInfoMap">
+		<result column="nickname" property="nickname" />
+		<result column="signature" property="signature" />
+	</resultMap>
+	<select id="selectUserBasicInfoByUser" parameterType="User"
+		resultMap="selectBasicInfoMap">
+		select nickname,signature from user_info where userId=#{id}
+	</select>
+	<!-- select basic info end -->
+	
+	<!-- select avatar start -->
+	<select id="selectUserAvatarByUser" parameterType="User"
+		resultType="String">
+		select imageUri from user_info where userId=#{id}
+	</select>
+	<!-- select avatar end-->
+	
+	<!-- update avatar start -->
+		<update id="updateAvatar">
+		update user_info set
+		imageUri=#{avatar} where
+		userId = #{user.id}
+	</update>
+	<!-- update avatar end-->
+
 	<insert id="insertUserInfo" parameterType="UserInfo">
 		insert into
-		user(nickname,registerTime,userId) values
+		user_info(nickname,registerTime,userId) values
 		(#{nickname},#{registerTime},#{user.id})
 	</insert>
+
+	<update id="updateBasicInfo">
+		update user_info set
+		nickname=#{nickname},signature=#{signature} where
+		userId = #{user.id}
+	</update>
 
 </mapper>

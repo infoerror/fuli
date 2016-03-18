@@ -13,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.duang.fuli.domain.InactiveAccount"
 			alias="InactiveAccount" />
 		<typeAlias type="com.duang.fuli.domain.User" alias="User" />
+		<typeAlias type="com.duang.fuli.domain.BasicInfo" alias="BasicInfo" />
 		<typeAlias type="com.duang.fuli.domain.UserInfo" alias="UserInfo" />
 	</typeAliases>
 	<mappers>

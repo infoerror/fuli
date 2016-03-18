@@ -2,15 +2,13 @@ package com.duang.fuli.domain;
 
 import java.util.Date;
 
-public class UserInfo {
+public class UserInfo extends BasicInfo{
 	
 	private User user;
-	private String nickname;
 	private String email;
 	private String imageUri;
 	private String phone;
 	private int userId;
-	private String description;
 	private Date registerTime;
 	
 	public User getUser() {
@@ -37,12 +35,7 @@ public class UserInfo {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
+
 	public String getNickname() {
 		return nickname;
 	}

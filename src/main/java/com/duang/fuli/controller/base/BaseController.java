@@ -16,6 +16,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import com.duang.fuli.domain.User;
+import com.duang.fuli.utils.JsonUtils;
 import com.duang.fuli.utils.RenderUtils;
 import com.duang.fuli.utils.SessionFlagUtils;
 
@@ -53,18 +54,12 @@ public class BaseController {
 	 * @param response
 	 * @throws IOException
 	 */
-	protected void writeJson(String json, HttpServletResponse response)
+	protected final static void writeJson(String json, HttpServletResponse response)
 			throws IOException {
 		RenderUtils.renderJson(json, response);
 	}
-
-	protected void writeJson(String json) throws IOException {
-          writeJson(json, getResponse());
-	}
-	protected final HttpServletResponse getResponse() {
-		ServletWebRequest servletContainer = (ServletWebRequest)RequestContextHolder.getRequestAttributes();
-		return servletContainer.getResponse();
-	}
+	
+	
 	
 	protected final static HttpServletRequest getRequest() {
 		return ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest(); 
@@ -72,6 +67,14 @@ public class BaseController {
 	
 	protected final static User getCurrentUser(){
 		return (User) getRequest().getSession().getAttribute(SessionFlagUtils.LOGINED_USER_FLAG);
+	}
+	
+	protected final static String getContextPath(){
+		return getRequest().getServletContext().getContextPath();
+	}
+	
+	protected final static String getRealPath(String path){
+		return getRequest().getServletContext().getRealPath(path);
 	}
 
 }

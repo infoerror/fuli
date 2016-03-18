@@ -1,10 +1,5 @@
 <%@ page language="java" pageEncoding="utf-8"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path;
-%>
+
 <div class="top-wrap">
     <nav role="navigation" class="navbar navbar-inverse">
     	<!--[if lt IE 9]>
@@ -51,8 +46,8 @@
     			</ul>
     			
     			<ul class="nav navbar-nav navbar-right sign">
-    				    				<li><a class="signin" href="/login">登录</a></li>
-                    <li><a class="signup" href="/reg">注册</a></li>
+    				    				<li><a class="signin" href="${pageContext.request.contextPath }/login/">登录</a></li>
+                    <li><a class="signup" href="${pageContext.request.contextPath }/register/">注册</a></li>
     				    			</ul>
     		</div>
     	</div>

@@ -1,6 +1,7 @@
 package com.duang.fuli.controller;
 
 import java.util.Collection;
+
 import javax.annotation.Resource;
 
 import org.springframework.context.annotation.Scope;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.duang.fuli.controller.base.BaseController;
+import com.duang.fuli.domain.BasicInfo;
 import com.duang.fuli.domain.UserInfo;
 import com.duang.fuli.domain.WelfareTag;
 import com.duang.fuli.domain.page.UnauditedWelfarePage;
@@ -35,6 +37,20 @@ public class UserController extends BaseController{
 		return "user/index";
 	}
 	
+	@RequestMapping(value = "/modifyBasicInfo")
+	public String modifyBasicInfoUI(Model model){
+		BasicInfo basicInfo=userService.getUserBasicInfo(getCurrentUser());
+		model.addAttribute("basicInfo", basicInfo);
+		return "user/modifyBasicInfo";
+	}
+	
+	@RequestMapping(value = "/modifyAvatar")
+	public String modifyAvatarUI(Model model){
+		String imageUri=userService.getUserAvatarImageUri(getCurrentUser());
+		model.addAttribute("imageUri", imageUri);
+		return "user/modifyAvatar";
+	}	
+	
 	
 	@RequestMapping(value = "/publishWelfare")
 	public String addWelfareUI(Model model){
@@ -42,6 +58,7 @@ public class UserController extends BaseController{
 		model.addAttribute("welfareTags",welfareTag);
 		return "user/publishWelfare";
 	}
+	
 	
 	@RequestMapping(value = "/unauditedWelfares")
 	public String unauditedWelfares(Model model){
