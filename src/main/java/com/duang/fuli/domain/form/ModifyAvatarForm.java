@@ -1,9 +1,12 @@
 package com.duang.fuli.domain.form;
 
 import java.io.Serializable;
-
 import com.duang.fuli.domain.User;
-
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:56:36
+ */
 public class ModifyAvatarForm implements Serializable{
 	
 	/**

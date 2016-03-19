@@ -2,7 +2,11 @@ package com.duang.fuli.domain;
 
 import java.io.Serializable;
 
-
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:55:23
+ */
 public class InactiveAccount implements Serializable {
 
 	/**

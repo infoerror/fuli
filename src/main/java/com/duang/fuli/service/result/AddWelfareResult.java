@@ -2,7 +2,11 @@ package com.duang.fuli.service.result;
 
 import com.duang.fuli.domain.form.WelfareForm;
 import com.duang.fuli.service.result.Protocols.AddWelfare;
-
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:53:30
+ */
 public class AddWelfareResult extends ServiceResult {
 
 	public static final AddWelfareResult TITLE_FORMAT_ERROR;

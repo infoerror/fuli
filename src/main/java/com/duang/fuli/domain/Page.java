@@ -1,5 +1,9 @@
 package com.duang.fuli.domain;
-
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:55:28
+ */
 public class Page {
 	private Long tempID;
 	private int pageCount;

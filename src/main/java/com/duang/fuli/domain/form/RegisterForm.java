@@ -2,6 +2,11 @@ package com.duang.fuli.domain.form;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:56:49
+ */
 public class RegisterForm implements Serializable{
 	
 	/**

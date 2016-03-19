@@ -1,7 +1,11 @@
 package com.duang.fuli.service.result;
 
 import com.duang.fuli.service.result.Protocols.Register;
-
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:54:18
+ */
 public class SendRegisterEmailResult extends ServiceResult {
 	public static SendRegisterEmailResult EXPIRED_MAIL;
 	public static SendRegisterEmailResult SUCC_MAIL;

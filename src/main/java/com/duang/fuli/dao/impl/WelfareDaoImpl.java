@@ -14,6 +14,11 @@ import com.duang.fuli.domain.Welfare;
 import com.duang.fuli.domain.Welfare_Tag;
 import com.duang.fuli.utils.PageUtils;
 
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:51:18
+ */
 @Repository("welfareDao")
 public class WelfareDaoImpl extends SqlSessionDaoSupport implements WelfareDao {
 

@@ -16,7 +16,6 @@ public class JSONController extends BaseController {
 	public void setReqAndRes(HttpServletResponse response) {
 		this.response = response;
 	}
-
 	protected void writeJson(Object json) throws IOException {
 		writeJson(JsonUtils.toString(json), response);
 	}

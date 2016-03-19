@@ -1,9 +1,17 @@
 package com.duang.fuli.domain;
 
 import java.io.Serializable;
-
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:56:12
+ */
 public class WelfareTag implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String name;
 	private String description;

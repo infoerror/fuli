@@ -1,7 +1,6 @@
 package com.duang.fuli.service.impl;
 
 import javax.annotation.Resource;
-
 import org.springframework.stereotype.Service;
 
 import com.duang.fuli.dao.UserInfoDao;
@@ -13,8 +12,11 @@ import com.duang.fuli.domain.form.ModifyAvatarForm;
 import com.duang.fuli.service.UserService;
 import com.duang.fuli.service.result.ModifyAvatarResult;
 import com.duang.fuli.service.result.ModifyBasicInfoResult;
-import com.duang.fuli.service.result.ServiceResult;
-
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:53:13
+ */
 @Service("userService")
 public class UserServiceImpl implements UserService {
 

@@ -1,5 +1,10 @@
 package com.duang.fuli.service.result;
 
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:54:10
+ */
 public class Protocols {
 
 	public static final int USER_NO_LOGIN_CODE = 9999;

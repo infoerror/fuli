@@ -1,11 +1,17 @@
 package com.duang.fuli.web.dispatcher;
 
 import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.context.i18n.LocaleContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:57:30
+ */
 public class MyDispatcher extends DispatcherServlet {
 
 	private static final long serialVersionUID = 1L;

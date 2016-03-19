@@ -9,6 +9,11 @@ import com.duang.fuli.service.result.Protocols.ModifyBasicInfo;
 import com.duang.fuli.utils.StringUtils;
 import com.duang.fuli.utils.XSSUtils;
 
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:54:04
+ */
 public class ModifyBasicInfoResult extends ServiceResult implements Serializable {
 
 	/**

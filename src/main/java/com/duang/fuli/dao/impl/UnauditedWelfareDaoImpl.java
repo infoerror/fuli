@@ -1,7 +1,6 @@
 package com.duang.fuli.dao.impl;
 
 import java.util.Collection;
-
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
@@ -9,7 +8,11 @@ import com.duang.fuli.dao.UnauditedWelfareDao;
 import com.duang.fuli.domain.UnauditedWelfare;
 import com.duang.fuli.domain.User;
 import com.duang.fuli.domain.Welfare_Tag;
-
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:50:45
+ */
 @Repository("unauditedWelfareDao")
 public class UnauditedWelfareDaoImpl extends SqlSessionDaoSupport implements UnauditedWelfareDao {
 

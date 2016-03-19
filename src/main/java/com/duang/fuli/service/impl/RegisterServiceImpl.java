@@ -1,7 +1,6 @@
 package com.duang.fuli.service.impl;
 
 import java.sql.Timestamp;
-
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
@@ -18,7 +17,11 @@ import com.duang.fuli.service.result.RegisterResult;
 import com.duang.fuli.service.result.SendRegisterEmailResult;
 import com.duang.fuli.utils.EmailUtil;
 import com.duang.fuli.utils.MD5Utils;
-
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:53:00
+ */
 @Service("registerService")
 public class RegisterServiceImpl implements RegisterService {
 
@@ -31,7 +34,7 @@ public class RegisterServiceImpl implements RegisterService {
 	private InactiveAccountDao inactiveAccountDao;
 	
 	/**
-	 * also can be validated through aop
+	 * 也可以用aop验证
 	 */
 	@Override
 	public RegisterResult register(RegisterForm registerForm) {

@@ -3,7 +3,11 @@ package com.duang.fuli.domain;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
-
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:55:56
+ */
 public class Welfare implements Serializable{
 	
 	/**

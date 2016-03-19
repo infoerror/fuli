@@ -20,9 +20,13 @@ import com.duang.fuli.service.UnauditedWelfareService;
 import com.duang.fuli.service.result.AddWelfareResult;
 import com.duang.fuli.service.result.UnauditedWelfarePageData;
 import com.duang.fuli.utils.JsonUtils;
-import com.duang.fuli.utils.SessionFlagUtils;
+import com.duang.fuli.web.utils.SessionFlags;
 
-
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:49:51
+ */
 @Controller
 @Scope("prototype")
 @RequestMapping(value = "/api/unauditedWelfare")
@@ -32,7 +36,7 @@ public class ApiUnauditedWelfareController extends JSONController {
 	
 	@RequestMapping(value = "/addWelfare",method=RequestMethod.POST)
 	public void add(HttpSession session,@RequestBody WelfareForm welfareForm) throws IOException{
-	    User user = (User) session.getAttribute(SessionFlagUtils.LOGINED_USER_FLAG);
+	    User user = (User) session.getAttribute(SessionFlags.LOGINED_USER_FLAG);
 		welfareForm.setAuthor(user);
 		AddWelfareResult result=unauditedWelfareService.addUnauditedWelfare(welfareForm);
 		writeJson(result);
@@ -40,7 +44,7 @@ public class ApiUnauditedWelfareController extends JSONController {
 	
 	@RequestMapping(value = "/myList",method=RequestMethod.POST)
 	public void myList(HttpServletResponse response,HttpSession session,@RequestBody UnauditedWelfarePage unauditedPage) throws IOException{
-	    User user = (User) session.getAttribute(SessionFlagUtils.LOGINED_USER_FLAG);
+	    User user = (User) session.getAttribute(SessionFlags.LOGINED_USER_FLAG);
 	    unauditedPage.setUser(user);
 	    UnauditedWelfarePageData unauditedWelfareData=unauditedWelfareService.getUnauditedWelfare(unauditedPage);
         writeJson(JsonUtils.toString(unauditedWelfareData));		

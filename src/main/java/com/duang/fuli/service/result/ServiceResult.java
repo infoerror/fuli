@@ -1,5 +1,10 @@
 package com.duang.fuli.service.result;
 
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:54:24
+ */
 public class ServiceResult {
 	private int code;
 	private String msg;

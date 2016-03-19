@@ -2,6 +2,11 @@ package com.duang.fuli.domain.form;
 
 import com.duang.fuli.domain.User;
 
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:56:26
+ */
 public class BasicInfoForm {
 	
 	private User user;

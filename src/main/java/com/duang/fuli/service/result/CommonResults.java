@@ -4,11 +4,16 @@ import java.lang.reflect.Field;
 import java.util.concurrent.ConcurrentHashMap;
 
 
-
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:53:34
+ */
 public class CommonResults {
 
 	private static final ConcurrentHashMap<Class<?>, Object> RESULT_CACHE=new ConcurrentHashMap<Class<?>,Object>();
 
+	@SuppressWarnings("unchecked")
 	public static <T> T USER_NO_LOGIN(Class<?> result) {
 		T obj =  (T) RESULT_CACHE.get(result);
 		if(obj==null){

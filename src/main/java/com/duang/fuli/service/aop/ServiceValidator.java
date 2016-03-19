@@ -4,7 +4,11 @@ import java.lang.reflect.Method;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
-
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:54:40
+ */
 public class ServiceValidator {
 	/** 
      * 方法环绕拦截器，如果使用了这个，可以忽视上面的方法 

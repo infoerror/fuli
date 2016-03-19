@@ -1,7 +1,11 @@
 package com.duang.fuli.service.result;
 
 import com.duang.fuli.service.result.Protocols.ModifyAvatar;
-
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:54:34
+ */
 public class UploadResult extends DataResult {
 
 	public static final UploadResult NO_FILE_UPLOAD = new UploadResult();

@@ -14,7 +14,11 @@ import com.duang.fuli.controller.base.BaseController;
 import com.duang.fuli.domain.Welfare;
 import com.duang.fuli.service.WelfareService;
 import com.duang.fuli.utils.PageUtils;
-
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:49:32
+ */
 @Controller
 @Scope("prototype")
 @RequestMapping(value = "/welfare")

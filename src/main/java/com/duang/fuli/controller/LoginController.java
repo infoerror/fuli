@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.duang.fuli.controller.base.BaseController;
 import com.duang.fuli.service.LoginService;
 import com.duang.fuli.utils.CaptchaUtils;
-import com.duang.fuli.utils.SessionFlagUtils;
-
+import com.duang.fuli.web.utils.SessionFlags;
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:48:56
+ */
 @Controller
 @Scope("prototype")
 @RequestMapping(value = "/login")
@@ -34,7 +38,7 @@ public class LoginController extends BaseController{
 	
 	@RequestMapping("/showCaptcha")
 	public void showCaptcha(HttpServletResponse response,HttpSession session) throws Exception {
-		CaptchaUtils.writeImg2Resp(response,session,SessionFlagUtils.LOGIN_SESSION_FLAG);
+		CaptchaUtils.writeImg2Resp(response,session,SessionFlags.LOGIN_CAPTCHA_SESSION_FLAG);
 	}
 
 }

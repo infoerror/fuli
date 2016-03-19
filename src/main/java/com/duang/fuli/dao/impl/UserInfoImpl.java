@@ -9,6 +9,12 @@ import com.duang.fuli.domain.User;
 import com.duang.fuli.domain.UserInfo;
 import com.duang.fuli.domain.form.BasicInfoForm;
 import com.duang.fuli.domain.form.ModifyAvatarForm;
+
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:51:11
+ */
 @Repository("userInfoDao")
 public class UserInfoImpl extends SqlSessionDaoSupport implements UserInfoDao{
 

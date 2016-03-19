@@ -1,7 +1,6 @@
 package com.duang.fuli.service.impl;
 
 import java.util.Collection;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -11,7 +10,11 @@ import com.duang.fuli.dao.WelfareDao;
 import com.duang.fuli.domain.Welfare;
 import com.duang.fuli.service.WelfareService;
 
-
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:53:22
+ */
 @Service("welfareService")
 public class WelfareServiceImpl implements WelfareService {
 

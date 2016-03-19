@@ -1,5 +1,10 @@
 package com.duang.fuli.domain.form;
 
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:56:31
+ */
 public class LoginForm {
 	
 	private String username;

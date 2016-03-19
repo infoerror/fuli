@@ -1,7 +1,11 @@
 package com.duang.fuli.domain;
 
 import java.util.Date;
-
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:55:48
+ */
 public class UserInfo extends BasicInfo{
 	
 	private User user;

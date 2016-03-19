@@ -1,5 +1,9 @@
 package com.duang.fuli.domain;
-
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:55:52
+ */
 public class Welfare_Tag {
 	
 	private int welfareId;

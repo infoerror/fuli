@@ -1,8 +1,11 @@
 package com.duang.fuli.domain;
 
 import java.io.Serializable;
-import java.util.Date;
-
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:55:39
+ */
 public class User extends Page implements Serializable{
 
 	/**

@@ -18,7 +18,11 @@ import com.duang.fuli.domain.form.ModifyAvatarForm;
 import com.duang.fuli.service.UserService;
 import com.duang.fuli.utils.FileUtils;
 import com.duang.fuli.utils.ImageUtils;
-
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:50:02
+ */
 @Controller
 @Scope("prototype")
 @RequestMapping(value = "/api/user")

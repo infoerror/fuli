@@ -16,8 +16,12 @@ import com.duang.fuli.domain.form.RegisterForm;
 import com.duang.fuli.service.RegisterService;
 import com.duang.fuli.service.result.RegisterResult;
 import com.duang.fuli.service.result.SendRegisterEmailResult;
-import com.duang.fuli.utils.SessionFlagUtils;
-
+import com.duang.fuli.web.utils.SessionFlags;
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:49:46
+ */
 @Controller
 @Scope("prototype")
 @RequestMapping(value = "/api/register")
@@ -28,7 +32,7 @@ public class ApiRegisterController extends JSONController{
 	@RequestMapping(value="/confirm",method=RequestMethod.POST)
 	public void register(HttpSession session,@RequestBody RegisterForm registerForm)
 			throws Exception {
-		String rightCaptcha = (String) session.getAttribute(SessionFlagUtils.REGISTER_SESSION_FLAG);
+		String rightCaptcha = (String) session.getAttribute(SessionFlags.REGISTER_SESSION_FLAG);
 		registerForm.setRightCaptcha(rightCaptcha);
 		RegisterResult registerResult = registerService.register(registerForm);
 		if(registerResult.isRegisterSuccessful()){

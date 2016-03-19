@@ -5,6 +5,11 @@ import com.duang.fuli.domain.form.RegisterForm;
 import com.duang.fuli.service.result.Protocols.Register;
 import com.duang.fuli.utils.ValidatorUtils;
 
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:54:14
+ */
 public class RegisterResult extends ServiceResult{
 	
 	public final static  RegisterResult EXIST_USER_ERROR;

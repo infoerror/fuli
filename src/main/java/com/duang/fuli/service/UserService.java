@@ -7,9 +7,12 @@ import com.duang.fuli.domain.form.BasicInfoForm;
 import com.duang.fuli.domain.form.ModifyAvatarForm;
 import com.duang.fuli.service.result.ModifyAvatarResult;
 import com.duang.fuli.service.result.ModifyBasicInfoResult;
-import com.duang.fuli.service.result.ServiceResult;
 
-
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:51:56
+ */
 public interface UserService{
 
 	UserInfo getUserInfo(User user);

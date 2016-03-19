@@ -5,6 +5,11 @@ import org.springframework.stereotype.Repository;
 
 import com.duang.fuli.dao.InactiveAccountDao;
 import com.duang.fuli.domain.InactiveAccount;
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:50:40
+ */
 @Repository("inactiveAccountDao")
 public class InactiveAccountDaoImpl extends SqlSessionDaoSupport implements InactiveAccountDao{
 

@@ -5,9 +5,12 @@ import com.duang.fuli.domain.User;
 import com.duang.fuli.domain.UserInfo;
 import com.duang.fuli.domain.form.BasicInfoForm;
 import com.duang.fuli.domain.form.ModifyAvatarForm;
-import com.duang.fuli.service.result.ModifyBasicInfoResult;
 
-
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:50:23
+ */
 public interface UserInfoDao{
 
 	UserInfo getUserInfo(User user);

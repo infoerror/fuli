@@ -20,7 +20,11 @@ import com.duang.fuli.service.result.AddWelfareResult;
 import com.duang.fuli.service.result.UnauditedWelfarePageData;
 import com.duang.fuli.utils.PageUtils;
 
-
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:53:08
+ */
 @Service("unauditedWelfareService")
 public class UnauditedWelfareServiceImpl implements UnauditedWelfareService {
 

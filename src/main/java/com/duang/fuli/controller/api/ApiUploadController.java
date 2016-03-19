@@ -19,7 +19,11 @@ import com.duang.fuli.domain.User;
 import com.duang.fuli.service.result.UploadResult;
 import com.duang.fuli.utils.ImageUtils;
 import com.duang.fuli.utils.UploadUtils;
-
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:49:57
+ */
 @Controller
 @Scope("prototype")
 @RequestMapping(value = "/api/upload")

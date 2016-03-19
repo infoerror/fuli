@@ -3,13 +3,16 @@ package com.duang.fuli.service;
 import java.util.Collection;
 
 import com.duang.fuli.domain.Welfare;
-import com.duang.fuli.domain.WelfareTag;
-import com.duang.fuli.domain.form.WelfareForm;
-import com.duang.fuli.service.result.AddWelfareResult;
 
+/**
+ * 这个接口的几个方法需要重名名和完善
+ * @author zgq
+ * @date 2016年3月19日 下午1:52:07
+ */
 public interface WelfareService {
 
 	/**
+	 * 
 	 * 获取最新的福利 
 	 * @param top 最新条数
 	 * @return

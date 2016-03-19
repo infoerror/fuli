@@ -2,7 +2,11 @@ package com.duang.fuli.domain;
 
 import java.util.Date;
 import java.util.Set;
-
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:55:33
+ */
 public class UnauditedWelfare {
 	
 	private int id;

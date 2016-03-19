@@ -2,6 +2,7 @@ package com.duang.fuli.controller;
 
 import java.util.Collection;
 
+
 import javax.annotation.Resource;
 
 import org.springframework.context.annotation.Scope;
@@ -18,7 +19,11 @@ import com.duang.fuli.service.UnauditedWelfareService;
 import com.duang.fuli.service.UserService;
 import com.duang.fuli.service.result.UnauditedWelfarePageData;
 import com.duang.fuli.utils.PageUtils;
-
+/**
+ * 
+ * @author zgq
+ * @date 2016年3月19日 下午1:49:24
+ */
 @Controller
 @Scope("prototype")
 @RequestMapping(value = "/user")
