@@ -1,17 +1,16 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ include file="/WEB-INF/web/common/common.jsp"%>
 <!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
-<%@ include file="/WEB-INF/web/common/resource.jspf"%>
+<title>修改用户信息</title>
+<%@ include file="../common/resource.jspf"%>
 <script
 	src="${pageContext.request.contextPath }/assets/vendors/jcrop/jquery.jcrop.min.js"
 	type="text/javascript"></script>
 <script src="${pageContext.request.contextPath }/assets/js/avatar.js"
 	type="text/javascript"></script>
 <script src="${pageContext.request.contextPath }/assets/vendors/layer/layer.js" type="text/javascript"></script>
-<title>修改用户信息</title>
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -21,7 +20,7 @@
 
 </head>
 <body>
-	<jsp:include page="/WEB-INF/web/common/newnav.jsp"></jsp:include>
+<%@ include file="../common/newNav.jspf"%>
 	<div class="wrap">
 		<div class="container">
 			<%@ include file="../common/userNotice.jspf"%>
@@ -35,8 +34,8 @@
 									<div class="panel-heading">
 										<ul class="nav nav-pills account-tab">
 											<li><a href="modifyBasicInfo">基本信息</a></li>
-											<li class="active"><a href="avatar">修改头像</a></li>
-											<li><a href="password">修改密码</a></li>
+											<li class="active"><a href="modifyAvatar">修改头像</a></li>
+											<li><a href="modifyPassword">修改密码</a></li>
 										</ul>
 									</div>
 									<div class="panel-body">
@@ -105,7 +104,7 @@
 			</div>
 		</div>
 	</div>
-	<script>
+		<script>
 
 	var jcrop_api;
 	var jcrop_init = false;

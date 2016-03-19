@@ -1,12 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ include file="/WEB-INF/web/common/common.jsp"%>
 <!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
 <%@ include file="../common/resource.jspf"%>
 <title>福利</title>
-<script src="<%=basePath%>/js/2016/register.js"></script>
+<script src="${pageContext.request.contextPath }/assets/js/register.js"></script>
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -15,7 +14,7 @@
       <![endif]-->
 </head>
 <body>
-<%@ include file="/WEB-INF/web/common/newnav.jsp"%>
+<%@ include file="../common/newNav.jspf"%>
    <div class="wrap">
 	<div class="container">
 		<div class="row container-fluid projects">
@@ -51,7 +50,7 @@
 						</div>
 						<div class="col-sm-3">
 							<img alt="captcha" id="captcha_img"
-								src="<%=basePath%>/login/showCaptcha">
+								src="${pageContext.request.contextPath }/login/showCaptcha">
 						</div>
 						<div class="col-sm-4">
 							<label style="color:red" id="e_captcha"></label>
@@ -64,37 +63,57 @@
 						</div>
 					</div>
 				</form>
-
-
-
-
-			</div>
-			<div class="col-md-4">
-
-
-
-				<div class="panel panel-default">
-					<!-- Default panel contents -->
-					<div class="panel-heading">标签云</div>
-					<div class="panel-body"></div>
-				</div>
-
-				<div class="panel panel-default">
-					<!-- Default panel contents -->
-					<div class="panel-heading">热门文章</div>
-					<div class="panel-body">
-						<ul class="list-group">
-						</ul>
-					</div>
-
-				</div>
 			</div>
 		</div>
-
 	</div>
 </div>
 <%@ include file="../common/footer.jspf"%>
 	<script>
+	
+	function login() {
+		var user = {};  
+
+		user.username=$("#username").val();
+		user.password=$("#password").val();
+		user.captcha=$("#captcha").val();
+
+		$.ajax({
+			url :  '${pageContext.request.contextPath}/api/login/confirm', // 跳转到 action
+			data : JSON.stringify(user) ,
+			type : 'post',
+			cache : false,
+			dataType : 'json',
+			contentType : 'application/json',
+			success : function(result) {
+				var no =result.code;
+				var msg = result.msg;
+				if (no== 0) {
+					window.location.href = '${pageContext.request.contextPath}/login/loginSuccess';
+				} else {
+					currentState = -1;
+					if (no>=20000 && no<21000) {
+						showUsernameError(msg);
+					}
+					if (no>=21000 && no<22000) {
+						showPasswordError(result.error);
+					}
+				
+					if (no>=22000 && no<23000) {
+						showCaptchaError(result.error);
+					}
+					// $("#tips_content").text(result.tips);
+					changeImg();
+
+				}
+			},
+			error : function() {
+				alert("暂时无法链接服务器，请联系管理员")
+			}
+		});
+
+
+	}
+	
 		$(document).ready(
 
 		function() {

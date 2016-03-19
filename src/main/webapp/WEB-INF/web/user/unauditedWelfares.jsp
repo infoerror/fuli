@@ -18,7 +18,7 @@
 
 </head>
 <body>
-<%@ include file="/WEB-INF/web/common/newnav.jsp"%>
+<%@ include file="../common/newNav.jspf"%>
 	<div class="wrap">
 		<div class="container">
 			
@@ -96,7 +96,7 @@
 		</div>
 		<!-- /.modal -->
 	</div>
-	<%@ include file="/WEB-INF/web/common/footer.jspf"%>
+	<%@ include file="../common/footer.jspf"%>
 	<script>
 	
 	var pageCount=${totalPages};
@@ -110,14 +110,14 @@
 		welfareData.currentPage=currentPage;
 		$
 		.ajax({
-			url : "${pageContext.request.contextPath}/unauditedWelfare/myList",
+			url : "${pageContext.request.contextPath}/api/unauditedWelfare/myList",
 						data : JSON.stringify(welfareData),
 						type : 'post',
 						cache : false,
 						dataType : 'json',
 						contentType : 'application/json',
 						success : function(result) {
-							var no = result.error_no;
+							var no = result.code;
 							if (no == 0) {
 								createPagination(currentPage, pageCount);
 
@@ -142,7 +142,7 @@
 								//if(result.totalPages)
 
 							} else {
-								$('#tips').text(result.error);
+								$('#tips').text(result.msg);
 								$('#myModal').modal('show')
 							}
 						},

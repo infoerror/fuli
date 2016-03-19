@@ -116,126 +116,12 @@ function changeImg() {
 	var timestamp = (new Date()).valueOf();
 	imgSrc.attr("src", registerAddress + "showCaptcha?x=" + timestamp);
 }
-
-function active() {
-	$.ajax({
-		type : "POST",
-		url : registerAddress + "sendEmailForRegister",
-		dataType : "json",
-		complete : function(data) {
-			// 在这里做些事情，假设返回的json数据里有name这个属性
-			// 有时候可以直接data.name或者data['name']去访问
-			// 但有时候，却要通过var jsonData =
-			// eval("("+data.responseText+")");才可以通过jsonData.name访问，而且这种情况下，需要是complete而不是success
-			var jsonData = eval("(" + data.responseText + ")");
-			
-			if (jsonData.error_no== 0) {
-				$('#a_login').show();
-				$("#sendEmailForRegister").hide();
-				$("#message").text(jsonData.msg);
-			}else{
-				$("#message").text(jsonData.error);	
-			}
-		}
-	});
-
-}
 var registerAddress = "";
 // if (!registerAddress.endsWith('/')) {
 // registerAddress = registerAddress + '/';
 // }
 
-function register() {
-	var user = {};  
-
-	user.username=$("#username").val();
-	user.password=$("#password").val();
-	user.confirmPassword =$("#confirmPassword").val();
-	user.captcha=$("#captcha").val();
-
-	$.ajax({
-		url : registerAddress + "confirm", // 跳转到 action
-		data : JSON.stringify(user) ,
-		type : 'post',
-		cache : false,
-		dataType : 'json',
-		contentType : 'application/json',
-		success : function(result) {
-			var no =result.error_no; 
-			if (no== 0) {
-				window.location.href = registerAddress + "activeAccount";
-			} else {
-				currentState = -1;
-				if (no==10001 || no==10002) {
-					showUsernameError(result.error);
-				}
-				if (no==20001) {
-					showPasswordError(result.error);
-				}
-
-				if (no==20002) {
-					showPasswordEqualError(result.error);
-				}
-
-				if (no==30001) {
-					showCaptchaError(result.error);
-				}
-				// $("#tips_content").text(result.tips);
-				changeImg();
-
-			}
-		},
-		error : function() {
-			alert("暂时无法链接服务器，请联系管理员")
-		}
-	});
-}
-
 
 function checkLoginSubmit() {
 	return checkUsername() && checkPassword() && checkCaptcha();
-}
-	
-	function login() {
-		var user = {};  
-
-		user.username=$("#username").val();
-		user.password=$("#password").val();
-		user.captcha=$("#captcha").val();
-
-		$.ajax({
-			url : registerAddress + "confirm", // 跳转到 action
-			data : JSON.stringify(user) ,
-			type : 'post',
-			cache : false,
-			dataType : 'json',
-			contentType : 'application/json',
-			success : function(result) {
-				var no =result.error_no; 
-				if (no== 0) {
-					window.location.href = registerAddress + "loginSuccess";
-				} else {
-					currentState = -1;
-					if (no==10001 || no==10002) {
-						showUsernameError(result.error);
-					}
-					if (no==20001 || no==100001) {
-						showPasswordError(result.error);
-					}
-				
-					if (no==30001) {
-						showCaptchaError(result.error);
-					}
-					// $("#tips_content").text(result.tips);
-					changeImg();
-
-				}
-			},
-			error : function() {
-				alert("暂时无法链接服务器，请联系管理员")
-			}
-		});
-
-	
-	
 }

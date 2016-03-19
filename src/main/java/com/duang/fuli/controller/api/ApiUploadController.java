@@ -1,4 +1,4 @@
-package com.duang.fuli.controller;
+package com.duang.fuli.controller.api;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -23,9 +23,9 @@ import com.duang.fuli.utils.UploadUtils;
 @Controller
 @Scope("prototype")
 @RequestMapping(value = "/api/upload")
-public class UploadController extends JSONController{
+public class ApiUploadController extends JSONController{
 
-	private static final Logger LOG=Logger.getLogger(UploadController.class);
+	private static final Logger LOG=Logger.getLogger(ApiUploadController.class);
 	
 	/**
 	 * 有待完善

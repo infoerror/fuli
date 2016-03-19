@@ -1,0 +1,18 @@
+<%@ page language="java" pageEncoding="utf-8"%>
+	<div class="col-md-4">
+					<div class="panel panel-default">
+						<!-- Default panel contents -->
+						<div class="panel-heading">标签云</div>
+						<div class="panel-body"></div>
+					</div>
+
+					<div class="panel panel-default">
+						<!-- Default panel contents -->
+						<div class="panel-heading">热门文章</div>
+						<div class="panel-body">
+							<ul class="list-group">
+							</ul>
+						</div>
+
+					</div>
+				</div>

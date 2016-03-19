@@ -1,18 +1,16 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ include file="/WEB-INF/web/common/common.jsp"%>
 <!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
 <title>发福利</title>
-<%@ include file="/WEB-INF/web/common/resource.jspf"%>
-
+<%@ include file="../common/resource.jspf"%>
 <script type="text/javascript"
-	src="<%=basePath%>/ueditor/ueditor.config.js"></script>
+	src="${pageContext.request.contextPath }/ueditor/ueditor.config.js"></script>
 <script type="text/javascript"
-	src="<%=basePath%>/ueditor/ueditor.all.min.js"></script>
+	src="${pageContext.request.contextPath }/ueditor/ueditor.all.min.js"></script>
 <script type="text/javascript"
-	src="<%=basePath%>/ueditor/lang/zh-cn/zh-cn.js"></script>
+	src="${pageContext.request.contextPath }/ueditor/lang/zh-cn/zh-cn.js"></script>
 
 <script type="text/javascript">
 	//以前ckeditor写的js代码移步js/写过的js
@@ -28,7 +26,7 @@
       <![endif]-->
 </head>
 <body>
-	<%@ include file="/WEB-INF/web/common/newnav.jsp"%>
+<%@ include file="../common/newNav.jspf"%>
 	<div class="wrap">
 		<div class="container">
 			<div class="row container-fluid">
@@ -127,10 +125,11 @@
 								
 								$('#myModal').on('hidden.bs.modal', function () {
 									if(state==0){
-										window.location.href ="<%=basePath%>/welfare/";
+										window.location.href ='${pageContext.request.contextPath}/welfare/';
 												}
 
-											})
+											
+		})
 
 							function publishWelfare() {
 								var welfare = {};
@@ -150,14 +149,14 @@
 
 								$
 										.ajax({
-											url : "${pageContext.request.contextPath}/welfare/addWelfare",
+											url : "${pageContext.request.contextPath}/api/welfare/addWelfare",
 											data : JSON.stringify(welfare),
 											type : 'post',
 											cache : false,
 											dataType : 'json',
 											contentType : 'application/json;charset=utf-8',
 											success : function(result) {
-												var no = result.error_no;
+												var no = result.code;
 												if (no == 0) {
 													state = 0;
 													$('#tips').text(result.msg);

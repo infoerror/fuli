@@ -1,26 +1,19 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ include file="/WEB-INF/web/common/common.jsp"%>
 <!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>福利</title>
-<link href="<%=basePath%>/css/bootstrap.min.css" rel="stylesheet">
-<script src="<%=basePath%>/js/jquery-1.11.2.min.js"></script>
-<script src="<%=basePath%>/js/bootstrap.js"></script>
-<link href="<%=basePath%>/css/layout.css" rel="stylesheet">
-<link href="<%=basePath%>/css/style.css" rel="stylesheet">
+<title>福利详情-${welfare.title }</title>
+<%@ include file="../common/resource.jspf"%>
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
-<script charset="utf-8" type="text/javascript"
-	src="http://changyan.sohu.com/upload/changyan.js"></script>
 </head>
 <body>
-	<jsp:include page="/WEB-INF/web/common/newnav.jsp"></jsp:include>
+<%@ include file="../common/newNav.jspf"%>
 	<div class="wrap">
 		<div class="container">
 			<div class="row">
@@ -72,7 +65,7 @@
 							<li class="list-group-item user-card">
 								<div class="ava">
 									<a href="/ta/97"> <img
-										src="<%=basePath %>${welfare.author.imageUri }" class="img-circle">
+										src="${pageContext.request.contextPath }${welfare.author.imageUri }" class="img-circle">
 									</a>
 								</div>
 								<div class="user-info">
@@ -100,7 +93,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
 
 	<%@ include file="../common/footer.jspf"%>
 </body>

@@ -1,10 +1,9 @@
 package com.duang.fuli.service.result;
 
 import java.util.Collection;
-
 import com.duang.fuli.domain.UnauditedWelfare;
 
-public class UnauditedWelfarePageData extends com.duang.fuli.domain.json.Result{
+public class UnauditedWelfarePageData extends ServiceResult{
 	
 	private int totalPages;
 	private Collection<UnauditedWelfare> data;

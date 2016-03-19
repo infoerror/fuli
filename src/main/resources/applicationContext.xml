@@ -23,9 +23,13 @@
 
 	<aop:config>
 		<aop:aspect ref="serviceValidator">
-			<aop:pointcut id="serviceValidatorPointCut"
+			<aop:pointcut id="modifyMethods"
 				expression="execution(* *..service..*.modify*(..))" />
-			<aop:around method="around" pointcut-ref="serviceValidatorPointCut" />
+			<aop:around method="around" pointcut-ref="modifyMethods" />
+			
+			<aop:pointcut id="addMethods"
+				expression="execution(* *..service..*.add*(..))" />
+			<aop:around method="around" pointcut-ref="addMethods" />
 		</aop:aspect>
 	</aop:config>
 

@@ -14,12 +14,10 @@ import com.duang.fuli.domain.User;
 import com.duang.fuli.domain.WelfareTag;
 import com.duang.fuli.domain.Welfare_Tag;
 import com.duang.fuli.domain.form.WelfareForm;
-import com.duang.fuli.domain.json.Result;
 import com.duang.fuli.domain.page.UnauditedWelfarePage;
 import com.duang.fuli.service.UnauditedWelfareService;
 import com.duang.fuli.service.result.AddWelfareResult;
 import com.duang.fuli.service.result.UnauditedWelfarePageData;
-import com.duang.fuli.utils.JsonUtils;
 import com.duang.fuli.utils.PageUtils;
 
 
@@ -30,48 +28,16 @@ public class UnauditedWelfareServiceImpl implements UnauditedWelfareService {
 	private UnauditedWelfareDao unauditedWelfareDao;
 	@Resource(name = "welfareTagDao")
 	private WelfareTagDao welfareTagDao;
-	
-	private static final String TITLE_FORMAT_ERROR_JSON;
-	private static final String CONTENT_FORMAT_ERROR_JSON;
-	private static final String ADD_WELFARE_SUCC_JSON;
-	static{
-		Result result = new Result();
-		result.setError_no(0);
-		result.setMsg("添加成功");
-		ADD_WELFARE_SUCC_JSON =JsonUtils.toString(result);
-		
-		result.setError_no(10001);
-		result.setError("标题长度不能少于10字");
-		TITLE_FORMAT_ERROR_JSON =JsonUtils.toString(result);
-		
-		result.setError_no(10001);
-		result.setError("内容长度不能少于100字");
-		CONTENT_FORMAT_ERROR_JSON =JsonUtils.toString(result);
-		
-	}
-	
 
 	@Override
 	public AddWelfareResult addUnauditedWelfare(WelfareForm welfareForm) {
-		AddWelfareResult result  = new AddWelfareResult();
-		String title= welfareForm.getTitle();
-		User author  = welfareForm.getAuthor();
-		String content= welfareForm.getContent();
-		int[] welfareTagIds=welfareForm.getWelfareTagIds();
 		
-		if(title==null || title.length()<10){
-			result.setJson(TITLE_FORMAT_ERROR_JSON);
-			return result;
-		}
-		
-		if(content==null || content.length()<50){
-			result.setJson(CONTENT_FORMAT_ERROR_JSON);
-			return result;
-		}
+		User author = welfareForm.getAuthor();
+		int[] welfareTagIds = welfareForm.getWelfareTagIds();
 		
 		UnauditedWelfare welfare=new UnauditedWelfare();
-		welfare.setTitle(title);
-		welfare.setContent(content);
+		welfare.setTitle(welfare.getTitle());
+		welfare.setContent(welfare.getContent());
 		Timestamp publishTime = new Timestamp(System.currentTimeMillis());
 		welfare.setPublishTime(publishTime);
 		welfare.setAuthor(author);
@@ -83,9 +49,8 @@ public class UnauditedWelfareServiceImpl implements UnauditedWelfareService {
 			welfare_Tag.setWelfareTagId(welfareTagId);
 			unauditedWelfareDao.addTagsToUnauditedWelfare(welfare_Tag);
 		}
-		result.setJson(ADD_WELFARE_SUCC_JSON);
 		
-		return result;
+		return AddWelfareResult.ADD_WELFARE_SUCC;
 	}
 
 
@@ -114,7 +79,7 @@ public class UnauditedWelfareServiceImpl implements UnauditedWelfareService {
 		currentUser.setPageCount(PageUtils.showCount);
 		
 		Collection<UnauditedWelfare> unauditedWelfares=unauditedWelfareDao.getUnauditedWelfares(currentUser);
-		unauditedWelfarePageData.setError_no(0);
+		unauditedWelfarePageData.setCode(0);
 		unauditedWelfarePageData.setData(unauditedWelfares);
 		unauditedWelfarePageData.setTotalPages(totalPages);
 		return unauditedWelfarePageData;

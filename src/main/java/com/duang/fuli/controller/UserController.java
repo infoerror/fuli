@@ -51,6 +51,10 @@ public class UserController extends BaseController{
 		return "user/modifyAvatar";
 	}	
 	
+	@RequestMapping(value = "/modifyPasswrod")
+	public String modifyPasswordUI(Model model){
+		return "user/modifyPassword";
+	}	
 	
 	@RequestMapping(value = "/publishWelfare")
 	public String addWelfareUI(Model model){
@@ -75,7 +79,6 @@ public class UserController extends BaseController{
 		model.addAttribute("endPage", endPage);
 	
 		model.addAttribute("totalPages",pageData.getTotalPages());
-		
 		return "user/unauditedWelfares";
 	}
 	
