@@ -1,6 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ include file="/WEB-INF/web/common/common.jsp"%>
 <!doctype html>
 <html>
 <head>
@@ -18,7 +17,7 @@
 <%@ include file="../common/newNav.jspf"%>
 	<div class="wrap">
 		<div class="container">
-			<div class="row container-fluid projects">
+			<div class="row container-fluid">
 				<div class="col-md-8">
 					<div class="content">
 						<c:forEach var="welfare" items="${results}">

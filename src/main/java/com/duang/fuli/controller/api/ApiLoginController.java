@@ -44,7 +44,8 @@ public class ApiLoginController extends JSONController{
 			Cookie cookie2 = new Cookie(CookieFlags.LOGINED_PASSWORD,
 					loginedUser.getPassword());
 			addCookies(response,cookie1, cookie2);
-			session.setAttribute(SessionFlags.LOGINED_USER_FLAG, loginResult.getUser());
+			loginedUser.setPassword(null); //密码在这里session中，用不到
+			session.setAttribute(SessionFlags.LOGINED_USER_FLAG, loginedUser);
 		}
 		writeJson(loginResult);
 	}

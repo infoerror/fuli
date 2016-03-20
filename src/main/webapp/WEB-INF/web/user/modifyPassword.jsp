@@ -11,7 +11,9 @@
 	type="text/javascript"></script>
 <script src="${pageContext.request.contextPath }/assets/js/avatar.js"
 	type="text/javascript"></script>
-<script src="${pageContext.request.contextPath }/assets/vendors/layer/layer.js" type="text/javascript"></script>
+<script
+	src="${pageContext.request.contextPath }/assets/vendors/layer/layer.js"
+	type="text/javascript"></script>
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -21,7 +23,7 @@
 
 </head>
 <body>
-<%@ include file="../common/newNav.jspf"%>
+	<%@ include file="../common/newNav.jspf"%>
 	<div class="wrap">
 		<div class="container">
 			<%@ include file="../common/userNotice.jspf"%>
@@ -35,75 +37,130 @@
 									<div class="panel-heading">
 										<ul class="nav nav-pills account-tab">
 											<li><a href="modifyBasicInfo">基本信息</a></li>
-											<li class="active"><a href="avatar">修改头像</a></li>
-											<li><a href="password">修改密码</a></li>
+											<li><a href="modifyAvatar">修改头像</a></li>
+											<li class="active"><a href="modifyPassword">修改密码</a></li>
 										</ul>
 									</div>
 									<div class="panel-body">
 										<div id="message"></div>
-										<form method="post" action="${pageContext.request.contextPath }/api/user/modifyAvatar" class="form-horizontal">
-											<input type="hidden" value="" name="x" id="x"> <input
-												type="hidden" value="" name="y" id="y"> <input
-												type="hidden" value="" name="width" id="width"> <input
-												type="hidden" value="" name="height" id="height"> <input
-												type="hidden" value="" name="path" id="path">
-
-											<div class="upload-btn">
-												<label> <span>点击选择一张图片</span> <input type="file"
-													title="点击添加图片" accept="image/*" name="file" id="upload_btn">
-												</label>
-											</div>
-											<div class="update_ava">
-												<img alt="[Jcrop Example]" id="target"
-													src="${pageContext.request.contextPath }${imageUri }">
-											</div>
-
-											<div class="form-group">
-												<div class="text-center">
-													<button class="btn btn-primary" id="confirmModify">提交</button>
+										<div id="passwd" class="tab-pane active">
+											<form class="form-horizontal" method="post" action="password"
+												id="pw">
+												<div class="form-group">
+													<label for="password" class="control-label col-lg-3">当前密码</label>
+													<div class="col-lg-4 has-success">
+														<input type="password" data-required=""
+															placeholder="请输入当前密码" maxlength="18" name="oldPassword"
+															class="form-control">
+													</div>
 												</div>
-											</div>
-										</form>
+												<div class="form-group">
+													<label for="password" class="control-label col-lg-3">新密码</label>
+													<div class="col-lg-4">
+														<input type="password" data-required="" maxlength="18"
+															placeholder="请输入新密码" name="password" id="password"
+															class="form-control">
+													</div>
+												</div>
+												<div class="form-group">
+													<label for="password2" class="control-label col-lg-3">确认密码</label>
+													<div class="col-lg-4">
+														<input type="password" data-description="passwd"
+															data-describedby="message" data-conditional="confirm"
+															maxlength="18" placeholder="请再输入一遍新密码" data-required=""
+															name="password2" class="form-control">
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="text-center">
+														<button class="btn btn-primary" id="confirmModify">提交</button>
+													</div>
+												</div>
+												<!-- /form-actions -->
+											</form>
+										</div>
 									</div>
 									<!-- /panel-content -->
-									
-										<script type="text/javascript">
+								</div>
+								<!-- /panel-content -->
+
+								<script type="text/javascript">
 									$(function() {
-										$("#confirmModify").click(function(event){
-											 event.preventDefault();
-											 var info={
-													x:$('#x').val(),
-													y:$('#y').val(),
-													width:$('#width').val(),
-													height:$('#height').val(),
-													path:$('#path').val()
-													 
-											 };
-											 $.ajax({
-													url : "${pageContext.request.contextPath}/api/user/modifyAvatar", // 跳转到 action
-													data : JSON.stringify(info) ,
-													type : 'post',
-													cache : false,
-													dataType : 'json',
-													contentType : 'application/json',
-													success : function(result) {
-														layer.msg(result.msg);
-													},
-													error : function() {
-														alert("暂时无法链接服务器，请联系管理员")
-													}
-												});
-											 
-										})
+										$("#confirmModify")
+												.click(
+														function(event) {
+															event
+																	.preventDefault();
+															oldPass = $('#pw input:eq(0)')
+																	.val();
+															newPass = $(
+																	'#pw input:eq(1)')
+																	.val();
+															newPass2 = $(
+																	'#pw  input:eq(2)')
+																	.val();
+
+															if (oldPass.length<6 || oldPass.length>16) {
+																layer
+																		.msg("密码只能6到16位之间!");
+																return;
+															}
+
+															if (newPass<6 || newPass>16) {
+																layer
+																		.msg("密码只能6到16位之间!");
+																return;
+															}
+
+															if (newPass != newPass2) {
+																layer
+																		.msg("两次密码必须一致 !");
+																return;
+															}
+
+															var info = {
+																	oldPassword:oldPass,
+																	newPassword:newPass,
+																	confirmNewPassword:newPass2
+															};
+															$
+																	.ajax({
+																		url : '${pageContext.request.contextPath}/api/user/modifyPassword', // 跳转到 action
+																		data : JSON
+																				.stringify(info),
+																		type : 'post',
+																		cache : false,
+																		dataType : 'json',
+																		contentType : 'application/json',
+																		success : function(
+																				result) {
+																		    var code= result.code;
+																		    var msg=result.msg;
+																			if(code==0){
+																			    layer.msg('修改成功', function(){
+																				//关闭后的操作
+																				window.location.href='${pageContext.request.contextPath}/login/'
+																				});
+																			}else{
+																				layer.msg(msg);
+																			}
+																			
+																		},
+																		error : function() {
+																			alert("暂时无法链接服务器，请联系管理员")
+																		}
+																	});
+
+														})
 									});
 								</script>
-								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 
 	<%@ include file="../common/footer.jspf"%>

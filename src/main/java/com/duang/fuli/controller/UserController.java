@@ -1,8 +1,6 @@
 package com.duang.fuli.controller;
 
 import java.util.Collection;
-
-
 import javax.annotation.Resource;
 
 import org.springframework.context.annotation.Scope;
@@ -56,7 +54,7 @@ public class UserController extends BaseController{
 		return "user/modifyAvatar";
 	}	
 	
-	@RequestMapping(value = "/modifyPasswrod")
+	@RequestMapping(value = "/modifyPassword")
 	public String modifyPasswordUI(Model model){
 		return "user/modifyPassword";
 	}	

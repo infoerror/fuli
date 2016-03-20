@@ -1,13 +1,14 @@
 package com.duang.fuli.dao.impl;
 
 import java.util.Collection;
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.duang.fuli.dao.UnauditedWelfareDao;
 import com.duang.fuli.domain.UnauditedWelfare;
 import com.duang.fuli.domain.User;
-import com.duang.fuli.domain.Welfare_Tag;
+import com.duang.fuli.domain.mtm.Welfare_Tag;
 /**
  * 
  * @author zgq

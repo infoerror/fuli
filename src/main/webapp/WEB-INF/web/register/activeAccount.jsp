@@ -29,7 +29,6 @@
 								style="display:none" id="a_login">点击登录网站</a>
 						</div>
 					</div>
-					<%@ include file="../common/rightWidget.jspf"%>
 				</div>
 			</div>
 		</div>

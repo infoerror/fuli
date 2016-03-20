@@ -3,7 +3,7 @@ package com.duang.fuli.dao;
 import java.util.Collection;
 
 import com.duang.fuli.domain.Welfare;
-import com.duang.fuli.domain.Welfare_Tag;
+import com.duang.fuli.domain.mtm.Welfare_Tag;
 
 public interface WelfareDao {
 

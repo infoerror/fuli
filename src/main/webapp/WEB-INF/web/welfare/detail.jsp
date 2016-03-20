@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html>
 <head>
@@ -13,7 +14,8 @@
       <![endif]-->
 </head>
 <body>
-<%@ include file="../common/newNav.jspf"%>
+	<%@ include file="../common/loginAlert.jspf"%>
+	<%@ include file="../common/newNav.jspf"%>
 	<div class="wrap">
 		<div class="container">
 			<div class="row">
@@ -43,9 +45,7 @@
 									</div>
 									<!-- .post-thumbnail -->
 								</div>
-								<div class="post-content">
-								        ${welfare.content }
-								</div>
+								<div class="post-content">${welfare.content }</div>
 
 								<div class="tc mt40">
 									<a href="javascript:void(0);" class="icon-ding dib" rel="favor"
@@ -53,26 +53,30 @@
 								</div>
 
 								<div class="post-footer">
-										<!-- Share Button END -->
-									</div>
+									<!-- Share Button END -->
 								</div>
 							</div>
 						</div>
-						
+					</div>
+
 					<!-- right sidebar-->
 					<div class="col-md-3 side-right hidden-xs hidden-sm">
 						<ul class="list-group about-user">
 							<li class="list-group-item user-card">
 								<div class="ava">
 									<a href="/ta/97"> <img
-										src="${pageContext.request.contextPath }${welfare.author.imageUri }" class="img-circle">
+										src="${pageContext.request.contextPath }${welfare.author.imageUri }"
+										class="img-circle">
 									</a>
 								</div>
 								<div class="user-info">
 									<div class="nk mb10">${welfare.author.nickname }</div>
 									<div class="mb6">
-										<a rel="follow" data-id="97" href="javascript:void(0);"
-											class="btn btn-success btn-xs">+ 关注</a>
+										<c:if test="${logined_user.id!=welfare.author.userId }">
+											<a rel="follow" data-id="${welfare.author.userId }"
+												href="javascript:void(0);" class="btn btn-success btn-xs">+
+												关注</a>
+										</c:if>
 									</div>
 								</div>
 							</li>
@@ -87,12 +91,12 @@
 							</li>
 						</ul>
 					</div>
-					</div>
-					<!-- post/end -->
-
 				</div>
+				<!-- post/end -->
+
 			</div>
 		</div>
+	</div>
 
 	<%@ include file="../common/footer.jspf"%>
 </body>

@@ -72,4 +72,7 @@ public class BaseController {
 		}
 	}
 
+	protected static final void setSession(String key,Object value){
+		getRequest().getSession().setAttribute(key, value);
+	}
 }

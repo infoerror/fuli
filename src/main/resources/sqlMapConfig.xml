@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.duang.fuli.domain.Page" alias="Page" />
 		<typeAlias type="com.duang.fuli.domain.Welfare" alias="Welfare" />
 		<typeAlias type="com.duang.fuli.domain.WelfareTag" alias="WelfareTag" />
-		<typeAlias type="com.duang.fuli.domain.Welfare_Tag" alias="Welfare_Tag" />
+		<typeAlias type="com.duang.fuli.domain.mtm.Welfare_Tag" alias="Welfare_Tag" />
 		<typeAlias type="com.duang.fuli.domain.UnauditedWelfare"
 			alias="UnauditedWelfare" />
 		<typeAlias type="com.duang.fuli.domain.InactiveAccount"
@@ -15,6 +15,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.duang.fuli.domain.User" alias="User" />
 		<typeAlias type="com.duang.fuli.domain.BasicInfo" alias="BasicInfo" />
 		<typeAlias type="com.duang.fuli.domain.UserInfo" alias="UserInfo" />
+		
+		<typeAlias type="com.duang.fuli.domain.mtm.Follow_User" alias="Follow_User" />
 	</typeAliases>
 	<mappers>
 		<!-- 映射文件的位置 -->

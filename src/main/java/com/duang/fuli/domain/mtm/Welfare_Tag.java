@@ -1,4 +1,4 @@
-package com.duang.fuli.domain;
+package com.duang.fuli.domain.mtm;
 /**
  * 
  * @author zgq

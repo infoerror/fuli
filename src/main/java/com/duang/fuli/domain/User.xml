@@ -11,6 +11,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="nickname" property="nickname" />
 		<result column="registerTime" property="registerTime" />
 	</resultMap>
+	
+	<!-- select password start  -->
+	<select id="selectPasswordByUser" parameterType="String" resultType="String">
+		select password from user where uid=#{id}
+	</select>
+	<!-- select password end -->
+	
+	<!-- select follow user start  -->
+	<select id="selectFollowUser" parameterType="String" resultType="String">
+		select * from user_fans where userId=#{userId} and followId=#{followId}
+	</select>
+	<!-- select follow user end -->
 
 	<select id="selectByUsername" parameterType="String" resultMap="selectMap">
 		select * from user where username=#{username}
@@ -30,10 +42,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		user(username,password) values
 		(#{username},#{password})
 	</insert>
+	
+	<!-- follow user start -->
+	<insert id="insertFollowUser" parameterType="Follow_User">
+		insert into
+		user_fans(userId,followId) values
+		(#{userId},#{followId})
+	</insert>
+	<!-- follow user end -->
+	
 
 	<delete id="deleteByUsername" parameterType="String">
 		delete from user
 		where username=#{username}
 	</delete>
+
+	<!-- update password start -->
+	<update id="updateUserPassword">
+		update user set
+		password=#{newPassword} where
+		uid =
+		#{user.id}
+	</update>
+	<!-- update password end -->
+	
+	
+	
 
 </mapper>

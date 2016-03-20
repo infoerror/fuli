@@ -23,52 +23,7 @@
 	<div class="container mode-link">
         <h3 class="t-h3">友情链接</h3>
         <ul class="list-inline">
-            <li><a href="http://www.luosh.com" target="_blank" title="落事,分享您我的时落事往！">落事网</a></li>
-			                <li>
-                    <a href="http://yingtaop.com" target="_blank" title="主攻与小受的樱桃派">樱桃派</a>
-                </li>
-			                <li>
-                    <a href="http://www.wowenxue.com/" target="_blank" title="我文学杂志">我文学杂志</a>
-                </li>
-			                <li>
-                    <a href="http://wenyizhi.com/" target="_blank" title="发现美好！">文艺志</a>
-                </li>
-			                <li>
-                    <a href="http://www.bugela.com/" target="_blank" title="个人记录生活角落，一枚听着摇滚会做网站爱摄影画植物昆虫的水彩画爱好者！"> 布格拉 </a>
-                </li>
-			                <li>
-                    <a href="http://www.muwuxia.com" target="_blank" title="木屋下">木屋下</a>
-                </li>
-			                <li>
-                    <a href="http://www.xinzheku.org/" target="_blank" title="辛者酷">辛者酷</a>
-                </li>
-			                <li>
-                    <a href="http://munanzi.com/" target="_blank" title="牧南子">牧南子</a>
-                </li>
-			                <li>
-                    <a href="http://www.51kdn.cn" target="_blank" title="啃电脑">啃电脑</a>
-                </li>
-			                <li>
-                    <a href="http://www.iviki.org" target="_blank" title="viki">viki</a>
-                </li>
-			                <li>
-                    <a href="http://www.ieza.cn/" target="_blank" title="之行">之行</a>
-                </li>
-			                <li>
-                    <a href="http://www.yingsec.com/" target="_blank" title="影乐">影乐</a>
-                </li>
-			                <li>
-                    <a href="http://www.lanzhiyiyi.com/" target="_blank" title="遇见蓝波">遇见蓝波</a>
-                </li>
-			                <li>
-                    <a href="http://www.3miaotu.com" target="_blank" title="三秒兔">三秒兔</a>
-                </li>
-			                <li>
-                    <a href="http://www.cuixiaoke.com/" target="_blank" title="片段">片段</a>
-                </li>
-			                <li>
-                    <a href="http://www.qxfun.com" target="_blank" title="清新范">清新范</a>
-                </li>
+			    
 			                <li>
                     <a href="http://www.webjyh.com/" target="_blank" title="M.J">M.J</a>
                 </li>
@@ -121,78 +76,7 @@
 			                <li>
                     <a href="http://www.qmsgw.com/" target="_blank" title="浅默时光">浅默时光</a>
                 </li>
-			                <li>
-                    <a href="http://www.itomre.com" target="_blank" title="在喧嚣中寻找宁静，在生活中发现乐趣。">ITOMRE</a>
-                </li>
-			                <li>
-                    <a href="http://www.wufafuwu.com/" target="_blank" title="ONE一个">ONE一个</a>
-                </li>
-			                <li>
-                    <a href="http://www.songwine.cn/" target="_blank" title="朝歌暮酒">朝歌暮酒</a>
-                </li>
-			                <li>
-                    <a href="http://www.nonzen.com/" target="_blank" title="空白杂志">空白杂志</a>
-                </li>
-			                <li>
-                    <a href="http://www.17hishang.com" target="_blank" title="发现和分享最新影视预告片、精彩音乐MV、劲爆游戏CG、唯美图片故事，嗨尚视觉让你随时随地享受震撼的视觉体验。">嗨尚视觉</a>
-                </li>
-			                <li>
-                    <a href="http://www.sunan.me" target="_blank" title="陌风">陌风</a>
-                </li>
-			                <li>
-                    <a href="http://azfashao.com/" target="_blank" title="爱在发烧">爱在发烧</a>
-                </li>
-			                <li>
-                    <a href="http://www.shaibaonet.com" target="_blank" title="筛宝网">筛宝网</a>
-                </li>
-			                <li>
-                    <a href="http://www.weiheji.net" target="_blank" title="微合集">微合集</a>
-                </li>
-			                <li>
-                    <a href="https://www.osasic.com/" target="_blank" title="osasic">osasic</a>
-                </li>
-			                <li>
-                    <a href="http://www.bslxx.com" target="_blank" title="奔三路">奔三路</a>
-                </li>
-			                <li>
-                    <a href="http://www.4inlove.net" target="_blank" title="">4inlove</a>
-                </li>
-			                <li>
-                    <a href="http://www.cuidao.net/" target="_blank" title="萃岛">萃岛</a>
-                </li>
-			                <li>
-                    <a href="http://www.basemu.com/" target="_blank" title="记录生活中的所思所想及所悟。">八色木</a>
-                </li>
-			                <li>
-                    <a href="http://www.z-clown.com/" target="_blank" title="然而扮演着各种角色">Z-CLOWN</a>
-                </li>
-			                <li>
-                    <a href="http://www.estory365.com" target="_blank" title="衣故事">衣故事</a>
-                </li>
-			                <li>
-                    <a href="http://qingchun.org" target="_blank" title="永远年轻，永远热泪盈眶">青春</a>
-                </li>
-			                <li>
-                    <a href="http://ixqx.cn" target="_blank" title="爱小清新">爱小清新</a>
-                </li>
-			                <li>
-                    <a href="http://juhemulu.com" target="_blank" title="聚合网站目录">聚合网站目录</a>
-                </li>
-			                <li>
-                    <a href="http://www.liuyunfei.cn/" target="_blank" title="LovePanda">LovePanda</a>
-                </li>
-			                <li>
-                    <a href="http://ioooy.com/" target="_blank" title="畅游是一个以爱情情感为主题的短文学文章阅读网站。内含有各种经典好文章,爱情散文,诗歌散文,优美哲理抒情散文,经典短文学等。读短文学文章，尽在http://ioooy.com/">畅游文学</a>
-                </li>
-			                <li>
-                    <a href="http://ipjzj.com" target="_blank" title="心理说">心理说</a>
-                </li>
-			                <li>
-                    <a href="https://zyl.me" target="_blank" title="爱折腾，喜欢造，极简主义者，主从事Web开发兼前端爱好者">ZYL的博客</a>
-                </li>
-					<li>
-			<script type="text/javascript" src="http://links.webscan.360.cn/index/index/22f2a51884faf54065fc7e3ba852b1dc"></script>
-		</li>
+		
         </ul>
     </div>
 	<div class="container copy-right">

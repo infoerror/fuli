@@ -81,7 +81,7 @@ public class RegisterResult extends ServiceResult{
 		succ.setCode(Register.SUCC);
 		succ.setInactiveAccount(inactiveAccount);
 		succ.setMsg("注册成功!");
-		return null;
+		return succ;
 	}
 
 	public boolean isRegisterSuccessful() {

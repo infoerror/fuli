@@ -20,8 +20,6 @@ public class User extends Page implements Serializable{
 	private String password;
 
 
-	private String nickname;
-	
 
 
 
@@ -51,13 +49,6 @@ public class User extends Page implements Serializable{
 	}
 
 
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
 
 
 

@@ -22,7 +22,7 @@ public class ServiceResult {
 		this.msg = msg;
 	}
 	
-	protected  static <T> T USER_NO_LOGIN(Class<?> resClass){
+	protected static final <T> T USER_NO_LOGIN(Class<?> resClass){
 		return CommonResults.USER_NO_LOGIN(resClass);
 	}
 }

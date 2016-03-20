@@ -3,6 +3,8 @@ package com.duang.fuli.dao;
 import com.duang.fuli.domain.User;
 import com.duang.fuli.domain.UserInfo;
 import com.duang.fuli.domain.form.LoginForm;
+import com.duang.fuli.domain.form.ModifyPasswordForm;
+import com.duang.fuli.domain.mtm.Follow_User;
 
 /**
  * 
@@ -19,4 +21,21 @@ public interface UserDao{
 
 	void saveUserInfo(UserInfo userInfo);
 
+	void modifyPassword(ModifyPasswordForm modifyPassword);
+
+	String getPasswordByUser(User user);
+
+	User getUserById(int userId);
+
+	
+	/*
+	 * follow start
+	 */
+	void follow(Follow_User follow_User);
+
+	Follow_User getFollowUser(Follow_User follow_User);
+
+	/*
+	 * follow end
+	 */
 }

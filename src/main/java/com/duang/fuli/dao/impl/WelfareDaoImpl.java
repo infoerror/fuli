@@ -5,13 +5,15 @@ import java.util.Collection;
 
 
 
+
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.duang.fuli.dao.WelfareDao;
 import com.duang.fuli.domain.Page;
 import com.duang.fuli.domain.Welfare;
-import com.duang.fuli.domain.Welfare_Tag;
+import com.duang.fuli.domain.mtm.Welfare_Tag;
 import com.duang.fuli.utils.PageUtils;
 
 /**

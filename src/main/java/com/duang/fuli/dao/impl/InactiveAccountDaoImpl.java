@@ -26,7 +26,7 @@ public class InactiveAccountDaoImpl extends SqlSessionDaoSupport implements Inac
 
 	@Override
 	public void deleteByUsername(String username) {
-		  this.getSqlSession().delete("com.duang.fuli.domain.InactiveAccount.deleteByUsername", username);	
+		  this.getSqlSession().delete("com.duang.fuli.domain.InactiveAccount.deleteByUsername", username);
 	}
 
 }

@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import com.duang.fuli.domain.UnauditedWelfare;
 import com.duang.fuli.domain.User;
-import com.duang.fuli.domain.Welfare_Tag;
+import com.duang.fuli.domain.mtm.Welfare_Tag;
 
 /**
  * 

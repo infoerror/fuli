@@ -42,8 +42,7 @@ public class ModifyBasicInfoResult extends ServiceResult implements Serializable
 	}
 
 	/**
-	 * would return null if the data has passed validation successfully.
-	 * 
+	 *  
 	 * @param basicInfo
 	 * @return
 	 */

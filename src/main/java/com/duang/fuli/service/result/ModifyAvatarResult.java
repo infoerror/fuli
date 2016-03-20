@@ -1,5 +1,6 @@
 package com.duang.fuli.service.result;
 
+import com.duang.fuli.domain.form.ModifyAvatarForm;
 import com.duang.fuli.service.result.Protocols.ModifyAvatar;
 
 /**
@@ -14,6 +15,14 @@ public class ModifyAvatarResult extends ServiceResult{
 	static{
 		MODIFY_SUCC.setCode(ModifyAvatar.SUCC);
 		MODIFY_SUCC.setMsg("修改成功!");
+	}
+	
+	public static ModifyAvatarResult validate(ModifyAvatarForm modifyAvatarForm) {
+		if(modifyAvatarForm.getUser()==null){
+			return USER_NO_LOGIN(ModifyAvatarResult.class);
+		}
+		return null;
+		
 	}
 
 }

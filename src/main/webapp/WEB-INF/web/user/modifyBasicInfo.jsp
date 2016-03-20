@@ -29,9 +29,9 @@
 								<div class="panel panel-default stacked">
 									<div class="panel-heading">
 										<ul class="nav nav-pills account-tab">
-											<li class="active"><a href="#">基本信息</a></li>
+											<li class="active"><a href="modifyBasicInfo">基本信息</a></li>
 											<li><a href="modifyAvatar">修改头像</a></li>
-											<li><a href="password">修改密码</a></li>
+											<li><a href="modifyPassword">修改密码</a></li>
 										</ul>
 									</div>
 									<div class="panel-body">

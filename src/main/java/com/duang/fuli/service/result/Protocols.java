@@ -8,19 +8,22 @@ package com.duang.fuli.service.result;
 public class Protocols {
 
 	public static final int USER_NO_LOGIN_CODE = 9999;
-	
+
+	/**
+	 * 
+	 * @author zgq
+	 * @date 2016年3月19日 下午8:53:47
+	 */
 	public static class Common {
 
 		public static final int SUCC = 0;
-		
+
 	}
-	
 
 	/**
-	 * 10000 - 20000
 	 * 
-	 * @author Administrator
-	 * 
+	 * @author zgq
+	 * @date 2016年3月19日 下午8:53:42
 	 */
 	public static class Register extends Common {
 
@@ -39,10 +42,9 @@ public class Protocols {
 	}
 
 	/**
-	 * 20000 - 30000
 	 * 
-	 * @author Administrator
-	 * 
+	 * @author zgq
+	 * @date 2016年3月19日 下午8:53:35
 	 */
 	public static class Login extends Common {
 
@@ -51,14 +53,12 @@ public class Protocols {
 		public static final int PASSWORD_FORMAT_ERROR = 21000;
 		public static final int CAPTCHA_ERROR = 22000;
 
-		
 	}
 
 	/**
-	 * 30000 - 40000
 	 * 
-	 * @author Administrator
-	 * 
+	 * @author zgq
+	 * @date 2016年3月19日 下午8:53:31
 	 */
 	public static class AddWelfare extends Common {
 
@@ -68,23 +68,21 @@ public class Protocols {
 	}
 
 	/**
-	 * 40000 - 50000
 	 * 
-	 * @author Administrator
-	 * 
+	 * @author zgq
+	 * @date 2016年3月19日 下午8:53:24
 	 */
 	public static class ModifyBasicInfo extends Common {
 
 		public static final int NICKNAME_FORMAT_WRONG = 40000;
 
-		public static final int NICKNAME_CONTAIN_DANGEROUS =41000;
+		public static final int NICKNAME_CONTAIN_DANGEROUS = 41000;
 	}
 
 	/**
-	 * 50000 - 60000
 	 * 
-	 * @author Administrator
-	 * 
+	 * @author zgq
+	 * @date 2016年3月19日 下午8:53:18
 	 */
 	public static class ModifyAvatar extends Common {
 
@@ -93,4 +91,44 @@ public class Protocols {
 		public static final int UPLOAD_SUCC = 0;
 
 	}
+
+	/**
+	 * 
+	 * @author zgq
+	 * @date 2016年3月19日 下午8:53:13
+	 */
+	public static class ModifyPassword extends Common {
+
+		public static final int PASSWORD_FORMAT_ERROR = 60000;
+		public static final int TWO_PASSWORD_INEQUAL = 61000;
+		public static final int ORIGIN_PASSWORD_WRONG = 62000;
+
+	}
+	
+	/**
+	 * 
+	 * @author zgq
+	 * @date 2016年3月20日 下午12:02:47
+	 */
+	public static class Follow extends Common {
+
+		public static final int USER_INEXISTENT = 70000;
+		public static final int ALREADY_FOLLOWED = 71000;
+
+
+	}
+	
+	/**
+	 * 
+	 * @author zgq
+	 * @date 2016年3月20日 下午7:51:20
+	 */
+	public static class CheckFollow extends Common {
+		
+		public static final int ALREADY_FOLLOW = 0;
+
+		public static final int NOT_FOLLOW = -1;
+		
+	}
+	
 }

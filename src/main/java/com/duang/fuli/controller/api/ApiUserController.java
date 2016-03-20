@@ -15,9 +15,12 @@ import com.duang.fuli.controller.base.JSONController;
 import com.duang.fuli.domain.User;
 import com.duang.fuli.domain.form.BasicInfoForm;
 import com.duang.fuli.domain.form.ModifyAvatarForm;
+import com.duang.fuli.domain.form.ModifyPasswordForm;
 import com.duang.fuli.service.UserService;
+import com.duang.fuli.service.result.ModifyPasswordResult;
 import com.duang.fuli.utils.FileUtils;
 import com.duang.fuli.utils.ImageUtils;
+import com.duang.fuli.web.utils.SessionFlags;
 /**
  * 
  * @author zgq
@@ -30,7 +33,6 @@ public class ApiUserController extends JSONController{
 	
 	@Resource(name="userService")
 	private UserService userService;
-	
 	
 	@RequestMapping(value = "/modifyBasicInfo")
 	public void modifyBasicInfo(@RequestBody BasicInfoForm basicInfo) throws IOException{
@@ -60,9 +62,26 @@ public class ApiUserController extends JSONController{
         String avatarPath=realAppPath+avatar.replace('/', File.separatorChar);
         ImageUtils.abscut(origin, avatarPath, modifyAvatarForm.getX(),modifyAvatarForm.getY(),modifyAvatarForm.getWidth(), modifyAvatarForm.getHeight());
 
+        if(modifyAvatarForm.getWidth()>100){
+        	ImageUtils.scale(avatarPath, avatarPath, 100, 100);
+        	
+        }
+        
         modifyAvatarForm.setUser(currentUser);
         modifyAvatarForm.setAvatar(avatar);
         writeJson(userService.modifyAvatar(modifyAvatarForm));
 	}
+	
+	@RequestMapping(value = "/modifyPassword")
+	public void modifyPassword(@RequestBody ModifyPasswordForm modifyPassword) throws IOException{
+		User currentUser=getCurrentUser();
+		modifyPassword.setUser(currentUser);
+		ModifyPasswordResult passwordResult=userService.modifyPassword(modifyPassword);
+		if(passwordResult.modifySuccessfully()){
+			setSession(SessionFlags.LOGINED_USER_FLAG, null);
+		}
+		writeJson(passwordResult);
+	}
+	
 	
 }

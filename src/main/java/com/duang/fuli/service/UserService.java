@@ -5,8 +5,10 @@ import com.duang.fuli.domain.User;
 import com.duang.fuli.domain.UserInfo;
 import com.duang.fuli.domain.form.BasicInfoForm;
 import com.duang.fuli.domain.form.ModifyAvatarForm;
+import com.duang.fuli.domain.form.ModifyPasswordForm;
 import com.duang.fuli.service.result.ModifyAvatarResult;
 import com.duang.fuli.service.result.ModifyBasicInfoResult;
+import com.duang.fuli.service.result.ModifyPasswordResult;
 
 /**
  * 
@@ -23,7 +25,8 @@ public interface UserService{
 
 	String getUserAvatarImageUri(User user);
 
-
 	ModifyAvatarResult modifyAvatar(ModifyAvatarForm modifyAvatarForm);
+
+	ModifyPasswordResult modifyPassword(ModifyPasswordForm modifyPassword);
 
 }

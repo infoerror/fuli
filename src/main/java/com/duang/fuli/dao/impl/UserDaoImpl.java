@@ -7,6 +7,8 @@ import com.duang.fuli.dao.UserDao;
 import com.duang.fuli.domain.User;
 import com.duang.fuli.domain.UserInfo;
 import com.duang.fuli.domain.form.LoginForm;
+import com.duang.fuli.domain.form.ModifyPasswordForm;
+import com.duang.fuli.domain.mtm.Follow_User;
 
 /**
  * 
@@ -34,6 +36,32 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao{
 	@Override
 	public void saveUserInfo(UserInfo userInfo) {
 		this.getSqlSession().insert("com.duang.fuli.domain.UserInfo.insertUserInfo",userInfo);		
+	}
+
+	@Override
+	public void modifyPassword(ModifyPasswordForm modifyPassword) {
+		this.getSqlSession().update("com.duang.fuli.domain.User.updateUserPassword",modifyPassword);
+		
+	}
+
+	@Override
+	public String getPasswordByUser(User user) {
+		return this.getSqlSession().selectOne("com.duang.fuli.domain.User.selectPasswordByUser",user);
+	}
+
+	@Override
+	public User getUserById(int userId) {
+		return this.getSqlSession().selectOne("com.duang.fuli.domain.User.selectById",userId);
+	}
+
+	@Override
+	public void follow(Follow_User follow_User) {
+		this.getSqlSession().insert("com.duang.fuli.domain.UserInfo.insertFollowUser",follow_User);
+	}
+
+	@Override
+	public Follow_User getFollowUser(Follow_User follow_User) {
+		return this.getSqlSession().selectOne("com.duang.fuli.domain.User.selectFollowUser",follow_User);
 	}
 
 }

@@ -40,7 +40,7 @@
     					<a target="_self" href="/tags">发现</a>
     				</li>
 										<li>
-    					<a target="_self" href="/gallery?g=2">最新</a>
+    					<a target="_self" href="${pageContext.request.contextPath }/">最新</a>
     				</li>
 										
     			</ul>
