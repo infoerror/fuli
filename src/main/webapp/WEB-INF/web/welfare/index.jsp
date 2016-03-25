@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!doctype html>
 <html>
@@ -18,8 +19,8 @@
 	<div class="wrap">
 		<div class="container">
 			<div class="row container-fluid">
-				<div class="col-md-8">
-					<div class="content">
+				<div class="col-md-9">
+					<div class="welfare-list">
 						<c:forEach var="welfare" items="${results}">
 							<article class="excerpt  cate1 auth1">
 								<h2>
@@ -37,7 +38,7 @@
 								<div class="note">
 									<p>${welfare.content}</p>
 									<p class="readmore">
-										<a href="welfare/${welfare.id}" title="${welfare.title}">阅读全文</a>
+										<a href="${pageContext.request.contextPath }/welfare/${welfare.id}" title="${welfare.title}">阅读全文</a>
 									</p>
 								</div>
 							</article>

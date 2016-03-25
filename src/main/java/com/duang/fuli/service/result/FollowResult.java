@@ -9,6 +9,8 @@ public class FollowResult extends  ServiceResult{
 	public static final FollowResult FOLLOW_SUCC;
 
 	public static final FollowResult ALREADY_FOLLOWED;
+
+	public static final FollowResult UNABLE_TO_FOLLOW_ONESELF;
 	
 	static{
 		USER_INEXISTENT = new FollowResult();
@@ -22,6 +24,9 @@ public class FollowResult extends  ServiceResult{
 		FOLLOW_SUCC = new FollowResult();
 		FOLLOW_SUCC.setCode(Follow.SUCC);
 		FOLLOW_SUCC.setMsg("关注成功");
+		
+		UNABLE_TO_FOLLOW_ONESELF=new FollowResult();
+		UNABLE_TO_FOLLOW_ONESELF.setCode(Follow.UNABLE_TO_FOLLOW_ONESLFE);
 	}
 	
 	

@@ -48,13 +48,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String getUserAvatarImageUri(User user) {
-		return userInfoDao.getUserAvatarImageUri(user);
-	}
-
-	@Override
 	public ModifyAvatarResult modifyAvatar(ModifyAvatarForm modifyAvatarForm) {
-		userInfoDao.modifyAvatar(modifyAvatarForm);
+		userDao.modifyAvatar(modifyAvatarForm);
 		return ModifyAvatarResult.MODIFY_SUCC;
 	}
 

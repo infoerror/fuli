@@ -6,10 +6,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap type="WelfareTag" id="welfareTagMap">
 		<id column="wtid" property="id" />
 		<result column="name" property="name" />
+		<result column="markCount" property="markCount" />
 		<result column="description" property="description" />
 	</resultMap>
 	<select id="selectAllWelfareTags" resultMap="welfareTagMap">
 		select * from welfare_tag
 	</select>
+	<select id="selectHotWelfareTags" resultMap="welfareTagMap">
+		select * from welfare_tag order by markCount desc limit 0,#{top}
+	</select>
 	
+	<select id="selectWelfareTagByName" resultMap="welfareTagMap">
+		select * from welfare_tag where name=#{tagName}
+	</select>
 </mapper>

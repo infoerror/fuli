@@ -1,18 +1,14 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ include file="/WEB-INF/web/common/common.jsp"%>
 <!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
 <title>修改用户信息</title>
-<%@ include file="/WEB-INF/web/common/resource.jspf"%>
+<%@ include file="../common/resource.jspf"%>
 <script
 	src="${pageContext.request.contextPath }/assets/vendors/jcrop/jquery.jcrop.min.js"
 	type="text/javascript"></script>
 <script src="${pageContext.request.contextPath }/assets/js/avatar.js"
-	type="text/javascript"></script>
-<script
-	src="${pageContext.request.contextPath }/assets/vendors/layer/layer.js"
 	type="text/javascript"></script>
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

@@ -1,6 +1,7 @@
   
 (function(jQuery,app){
 	 app.auth= {
+			 
 	        isAuthced: function () {
 	            return (app.loginToken.length > 0);
 	        },

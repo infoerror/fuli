@@ -19,6 +19,9 @@ public class User extends Page implements Serializable{
 
 	private String password;
 
+	private String nickname;
+	
+	private String avatarUrl;
 
 
 
@@ -48,8 +51,21 @@ public class User extends Page implements Serializable{
 		this.password = password;
 	}
 
+	public String getNickname() {
+		return nickname;
+	}
 
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 
+	public String getAvatarUrl() {
+		return avatarUrl;
+	}
+
+	public void setAvatarUrl(String avatarUrl) {
+		this.avatarUrl = avatarUrl;
+	}
 
 
 }

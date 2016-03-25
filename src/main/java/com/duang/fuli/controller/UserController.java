@@ -1,22 +1,25 @@
 package com.duang.fuli.controller;
 
 import java.util.Collection;
+
 import javax.annotation.Resource;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.duang.fuli.controller.base.BaseController;
 import com.duang.fuli.domain.BasicInfo;
 import com.duang.fuli.domain.UserInfo;
+import com.duang.fuli.domain.Welfare;
 import com.duang.fuli.domain.WelfareTag;
 import com.duang.fuli.domain.page.UnauditedWelfarePage;
 import com.duang.fuli.service.UnauditedWelfareService;
 import com.duang.fuli.service.UserService;
-import com.duang.fuli.service.result.UnauditedWelfarePageData;
-import com.duang.fuli.utils.PageUtils;
+import com.duang.fuli.service.page.UnauditedWelfarePageResult;
+import com.duang.fuli.service.result.PageServiceResult;
 /**
  * 
  * @author zgq
@@ -43,14 +46,14 @@ public class UserController extends BaseController{
 	@RequestMapping(value = "/modifyBasicInfo")
 	public String modifyBasicInfoUI(Model model){
 		BasicInfo basicInfo=userService.getUserBasicInfo(getCurrentUser());
+		basicInfo.setNickname(getCurrentUser().getNickname());
 		model.addAttribute("basicInfo", basicInfo);
 		return "user/modifyBasicInfo";
 	}
 	
 	@RequestMapping(value = "/modifyAvatar")
 	public String modifyAvatarUI(Model model){
-		String imageUri=userService.getUserAvatarImageUri(getCurrentUser());
-		model.addAttribute("imageUri", imageUri);
+		model.addAttribute("avatarUrl", getCurrentUser().getAvatarUrl());
 		return "user/modifyAvatar";
 	}	
 	
@@ -67,21 +70,14 @@ public class UserController extends BaseController{
 	}
 	
 	
-	@RequestMapping(value = "/unauditedWelfares")
-	public String unauditedWelfares(Model model){
+	@RequestMapping(value = "/unauditedWelfares/{page}")
+	public String unauditedWelfares(@PathVariable("page")int page,Model model){
 		UnauditedWelfarePage unauditedWelfarePage  =new UnauditedWelfarePage();
-		unauditedWelfarePage.setCurrentPage(1);
+		unauditedWelfarePage.setCurrentPage(page);
 		unauditedWelfarePage.setUser(getCurrentUser());
-		unauditedWelfarePage.setNeedLoadCount(true);
-		UnauditedWelfarePageData pageData=unauditedWelfareService.getUnauditedWelfare(unauditedWelfarePage);
-		
-		model.addAttribute("welfares",pageData.getData());
-		int startPage=PageUtils.computerStartPage(1,pageData.getTotalPages());
-		model.addAttribute("startPage", startPage);
-		int endPage =PageUtils.computerEndPage(1,pageData.getTotalPages());
-		model.addAttribute("endPage", endPage);
-	
-		model.addAttribute("totalPages",pageData.getTotalPages());
+		PageServiceResult<Welfare> pageResult= (PageServiceResult<Welfare>) unauditedWelfareService.getUnauditedWelfaresForPage(unauditedWelfarePage);
+		model.addAttribute("welfares",pageResult.getResults());
+		sequencePage(pageResult,model);
 		return "user/unauditedWelfares";
 	}
 	

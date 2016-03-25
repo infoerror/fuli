@@ -12,30 +12,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<collection property="welfareTags" select="selectAllATByWid"
 			column="wid" ofType="WelfareTag" />
 	</resultMap>
+	
+	
 
 	<!-- welfare detail start -->
 	<resultMap type="Welfare" id="welfareDetail">
-		<id column="w.wid" property="id" />
+		<id column="w_id" property="id" />
 		<result column="w_title" property="title" />
 		<result column="w_content" property="content" />
 		<result column="w_publishTime" property="publishTime" />
 		<result column="w_visitCount" property="visitCount" />
-		<association property="author" javaType="UserInfo"
+		<association property="author" 
 			resultMap="userInfoDetail" />
 		<collection property="welfareTags" select="selectAllATByWid"
 			column="wid" ofType="WelfareTag" />
 	</resultMap>
 
-	<resultMap type="UserInfo" id="userInfoDetail">
-		<id column="u_i_userId" property="userId" />
+	<resultMap type="User" id="userInfoDetail">
+		<id column="u_i_userId" property="id" />
 		<result column="u_i_nickname" property="nickname" />
-		<result column="u_i_imageUri" property="imageUri" />
+		<result column="u_i_imageUri" property="avatarUrl" />
 	</resultMap>
 
 	<select id="selectWelfareById" parameterType="Integer"
 		resultMap="welfareDetail">
-		select w.content w_content,w.title w_title,w.publishTime w_publishTime,w.viewCount w_viewCount,u_i.userId u_i_userId,u_i.nickname u_i_nickname,u_i.imageUri u_i_imageUri from welfare
-		w,user_info u_i where w.wid=#{id} and w.userId=u_i.userId
+		select w.wid w_id,w.content w_content,w.title w_title,w.publishTime
+		w_publishTime,w.viewCount w_viewCount,u_i.uid
+		u_i_userId,u_i.nickname u_i_nickname,u_i.avatarUrl u_i_imageUri from
+		welfare
+		w,user u_i where w.wid=#{id} and w.userId=u_i.uid
 	</select>
 	<!-- welfare detail end -->
 
@@ -64,5 +69,87 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(welfareId,TagId) values
 		(#{welfareId},#{welfareTagId})
 	</insert>
+
+
+	<!-- comment/start -->
+	<resultMap type="Comment" id="commentMap">
+		<id column="cid" property="id" />
+		<result column="content" property="content" />
+		<result column="userId" property="userId" />
+	    <result column="rootId" property="rootId" />
+	    <result column="commentTime" property="commentTime" />
+	</resultMap>
+	
+	<select id="selectCommentById" parameterType="Integer"
+		resultMap="commentMap">
+		select cid,content,userId,rootId,commentTime from welfare_comment where cid=#{id}
+	</select>
+	
+	<!-- rootcomment/start -->
+	<resultMap type="Comment" id="rootCommentMap">
+		<id column="cid" property="id" />
+		<result column="content" property="content" />
+		<result column="userId" property="userId" />
+		<result column="nickname" property="nickname" />
+		<result column="avatarUrl" property="avatarUrl" />
+	    <result column="commentTime" property="commentTime" />
+	</resultMap>
+	<select id="selectRootCommentCount" resultType="Integer">
+		select count(cid) from welfare_comment where welfareId=#{welfareId} and rootId=0
+	</select>
+	<select id="selectRootComments" parameterType="WelfareCommentPage"
+		resultMap="rootCommentMap">
+		select cid,content,userId,avatarUrl,nickname,commentTime from welfare_comment where welfareId=#{welfareId} and rootId=0 order by cid desc limit #{startIndex},#{pageSize}
+	</select>
+	<!-- rootcomment/end -->
+	
+	<!-- subcomment/start  -->
+	<resultMap type="Comment" id="replyMap">
+		<result column="w2_userId" property="userId" />
+	    <result column="w2_nickname" property="nickname" />
+	</resultMap>
+	
+	<resultMap type="Comment" id="subcommentMap">
+		<id column="w_id" property="id" />
+		<result column="w_content" property="content" />
+		<result column="w_userId" property="userId" />
+		<result column="w_nickname" property="nickname" />
+		<result column="w_avatarUrl" property="avatarUrl" />
+	    <result column="w_commentTime" property="commentTime" />
+	    <association property="reply" javaType="Comment"
+			resultMap="replyMap" />
+	</resultMap>
+	
+	<select id="selectSubcommentCount" resultType="Integer">
+		select count(cid) from welfare_comment where rootId=#{rootId}
+	</select>
+	
+	<select id="selectSubCommentsForPage" parameterType="SubcommentPage"
+		resultMap="subcommentMap">
+		select w1.cid w_id,w1.content w_content,w1.userId w_userId,w1.nickname w_nickname,w1.avatarUrl w_avatarUrl,w1.commentTime w_commentTime,w2.userId w2_userId,w2.nickname w2_nickname from welfare_comment w1,welfare_comment w2 where w1.rootId=#{rootId} and w1.replyId=w2.cid order by w1.cid asc limit #{startIndex},#{pageSize}
+	</select>
+	
+	<!-- subcomment/end -->
+	
+	<select id="selectSubTreeComments" parameterType="Integer"
+		resultMap="commentMap">
+		select cid,content,userId,commentTime from welfare_comment where cid=#{id} and replyId=cid;
+	</select>
+
+	<insert id="insertComment" useGeneratedKeys="true" keyProperty="id">
+		insert
+		into welfare_comment
+		(content,commentTime,replyId,welfareId,rootId,userId,nickname,avatarUrl) values
+		(#{content},#{commentTime},#{replyId},#{welfareId},#{rootId},#{userId},#{nickname},#{avatarUrl})
+	</insert>
+	<!-- comment/end -->
+	
+	<!-- tag/start -->
+	
+	<select id="selectWelfaresByTag" resultMap="welfareDetail">
+		select w.wid w_id,w.content w_content,w.title w_title,w.publishTime
+		w_publishTime,w.viewCount w_viewCount from welfare_own_tag t inner join welfare w on t.welfareId=w.wid where t.tagId=#{id}
+	</select>
+    <!-- tag/end -->
 
 </mapper>

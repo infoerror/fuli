@@ -7,11 +7,14 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.duang.fuli.domain.User;
+import com.duang.fuli.service.result.PageServiceResult;
+import com.duang.fuli.utils.PageUtils;
 import com.duang.fuli.utils.RenderUtils;
 import com.duang.fuli.web.utils.SessionFlags;
 
@@ -29,12 +32,9 @@ public class BaseController {
 		// 想要用户看到的错误信息可以通过异常的构造器传进一些信息
 		// e.getMessage()会取到穿进去的参数。
 		request.setAttribute("exception", e.getMessage());
-
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");// 设置日期格式
 		// 根据不同的异常类型进行不同处理
-
 		e.printStackTrace();
-
 		return "error/error";
 	}
 	
@@ -74,5 +74,13 @@ public class BaseController {
 
 	protected static final void setSession(String key,Object value){
 		getRequest().getSession().setAttribute(key, value);
+	}
+	
+	protected static final <T> void sequencePage(PageServiceResult<T> pageServiceResult,Model model){
+		model.addAttribute("currentPage",pageServiceResult.getCurrentPage());
+		int startPage=PageUtils.computerStartPage(5,1,pageServiceResult.getPageCount());
+		model.addAttribute("startPage", startPage);
+		int endPage =PageUtils.computerEndPage(5,1,pageServiceResult.getPageCount());
+		model.addAttribute("endPage", endPage);
 	}
 }

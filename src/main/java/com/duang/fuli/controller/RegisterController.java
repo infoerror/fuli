@@ -24,6 +24,7 @@ import com.duang.fuli.web.utils.SessionFlags;
 @Controller
 @Scope("prototype")
 @RequestMapping(value = "/register")
+
 public class RegisterController extends BaseController {
 	private static final Logger LOG = Logger
 			.getLogger(RegisterController.class);

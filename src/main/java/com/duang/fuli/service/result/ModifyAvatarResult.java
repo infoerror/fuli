@@ -25,4 +25,8 @@ public class ModifyAvatarResult extends ServiceResult{
 		
 	}
 
+	public boolean modifySucc() {
+		return MODIFY_SUCC==this;
+	}
+
 }

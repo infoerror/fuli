@@ -2,6 +2,7 @@ package com.duang.fuli.service.impl;
 
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -16,8 +17,8 @@ import com.duang.fuli.domain.form.WelfareForm;
 import com.duang.fuli.domain.mtm.Welfare_Tag;
 import com.duang.fuli.domain.page.UnauditedWelfarePage;
 import com.duang.fuli.service.UnauditedWelfareService;
+import com.duang.fuli.service.page.UnauditedWelfarePageResult;
 import com.duang.fuli.service.result.AddWelfareResult;
-import com.duang.fuli.service.result.UnauditedWelfarePageData;
 import com.duang.fuli.utils.PageUtils;
 
 /**
@@ -35,58 +36,38 @@ public class UnauditedWelfareServiceImpl implements UnauditedWelfareService {
 
 	@Override
 	public AddWelfareResult addUnauditedWelfare(WelfareForm welfareForm) {
-		
+
 		User author = welfareForm.getAuthor();
 		int[] welfareTagIds = welfareForm.getWelfareTagIds();
-		
-		UnauditedWelfare welfare=new UnauditedWelfare();
+
+		UnauditedWelfare welfare = new UnauditedWelfare();
 		welfare.setTitle(welfare.getTitle());
 		welfare.setContent(welfare.getContent());
 		Timestamp publishTime = new Timestamp(System.currentTimeMillis());
 		welfare.setPublishTime(publishTime);
 		welfare.setAuthor(author);
 		unauditedWelfareDao.addUnauditedWelfare(welfare);
-		
-		for(int welfareTagId:welfareTagIds){
+
+		for (int welfareTagId : welfareTagIds) {
 			Welfare_Tag welfare_Tag = new Welfare_Tag();
 			welfare_Tag.setWelfareId(welfare.getId());
 			welfare_Tag.setWelfareTagId(welfareTagId);
 			unauditedWelfareDao.addTagsToUnauditedWelfare(welfare_Tag);
 		}
-		
+
 		return AddWelfareResult.ADD_WELFARE_SUCC;
 	}
-
 
 	@Override
 	public Collection<WelfareTag> getAllWelfareTags() {
 		return welfareTagDao.getAllWelfareTags();
 	}
 
-
 	@Override
-	public UnauditedWelfarePageData getUnauditedWelfare(
+	public Object getUnauditedWelfaresForPage(
 			UnauditedWelfarePage unauditedPage) {
-		
-		UnauditedWelfarePageData unauditedWelfarePageData = new UnauditedWelfarePageData();
-		int totalPages=unauditedPage.getTotalPages();
-		User currentUser = unauditedPage.getUser();
-		int currentPage=unauditedPage.getCurrentPage();
-	    currentPage =  currentPage==0?1:currentPage;
-	    
-		if(unauditedPage.isNeedLoadCount()){
-			//第一次加载
-			int count=unauditedWelfareDao.getUnauditedWelfareCount(currentUser);
-			totalPages = count/PageUtils.showCount+1;
-		}
-		currentUser.setPageIndex((currentPage-1)*PageUtils.showCount);
-		currentUser.setPageCount(PageUtils.showCount);
-		
-		Collection<UnauditedWelfare> unauditedWelfares=unauditedWelfareDao.getUnauditedWelfares(currentUser);
-		unauditedWelfarePageData.setCode(0);
-		unauditedWelfarePageData.setData(unauditedWelfares);
-		unauditedWelfarePageData.setTotalPages(totalPages);
-		return unauditedWelfarePageData;
+		return unauditedWelfareDao
+				.getUnauditedWelfaresForPage(unauditedPage);
 	}
 
 }

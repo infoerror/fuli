@@ -9,20 +9,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="username" property="username" />
 		<result column="password" property="password" />
 		<result column="nickname" property="nickname" />
-		<result column="registerTime" property="registerTime" />
+		<result column="avatarUrl" property="avatarUrl" />
 	</resultMap>
-	
-	<!-- select password start  -->
-	<select id="selectPasswordByUser" parameterType="String" resultType="String">
+
+
+
+	<!-- select password start -->
+	<select id="selectPasswordByUser" parameterType="String"
+		resultType="String">
 		select password from user where uid=#{id}
 	</select>
 	<!-- select password end -->
-	
-	<!-- select follow user start  -->
-	<select id="selectFollowUser" parameterType="String" resultType="String">
-		select * from user_fans where userId=#{userId} and followId=#{followId}
+
+	<!-- select follow user start -->
+	<select id="selectFollowUser" parameterType="Follow_User"
+		resultType="Follow_User">
+		select * from user_fans where userId=#{userId} and
+		followId=#{followId}
 	</select>
 	<!-- select follow user end -->
+
+	<select id="selectById" parameterType="Integer" resultMap="selectMap">
+		select * from user where uid=#{userId}
+	</select>
 
 	<select id="selectByUsername" parameterType="String" resultMap="selectMap">
 		select * from user where username=#{username}
@@ -39,10 +48,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertUser" parameterType="User" useGeneratedKeys="true"
 		keyProperty="id">
 		insert into
-		user(username,password) values
-		(#{username},#{password})
+		user(username,password,nickname,avatar) values
+		(#{username},#{password},#{nickname},#{avatarUrl})
 	</insert>
-	
+
 	<!-- follow user start -->
 	<insert id="insertFollowUser" parameterType="Follow_User">
 		insert into
@@ -50,7 +59,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(#{userId},#{followId})
 	</insert>
 	<!-- follow user end -->
-	
+
 
 	<delete id="deleteByUsername" parameterType="String">
 		delete from user
@@ -65,8 +74,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{user.id}
 	</update>
 	<!-- update password end -->
-	
-	
-	
+
+	<!-- update avatar start -->
+	<update id="updateAvatar">
+		update user set
+		avatarUrl=#{avatar} where
+		uid =
+		#{user.id}
+	</update>
+	<!-- update avatar end -->
+
 
 </mapper>

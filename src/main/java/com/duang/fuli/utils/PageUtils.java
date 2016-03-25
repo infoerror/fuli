@@ -1,9 +1,9 @@
 package com.duang.fuli.utils;
 
-
 /**
- * @author Administrator
- *	准备将页面导航封装为一个jar，这个项目完成之后再弄吧
+ * 
+ * @author zgq
+ * @date 2016年3月25日 下午4:54:52
  */
 public class PageUtils {
 	
@@ -11,7 +11,7 @@ public class PageUtils {
 	public static int showImgCount = 4;
 	
 	
-	public static int computerStartPage(int currentPage,int totalPages){
+	public static int computerStartPage(int showCount,int currentPage,int totalPages){
 		if(showCount<3)
 			throw new IllegalStateException("分页异常");
 		
@@ -35,7 +35,7 @@ public class PageUtils {
 		return currentPage - half3;
 		
 	}
-	public static int computerEndPage(int currentPage,int totalPages){
+	public static int computerEndPage(int showCount,int currentPage,int totalPages){
 		if(showCount<3)
 			throw new IllegalStateException("分页异常");
 		
@@ -46,7 +46,6 @@ public class PageUtils {
 		int endPage= currentPage + half3;
 		return endPage>totalPages?totalPages:endPage;
 	}
-	
 	
 	
 }

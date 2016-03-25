@@ -10,12 +10,15 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.duang.fuli.domain.mtm.Welfare_Tag" alias="Welfare_Tag" />
 		<typeAlias type="com.duang.fuli.domain.UnauditedWelfare"
 			alias="UnauditedWelfare" />
+	    <typeAlias type="com.duang.fuli.domain.Comment" alias="Comment" />		
+	    <typeAlias type="com.duang.fuli.domain.page.SubcommentPage" alias="SubcommentPage" />
+		<typeAlias type="com.duang.fuli.domain.page.WelfareCommentPage" alias="WelfareCommentPage" />	
+			
 		<typeAlias type="com.duang.fuli.domain.InactiveAccount"
 			alias="InactiveAccount" />
 		<typeAlias type="com.duang.fuli.domain.User" alias="User" />
 		<typeAlias type="com.duang.fuli.domain.BasicInfo" alias="BasicInfo" />
 		<typeAlias type="com.duang.fuli.domain.UserInfo" alias="UserInfo" />
-		
 		<typeAlias type="com.duang.fuli.domain.mtm.Follow_User" alias="Follow_User" />
 	</typeAliases>
 	<mappers>

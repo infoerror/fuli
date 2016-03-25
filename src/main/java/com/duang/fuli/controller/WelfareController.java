@@ -23,9 +23,12 @@ import com.duang.fuli.utils.PageUtils;
 @Scope("prototype")
 @RequestMapping(value = "/welfare")
 public class WelfareController extends BaseController {
+	
 	@Resource(name = "welfareService")
 	private WelfareService welfareService;
-
+	/*
+	 * 需要改善
+	 */
 	@RequestMapping(value = "/uptodate/{pageindex}")
 	public String uptodateList(Model model,
 			@PathVariable(value = "pageindex") int pageIndex) {
@@ -42,5 +45,19 @@ public class WelfareController extends BaseController {
 		model.addAttribute("welfare", welfare);
 		return "welfare/detail";
 	}
+	
+	@RequestMapping(value="/tag/{tagName:.*}")
+	public String getWelfareByTag(@PathVariable("tagName")String tagName,Model model){
+		model.addAttribute("results",welfareService.getWelfaresByTagName(tagName));
+		return "welfare/index";
+	}
+	
+	@RequestMapping(value="/tags")
+	public String welfareTags(Model model)
+	{
+		model.addAttribute("tags", welfareService.getHotWelfareTags(100));
+		return "welfare/tags";
+	}
+	
 
 }

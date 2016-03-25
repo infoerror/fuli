@@ -108,11 +108,11 @@ public class RegisterServiceImpl implements RegisterService {
 		
 		user.setPassword(MD5Utils.md5(account.getPassword()));
 		inactiveAccountDao.deleteByUsername(account.getUsername());
+		user.setNickname("新用户" + token.substring(0, 5));
 		userDao.saveUser(user);
 		
 		UserInfo userInfo  =new UserInfo();
 		userInfo.setRegisterTime(registerTime);
-		userInfo.setNickname("新用户" + token.substring(0, 5));
 		userInfo.setUser(user);
 		userDao.saveUserInfo(userInfo);
 		

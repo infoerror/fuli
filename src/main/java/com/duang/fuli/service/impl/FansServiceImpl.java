@@ -29,6 +29,10 @@ public class FansServiceImpl implements FansService {
 		if(user==null){
 			return CommonResults.USER_NO_LOGIN(FollowResult.class); 
 		}
+		if(user.getId()==followId){
+			return FollowResult.UNABLE_TO_FOLLOW_ONESELF;
+		}
+		
 		Follow_User follow_User = new Follow_User();
 		follow_User.setUserId(user.getId());
 		follow_User.setFollowId(followId);
@@ -55,6 +59,10 @@ public class FansServiceImpl implements FansService {
 		if(user==null){
 			return CommonResults.USER_NO_LOGIN(CheckFollowResult.class); 
 		}
+		if(user.getId() ==followId){
+			return CheckFollowResult.NOT_FOLLOW;
+		}
+		
 		Follow_User follow_User = new Follow_User();
 		follow_User.setUserId(user.getId());
 		follow_User.setFollowId(followId);

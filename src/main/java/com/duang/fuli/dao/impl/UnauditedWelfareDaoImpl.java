@@ -1,6 +1,6 @@
 package com.duang.fuli.dao.impl;
 
-import java.util.Collection;
+import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -9,6 +9,7 @@ import com.duang.fuli.dao.UnauditedWelfareDao;
 import com.duang.fuli.domain.UnauditedWelfare;
 import com.duang.fuli.domain.User;
 import com.duang.fuli.domain.mtm.Welfare_Tag;
+import com.duang.fuli.domain.page.UnauditedWelfarePage;
 /**
  * 
  * @author zgq
@@ -33,8 +34,8 @@ public class UnauditedWelfareDaoImpl extends SqlSessionDaoSupport implements Una
 	}
 
 	@Override
-	public Collection<UnauditedWelfare> getUnauditedWelfares(User currentUser) {
-		return this.getSqlSession().selectList("com.duang.fuli.domain.UnauditedWelfare.selectUserUnauditedWelfares",currentUser);
+	public List<UnauditedWelfare> getUnauditedWelfaresForPage(UnauditedWelfarePage unauditedWelfarePage) {
+		return this.getSqlSession().selectList("com.duang.fuli.domain.UnauditedWelfare.selectUserUnauditedWelfaresForPage",unauditedWelfarePage);
 	}
 
 

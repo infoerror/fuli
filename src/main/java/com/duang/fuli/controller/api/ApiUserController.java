@@ -17,6 +17,7 @@ import com.duang.fuli.domain.form.BasicInfoForm;
 import com.duang.fuli.domain.form.ModifyAvatarForm;
 import com.duang.fuli.domain.form.ModifyPasswordForm;
 import com.duang.fuli.service.UserService;
+import com.duang.fuli.service.result.ModifyAvatarResult;
 import com.duang.fuli.service.result.ModifyPasswordResult;
 import com.duang.fuli.utils.FileUtils;
 import com.duang.fuli.utils.ImageUtils;
@@ -69,7 +70,11 @@ public class ApiUserController extends JSONController{
         
         modifyAvatarForm.setUser(currentUser);
         modifyAvatarForm.setAvatar(avatar);
-        writeJson(userService.modifyAvatar(modifyAvatarForm));
+        ModifyAvatarResult modifyAvatarResult=userService.modifyAvatar(modifyAvatarForm);
+        if(modifyAvatarResult.modifySucc()){
+        	currentUser.setAvatarUrl(avatar);
+        }
+        writeJson(modifyAvatarResult);
 	}
 	
 	@RequestMapping(value = "/modifyPassword")

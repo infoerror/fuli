@@ -12,6 +12,12 @@ ul, li, h1, h2, h3, p, ol {
     margin: 0;
     padding: 0;
 }
+button, input {
+    border: 1px solid;
+    line-height: normal;
+    outline: medium none;
+}
+
 .clear{
 	clear:both;
 }
@@ -51,6 +57,19 @@ a,a:hover{
     cursor: pointer;
     text-decoration: none;
 }
+
+/* clear float */
+
+.clearfix::after, .widget ul::after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+/* clear float¡¡end */
+
 
 .navbar-inverse {
     background-color: #393D49;
@@ -119,7 +138,6 @@ a,a:hover{
 
 .shadow-box {
     background-color: #fff;
-    border: 1px solid #ebebeb;
     border-radius: 0;
     box-shadow: 0 1px 1px rgba(209, 212, 221, 0.15);
     margin-bottom: 15px;
@@ -348,7 +366,7 @@ modify user info start
     border: 1px solid #dae2e5;
     color: #979696;
     display: block;
-    height: 34px;
+    height: 40px;
     overflow: hidden;
     padding-bottom: 13px;
     padding-top: 13px;
@@ -430,3 +448,213 @@ modify user info start
     transform: rotate(-180deg);
 }
 /* login alert end */
+
+/* welfare comment start */
+
+
+#respond {
+    font-size: 12px;
+    margin-bottom: 38px;
+    overflow: hidden;
+    position: relative;
+}
+
+.base-tit {
+    border-bottom: 1px solid #e6e6e6;
+    clear: both;
+    color: #444;
+    font-size: 20px;
+    font-weight: normal;
+    margin-bottom: 16px;
+    padding: 0 0 5px;
+}
+
+.comt-box {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    overflow: hidden;
+    padding: 8px;
+    position: relative;
+}
+
+.comt-area {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: medium none;
+    color: #666;
+    font-size: 14px;
+    position: relative;
+    width: 100%;
+}
+
+.comt-ctrl {
+    color: #999;
+    height: 32px;
+    line-height: 32px;
+    margin: 8px 0;
+    position: relative;
+}
+
+.comt-addsmilies, .comt-addcode {
+    color: #888;
+    float: left;
+    padding: 0 10px;
+}
+.comt-submit {
+    background-color: #38a3db;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+    height: 32px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 108px;
+}
+
+
+.comment {
+    border-bottom: 1px solid #f0f0f0;
+    overflow: hidden;
+    padding: 25px 0;
+    position: relative;
+}
+.comment .c-avatar {
+    overflow: hidden;
+    padding: 8px 0 0;
+    position: absolute;
+}
+.comment .c-footer {
+    font-size: 12px;
+    overflow: hidden;
+    padding: 1px 0;
+    position: relative;
+}
+
+
+.comment .c-avatar .avatar {
+    border: 1px solid #f2f2f2;
+    border-radius: 50px;
+    display: block;
+    height: 45px;
+    transition: all 0.3s ease-out 0s;
+    width: 45px;
+}
+.comment .c-main .c-meta {
+    color: #cecece;
+    margin-left: -50px;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+
+.comment .c-main .msgarticle {
+    font-size: 15px;
+    line-height: 200%;
+    margin-right: 0;
+    overflow: visible;
+    padding-bottom: 22px;
+    position: relative;
+}
+
+
+.comment .c-main {
+    margin-left: 108px;
+    overflow: visible;
+    position: relative;
+}
+.comment .c-main .c-meta .c-author {
+    font-size: 17px;
+    position: relative;
+}
+
+
+.comment .c-main .c-meta .c-author a {
+    color: #000;
+    text-decoration: none;
+}
+
+.comment .c-main .c-meta .c-time {
+    font-size: 13px;
+    padding: 4px 0;
+    position: absolute;
+    right: 0;
+}
+
+
+.comment .c-footer a {
+    background-color: #eee;
+    border-radius: 15px;
+    color: #666;
+    padding: 1px 8px;
+    position: relative;
+}
+
+#cancel-reply {
+    border: 1px solid #38a3db;
+    border-radius: 18px;
+    color: #38a3db;
+    font-size: 13px;
+    margin-left: 8px;
+    padding: 2px 11px;
+}
+#postcomments{
+	padding:0 20px;
+}
+
+
+/* welfare comment end */
+
+/* right sidebar */
+.widget {
+    background-color: #f5f5f5;
+    border-top: 5px solid #0082c8;
+    clear: both;
+    color: #333;
+    font-size: 13px;
+    margin: 0 0 8px;
+    padding: 23px 28px 18px;
+}
+
+
+.widget h3 {
+    color: #000;
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 20px;
+    padding-bottom: 8px;
+    position: relative;
+}
+
+.widget_divCatalog li, .widget_divStatistics li, .widget_divArchives li, .widget_divFavorites li, .widget_divLinkage li, .widget_divMisc li {
+    float: left;
+    width: 50%;
+}
+.widget_divCatalog, .widget_divStatistics, .widget_divArchives, .widget_divFavorites, .widget_divLinkage, .widget_divMisc {
+    line-height: 32px;
+}
+
+.widget_views li, .widget_d_sticky li, .widget_divComments li, .widget_divPrevious li, .widget_links li, .d_hotpost_txt li, .widget_divAboutKen li {
+    height: 32px;
+    line-height: 32px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.widget a {
+    border-bottom: 2px solid #f5f5f5;
+    color: #333;
+}
+/* right sidebar */
+
+/* welfarelist/start */
+.welfare-list{
+	padding:0 10px;
+}
+
+
+/* welfarelist/end */

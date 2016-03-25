@@ -35,8 +35,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from unaudited_welfare where userId=#{id}
 	</select>
 	
-	<select id="selectUserUnauditedWelfares" parameterType="User" resultMap="selectUserUnauditedWelfare">
-	    select wid,title,publishTime from unaudited_welfare where userId=#{id} order by wid limit #{pageIndex},#{pageCount}
+	<select id="selectUserUnauditedWelfaresForPage" parameterType="User" resultMap="selectUserUnauditedWelfare">
+	    select wid,title,publishTime from unaudited_welfare where userId=#{user.id} order by wid limit #{startIndex},#{pageSize}
 	</select>
 	
 	<!-- INSERT INTO 表名称 VALUES (值1, 值2,....) -->

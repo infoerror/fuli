@@ -14,6 +14,7 @@ public class WelfareTag implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private String name;
+	private int markCount;
 	private String description;
 	public int getId() {
 		return id;
@@ -33,7 +34,12 @@ public class WelfareTag implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+	public int getMarkCount() {
+		return markCount;
+	}
+	public void setMarkCount(int markCount) {
+		this.markCount = markCount;
+	}
 	
 
 }

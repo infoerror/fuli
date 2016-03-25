@@ -26,7 +26,7 @@
 								<div class="container-fluid">
 									<div class="row">
 										<div class="col-md-3" style="text-align:left">
-											<img src="${pageContext.request.contextPath }${userInfo.imageUri}">
+											<img src="${pageContext.request.contextPath }${user.avatarUrl}">
 										</div>
 										<div class="col-md-9">
 											<div class="container-fluid">

@@ -7,6 +7,7 @@ import com.duang.fuli.dao.UserDao;
 import com.duang.fuli.domain.User;
 import com.duang.fuli.domain.UserInfo;
 import com.duang.fuli.domain.form.LoginForm;
+import com.duang.fuli.domain.form.ModifyAvatarForm;
 import com.duang.fuli.domain.form.ModifyPasswordForm;
 import com.duang.fuli.domain.mtm.Follow_User;
 
@@ -56,12 +57,17 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao{
 
 	@Override
 	public void follow(Follow_User follow_User) {
-		this.getSqlSession().insert("com.duang.fuli.domain.UserInfo.insertFollowUser",follow_User);
+		this.getSqlSession().insert("com.duang.fuli.domain.User.insertFollowUser",follow_User);
 	}
 
 	@Override
 	public Follow_User getFollowUser(Follow_User follow_User) {
 		return this.getSqlSession().selectOne("com.duang.fuli.domain.User.selectFollowUser",follow_User);
+	}
+
+	@Override
+	public void modifyAvatar(ModifyAvatarForm modifyAvatarForm) {
+		this.getSqlSession().update("com.duang.fuli.domain.User.updateAvatar", modifyAvatarForm);		
 	}
 
 }

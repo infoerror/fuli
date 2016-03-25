@@ -1,4 +1,4 @@
-(function($, app) {
+(function($,layer, app) {
 
 	$(function() {
 		// Follow
@@ -18,7 +18,7 @@
 					if (ret.code == 0) {
 						that.text("已关注");
 					} else {
-						layer.msg(ret.message, {
+						layer.msg(ret.msg, {
 							icon : 2
 						});
 					}
@@ -42,4 +42,4 @@
 		});
 	})
 
-})(window.jQuery, window.app)
+})(window.jQuery,window.layer, window.app)

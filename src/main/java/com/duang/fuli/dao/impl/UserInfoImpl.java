@@ -8,7 +8,6 @@ import com.duang.fuli.domain.BasicInfo;
 import com.duang.fuli.domain.User;
 import com.duang.fuli.domain.UserInfo;
 import com.duang.fuli.domain.form.BasicInfoForm;
-import com.duang.fuli.domain.form.ModifyAvatarForm;
 
 /**
  * 
@@ -38,10 +37,6 @@ public class UserInfoImpl extends SqlSessionDaoSupport implements UserInfoDao{
 		return this.getSqlSession().selectOne("com.duang.fuli.domain.UserInfo.selectUserAvatarByUser",user);
 	}
 
-	@Override
-	public void modifyAvatar(ModifyAvatarForm modifyAvatarForm) {
-		this.getSqlSession().update("com.duang.fuli.domain.UserInfo.updateAvatar", modifyAvatarForm);	
-	}
 
 	
 }

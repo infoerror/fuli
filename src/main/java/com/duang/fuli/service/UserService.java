@@ -23,8 +23,6 @@ public interface UserService{
 
 	BasicInfo getUserBasicInfo(User user);
 
-	String getUserAvatarImageUri(User user);
-
 	ModifyAvatarResult modifyAvatar(ModifyAvatarForm modifyAvatarForm);
 
 	ModifyPasswordResult modifyPassword(ModifyPasswordForm modifyPassword);

@@ -1,5 +1,6 @@
 package com.duang.fuli.service.result;
 
+
 /**
  * 
  * @author zgq
@@ -114,6 +115,7 @@ public class Protocols {
 
 		public static final int USER_INEXISTENT = 70000;
 		public static final int ALREADY_FOLLOWED = 71000;
+		public static final int UNABLE_TO_FOLLOW_ONESLFE = 72000;
 
 
 	}
@@ -130,5 +132,16 @@ public class Protocols {
 		public static final int NOT_FOLLOW = -1;
 		
 	}
+	
+	
+	public static class Welfare extends Common{
+		
+		public static final int ADD_COMMENT_SUCC=SUCC;
+		public static final int CONTENT_FORMAT_ERROR = 80000;
+		public static final int COMMENT_INEXISTENT = 81000;
+		
+		
+	}
+	
 	
 }

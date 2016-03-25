@@ -1,6 +1,8 @@
 package com.duang.fuli.dao.impl;
 
 import java.util.Collection;
+import java.util.List;
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
@@ -26,5 +28,14 @@ public class WelfareTagDaoImpl extends SqlSessionDaoSupport implements WelfareTa
 		return this.getSqlSession().selectList("com.duang.fuli.domain.WelfareTag.selectAllWelfareTags");
 	}
 
+	@Override
+	public List<WelfareTag> getHotWelfareTags(int top) {
+		return this.getSqlSession().selectList("com.duang.fuli.domain.WelfareTag.selectHotWelfareTags",top);
+	}
+
+	@Override
+	public WelfareTag getWelfareTagByName(String tagName) {
+		return this.getSqlSession().selectOne("com.duang.fuli.domain.WelfareTag.selectWelfareTagByName",tagName);
+	}
 
 }

@@ -16,10 +16,8 @@
 
 	<context:component-scan base-package="com.duang" />
 
-	<bean id="serviceValidator" class="com.duang.fuli.service.aop.ServiceValidator">
-	</bean>
-
-
+	<bean id="serviceValidator" class="com.duang.fuli.service.aop.ServiceValidator"></bean>
+ 	<bean id="pageCalculator" class="com.duang.fuli.service.aop.PageCalculator"></bean>
 
 	<aop:config>
 		<aop:aspect ref="serviceValidator">
@@ -31,9 +29,15 @@
 				expression="execution(* *..service..*.add*(..))" />
 			<aop:around method="around" pointcut-ref="addMethods" />
 		</aop:aspect>
+		
+		<aop:aspect ref="pageCalculator">
+			<aop:pointcut id="pageMethods"
+				expression="execution(* *..service..*.*Page(..))" />
+			<aop:around method="around" pointcut-ref="pageMethods" />
+		</aop:aspect>	
 	</aop:config>
 
-
+   <bean id="springContext" class="com.duang.fuli.utils.SpringContextUtils"></bean>
 	<!-- 很坑爹的是这里貌似aop无法执行，我再用注解的方式试一下吧。 <aop:config> <aop:aspect id="aspect" 
 		ref="aspectBean"> 配置com.lzq.spring.service包下所有类或接口的所有方法 <aop:pointcut id="logService" 
 		expression="execution(* com.feng.controller.*.*(..))" /> <aop:before pointcut-ref="logService" 

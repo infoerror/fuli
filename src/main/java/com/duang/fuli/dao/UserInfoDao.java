@@ -21,7 +21,6 @@ public interface UserInfoDao{
 
 	String getUserAvatarImageUri(User user);
 
-	void modifyAvatar(ModifyAvatarForm modifyAvatarForm);
 
 
 }

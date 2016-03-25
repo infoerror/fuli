@@ -1,18 +1,36 @@
 <%@ page language="java" pageEncoding="utf-8"%>
-	<div class="col-md-4">
-					<div class="panel panel-default">
-						<!-- Default panel contents -->
-						<div class="panel-heading">标签云</div>
-						<div class="panel-body"></div>
-					</div>
+<div class="col-md-3">
+	<aside class="sidebar">
+	   		<div class="widget widget_divFavorites">
+			<h3 class="widget_tit">热门标签</h3>
+			<div id="tag_top_js">
+				<ul>
+			
+				</ul>
+			</div>
+		</div>
+		<div class="widget widget_divAboutKen">
+			<h3 class="widget_tit">热门推荐</h3>
+			<div id="blog_rnd_js">
+				<ul>
+				
+				</ul>
+			</div>
+		</div>
+	</aside>
+	<script type="text/javascript">
+$(function() {
 
-					<div class="panel panel-default">
-						<!-- Default panel contents -->
-						<div class="panel-heading">热门文章</div>
-						<div class="panel-body">
-							<ul class="list-group">
-							</ul>
-						</div>
-
-					</div>
-				</div>
+   $.getJSON("${pageContext.request.contextPath}/api/welfare/hotTags?timestamp=" + Date.parse(new Date()),function(data){
+       var apd4 = "<ul>";
+        for (var i = 0; i < data.length; i++) {
+            apd4 = apd4 + '<li style="text-overflow:ellipsis;">';
+            apd4 = apd4 + '<a href="${pageContext.request.contextPath}/welfare/tag/' + data[i].name + '" title="' + data[i].name + '">' + data[i].name + '</a>';
+            apd4 = apd4 + '</li>';
+        }
+        apd4 = apd4 + "</ul>";
+        $("#tag_top_js").html(apd4);
+   });
+});
+</script>
+</div>

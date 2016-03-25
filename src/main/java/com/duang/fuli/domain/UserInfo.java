@@ -10,7 +10,6 @@ public class UserInfo extends BasicInfo{
 	
 	private User user;
 	private String email;
-	private String imageUri;
 	private String phone;
 	private int userId;
 	private Date registerTime;
@@ -27,12 +26,7 @@ public class UserInfo extends BasicInfo{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getImageUri() {
-		return imageUri;
-	}
-	public void setImageUri(String imageUri) {
-		this.imageUri = imageUri;
-	}
+
 	public String getPhone() {
 		return phone;
 	}

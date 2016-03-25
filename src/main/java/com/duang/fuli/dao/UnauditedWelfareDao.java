@@ -1,10 +1,11 @@
 package com.duang.fuli.dao;
 
-import java.util.Collection;
+import java.util.List;
 
 import com.duang.fuli.domain.UnauditedWelfare;
 import com.duang.fuli.domain.User;
 import com.duang.fuli.domain.mtm.Welfare_Tag;
+import com.duang.fuli.domain.page.UnauditedWelfarePage;
 
 /**
  * 
@@ -19,6 +20,7 @@ public interface UnauditedWelfareDao {
 
 	public int getUnauditedWelfareCount(User user);
 
-	public Collection<UnauditedWelfare> getUnauditedWelfares(User currentUser);
+	public List<UnauditedWelfare> getUnauditedWelfaresForPage(
+			UnauditedWelfarePage unauditedPage);
 	
 }

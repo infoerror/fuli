@@ -17,8 +17,8 @@ import com.duang.fuli.domain.User;
 import com.duang.fuli.domain.form.WelfareForm;
 import com.duang.fuli.domain.page.UnauditedWelfarePage;
 import com.duang.fuli.service.UnauditedWelfareService;
+import com.duang.fuli.service.page.UnauditedWelfarePageResult;
 import com.duang.fuli.service.result.AddWelfareResult;
-import com.duang.fuli.service.result.UnauditedWelfarePageData;
 import com.duang.fuli.utils.JsonUtils;
 import com.duang.fuli.web.utils.SessionFlags;
 
@@ -42,11 +42,20 @@ public class ApiUnauditedWelfareController extends JSONController {
 		writeJson(result);
 	}
 	
-	@RequestMapping(value = "/myList",method=RequestMethod.POST)
+	/**
+	 * @deprecated
+	 * @param response
+	 * @param session
+	 * @param unauditedPage
+	 * @throws IOException
+	 */
+	/*
+	 @RequestMapping(value = "/myList",method=RequestMethod.POST)
 	public void myList(HttpServletResponse response,HttpSession session,@RequestBody UnauditedWelfarePage unauditedPage) throws IOException{
 	    User user = (User) session.getAttribute(SessionFlags.LOGINED_USER_FLAG);
 	    unauditedPage.setUser(user);
-	    UnauditedWelfarePageData unauditedWelfareData=unauditedWelfareService.getUnauditedWelfare(unauditedPage);
-        writeJson(JsonUtils.toString(unauditedWelfareData));		
+	    UnauditedWelfarePageResult unauditedWelfareData=unauditedWelfareService.getUnauditedWelfaresForPage(unauditedPage);
+        writeJson(unauditedWelfareData);		
 	}
+	*/
 }

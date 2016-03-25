@@ -10,7 +10,6 @@
 	type="text/javascript"></script>
 <script src="${pageContext.request.contextPath }/assets/js/avatar.js"
 	type="text/javascript"></script>
-<script src="${pageContext.request.contextPath }/assets/vendors/layer/layer.js" type="text/javascript"></script>
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -54,7 +53,7 @@
 											</div>
 											<div class="update_ava">
 												<img alt="[Jcrop Example]" id="target"
-													src="${pageContext.request.contextPath }${imageUri }">
+													src="${pageContext.request.contextPath }${avatarUrl }">
 											</div>
 
 											<div class="form-group">

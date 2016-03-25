@@ -5,7 +5,7 @@
 		<li class="nav-header">操作列表</li>
 		<li><a href="#">我的福利</a></li>
 		<li><a href="#">我的余额</a></li>
-		<li><a href="${pageContext.request.contextPath}/user/unauditedWelfares">审核列表</a></li>
+		<li><a href="${pageContext.request.contextPath}/user/unauditedWelfares/1">审核列表</a></li>
 		<li><a href="${pageContext.request.contextPath}/user/publishWelfare">发福利</a></li>
 		<li><a href="${pageContext.request.contextPath}/user/modifyBasicInfo">修改信息</a></li>
 	</ul>
